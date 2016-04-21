@@ -49,6 +49,7 @@ Simulation::Simulation(Environnement* env_) : Simulation()
 				if( !( element->getName() == std::string("ground") ) )
 				{
 					simulatedObjects.insert( simulatedObjects.end(), std::unique_ptr<ISimulationObject>(new RigidBody( element->getPoseReference(), element->getName(),id, BOX) ) );
+					((RigidBody*)simulatedObjects[simulatedObjects.size()-1].get())->setMass(1e10f);
 					//((RigidBody&)(*simulatedObjects[id])).setPose( (*element)->getPoseReference());
 					//((RigidBody&)(*simulatedObjects[id])).setPtrShape( (IShape*)(new BoxShape( (RigidBody*)simulatedObjects[id].get(), ((IElementFixe&)(*(*element))).hwd)) );		
 					((BoxShape&)((RigidBody*)(simulatedObjects[id].get()))->getShapeReference()).setHWD( ((IElementFixe*)(element.get()))->hwd );
@@ -383,7 +384,7 @@ std::cout << "SIMULATION : runStride : robot control law update : DONE." << std:
 #ifdef debug
 std::cout << "SIMULATION : runStride : rigidbodies velocities' update : ..." << std::endl;
 #endif	
-	updater->update(timeStep);
+	//updater->update(timeStep);
 #ifdef debug
 std::cout << "SIMULATION : runStride : rigidbodies velocities' update : DONE." << std::endl;
 #endif	

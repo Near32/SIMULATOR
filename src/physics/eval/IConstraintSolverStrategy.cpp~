@@ -120,7 +120,7 @@ void SimultaneousImpulseBasedConstraintSolverStrategy::computeConstraintsJacobia
 		//((RigidBody*)(o.get()))->setPosition( extract(q, b1+1,1, b1+3,1) );	
 		//((RigidBody*)(o.get()))->setMatOrientation( extract(q, b1+4,1, b1+7,1) );
 		((RigidBody*)(o.get()))->setLinearVelocity( extract( qdot, b2+1,1, b2+3,1) );
-		((RigidBody*)(o.get()))->setAngularVelocity( extract( qdot, b2+4,1, b1+6,1) );
+		((RigidBody*)(o.get()))->setAngularVelocity( extract( qdot, b1+4,1, b1+6,1) );
 		
 		b1+=7;
 		b2+=6;	
@@ -248,8 +248,8 @@ void SimultaneousImpulseBasedConstraintSolverStrategy::computeConstraintsANDJaco
 	
 	constraintsJacobian = temp;
 	//Constraint :
-	float baumgarteBAS = 0.5f;
-	float baumgarteC = 0.8f;
+	float baumgarteBAS = 0.1f;
+	float baumgarteC = 0.1f;
 	C = tC;
 	//----------------------------------------
 	//BAUMGARTE STABILIZATION
@@ -737,7 +737,7 @@ void SimultaneousImpulseBasedConstraintSolverStrategy::Solve(float dt, std::vect
 	
 	//PREVIOUS METHOD :
 	//--------------------------------
-	/*
+	
 	Mat<float> A( (-1.0f)*tConstraintsJacobian );
 	Mat<float> M( invGJ( invM.SM2mat() ) );
 	A = operatorL( M, A);
@@ -754,18 +754,22 @@ void SimultaneousImpulseBasedConstraintSolverStrategy::Solve(float dt, std::vect
 	
 	
 	//Assumed model :
-	//qdot = tempInvMFext + extract(  &tempLambda, 1,1, qdot.getLine(), 1);
+	//qdot = tempInvMFext + dt*extract(  &tempLambda, 1,1, qdot.getLine(), 1);
 	//qdot = tempInvMFext + extract(  &tempLambda, 1,1, qdot.getLine(), 1);
 	
 	//Assumed model if the update of the integration is applied after that constraints solver :
 	//qdot += dt*extract(  &tempLambda, 1,1, qdot.getLine(), 1);//+tempInvMFext
 	
-	*/
+	Mat<float> t( dt*( S*qdot ) );
+	q += t;
+	
 	//END OF PREVIOUS METHOD :
 	//--------------------------------
 	
-	
-	
+	//--------------------------------
+	//--------------------------------
+	//Second Method :
+	/*
 	//According to Tonge Richar's Physucs For Game pdf :
 	Mat<float> tempLambda( (-1.0f)*invGJ( constraintsJacobian*invM.SM2mat()*tConstraintsJacobian)*constraintsJacobian*qdot );
 	qdot += invM*tConstraintsJacobian*tempLambda;
@@ -778,6 +782,49 @@ void SimultaneousImpulseBasedConstraintSolverStrategy::Solve(float dt, std::vect
 	
 	Mat<float> t( dt*( S*qdot ) );
 	q += t;
+	*/
+	//--------------------------------
+	//--------------------------------
+	//End of second method...
+	//--------------------------------
+	
+	
+	
+	//--------------------------------
+	//--------------------------------
+	//THIRD METHOD :
+	//--------------------------------
+	//With reference to A Unified Framework for Rigid Body Dynamics Chap. 4.6.2.Simultaneous Force-based methods :
+	//which refers to Bara96 :
+	/*
+	Mat<float> iM(invM.SM2mat());
+	Mat<float> b((-1.0f)*constraintsJacobian*iM*Fext+offset);
+	Mat<float> tempLambda( invGJ( constraintsJacobian*iM*tConstraintsJacobian) * b );
+	//Mat<float> qdoubledot(iM*(tConstraintsJacobian*tempLambda+Fext)); 
+	Mat<float> qdoubledot(iM*(tConstraintsJacobian*tempLambda)); 
+	qdot += dt*qdoubledot;
+	
+	
+	//qdot += tempInvMFext;	//contraints not satisfied.
+	
+	//qdot += tempInvMFext;	//qdot+ = qdot- + dt*M-1Fext;
+	//Mat<float> qdotreal( qdot + dt*extract(  &tempLambda, 1,1, qdot.getLine(), 1) );	//qdotreal = qdot+ + Pc;
+	
+	Mat<float> t( dt*( S*qdot ) );
+	q += t;
+	
+	std::cout << " computed Pc : " << std::endl;
+	(tConstraintsJacobian*tempLambda).afficher();
+	std::cout << " q+ : " << std::endl;
+	q.afficher();
+	std::cout << " qdot+ : " << std::endl;
+	qdot.afficher();
+	*/
+	//END OF THIRD METHOD :
+	//--------------------------------
+	
+	
+	
 	
 	//S.print();
 	
@@ -815,9 +862,10 @@ void SimultaneousImpulseBasedConstraintSolverStrategy::Solve(float dt, std::vect
 	
 	std::cout << "Cdot : " << std::endl;
 	(constraintsJacobian*qdot).afficher();
+	
 	//BAUMGARTE STABILIZATION has been handled in the computeConstraintsANDJacobian function....
-	std::cout << "Constraints : norme  = " << norme2(C) << std::endl;
-	C.afficher();
+	//std::cout << "Constraints : norme  = " << norme2(C) << std::endl;
+	//C.afficher();
 	
 }
 

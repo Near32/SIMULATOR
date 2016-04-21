@@ -131,7 +131,7 @@ void Robot::process( float timeStep, bool& isComputing)
 	lv.set( 9.83f*timeStep*this->getMass(), 3,1);
 	//2) let us implement the control law :
 	lv.set( lvR*cos(robotAngleZ), 1,1);
-	lv.set( avR*sin(robotAngleZ), 2,1);
+	lv.set( lvR*sin(robotAngleZ), 2,1);
 	
 	av.set(avR, 3,1);
 	

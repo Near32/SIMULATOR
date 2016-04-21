@@ -154,22 +154,6 @@ IShape.h
 RigidBody.h
 /home/kevin/Development/SIMULATOR/SIMULATOR/src/physics/RigidBody.h
 
-/home/kevin/Development/SIMULATOR/SIMULATOR/src/physics/Simulation.cpp
-Simulation.h
-/home/kevin/Development/SIMULATOR/SIMULATOR/src/physics/Simulation.h
-eval/IUpdater.h
-/home/kevin/Development/SIMULATOR/SIMULATOR/src/physics/eval/IUpdater.h
-eval/IConstraintSolverStrategy.h
-/home/kevin/Development/SIMULATOR/SIMULATOR/src/physics/eval/IConstraintSolverStrategy.h
-eval/CollisionDetector.h
-/home/kevin/Development/SIMULATOR/SIMULATOR/src/physics/eval/CollisionDetector.h
-eval/IIntegrator.h
-/home/kevin/Development/SIMULATOR/SIMULATOR/src/physics/eval/IIntegrator.h
-ROBOTSIM/IRobotHandler.h
-/home/kevin/Development/SIMULATOR/SIMULATOR/src/physics/ROBOTSIM/IRobotHandler.h
-mutex
--
-
 /home/kevin/Development/SIMULATOR/SIMULATOR/src/physics/Simulation.h
 memory
 -
@@ -214,6 +198,14 @@ Contact.h
 Contact.h
 /home/kevin/Development/SIMULATOR/SIMULATOR/src/physics/eval/Contact.h
 
+/home/kevin/Development/SIMULATOR/SIMULATOR/src/physics/eval/IConstraintSolverStrategy.cpp
+IConstraintSolverStrategy.h
+/home/kevin/Development/SIMULATOR/SIMULATOR/src/physics/eval/IConstraintSolverStrategy.h
+../Simulation.h
+/home/kevin/Development/SIMULATOR/SIMULATOR/src/physics/Simulation.h
+../../utils/LCPSolver/LCPSolver.h
+/home/kevin/Development/SIMULATOR/SIMULATOR/src/utils/LCPSolver/LCPSolver.h
+
 /home/kevin/Development/SIMULATOR/SIMULATOR/src/physics/eval/IConstraintSolverStrategy.h
 ../RigidBody.h
 /home/kevin/Development/SIMULATOR/SIMULATOR/src/physics/RigidBody.h
@@ -239,6 +231,10 @@ HelperFunctions.h
 /home/kevin/Development/SIMULATOR/SIMULATOR/src/physics/eval/IUpdater.h
 IIntegrator.h
 /home/kevin/Development/SIMULATOR/SIMULATOR/src/physics/eval/IIntegrator.h
+
+/home/kevin/Development/SIMULATOR/SIMULATOR/src/utils/LCPSolver/LCPSolver.h
+../../utils/Mat/Mat.h
+/home/kevin/Development/SIMULATOR/SIMULATOR/src/utils/Mat/Mat.h
 
 /home/kevin/Development/SIMULATOR/SIMULATOR/src/utils/MVG/MVG.h
 ../Mat/Mat.h
