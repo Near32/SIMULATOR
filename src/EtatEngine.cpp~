@@ -2,7 +2,7 @@
 #include "Game.h"
 
 #undef NDEBUG
-//#define debug
+#define debug
 
 extern std::mutex ressourcesMutex;
 
@@ -37,7 +37,7 @@ void EtatEngine::loop()
 				//DEBUGGING :
 				case TCSimulateStride:
 				{
-				float timestep = 25e-3f;
+				float timestep = 1e-2f;
 				float time = sim->getTime();
 #ifdef debug
 std::cout << "SIMULATION : run : ..." << std::endl;
@@ -54,7 +54,7 @@ std::cout << "SIMULATION : run " << sim->getTime() << " : successfully !!" << st
 				//DEBUGGING :
 				case TCSimulation:
 				{
-				float timestep = 25e-3f;
+				float timestep = 5e-3f;
 				float time = sim->getTime();
 #ifdef debug
 std::cout << "SIMULATION : run : ..." << std::endl;

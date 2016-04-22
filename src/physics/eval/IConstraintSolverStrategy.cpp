@@ -181,7 +181,7 @@ void SimultaneousImpulseBasedConstraintSolverStrategy::computeConstraintsJacobia
 	}
 	
 	
-	//Let us delete the contact constraints that are ephemarous by essence :
+	//Let us delete the contact constraints that are ephemerous by essence :
 	std::vector<std::unique_ptr<IConstraint> >::iterator itC = c.begin();
 	bool erased = false;
 	while(itC != c.end())
@@ -210,7 +210,7 @@ void SimultaneousImpulseBasedConstraintSolverStrategy::computeConstraintsANDJaco
 		//((RigidBody*)(o.get()))->setMatOrientation( extract(q, b1+4,1, b1+7,1) );
 		
 		((RigidBody*)(o.get()))->setLinearVelocity( extract( qdot, b2+1,1, b2+3,1) );
-		((RigidBody*)(o.get()))->setAngularVelocity( extract( qdot, b1+4,1, b1+6,1) );
+		((RigidBody*)(o.get()))->setAngularVelocity( extract( qdot, b2+4,1, b2+6,1) );
 		
 		b1+=7;
 		b2+=6;	

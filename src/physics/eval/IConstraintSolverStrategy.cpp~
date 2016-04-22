@@ -181,7 +181,7 @@ void SimultaneousImpulseBasedConstraintSolverStrategy::computeConstraintsJacobia
 	}
 	
 	
-	//Let us delete the contact constraints that are ephemarous by essence :
+	//Let us delete the contact constraints that are ephemerous by essence :
 	std::vector<std::unique_ptr<IConstraint> >::iterator itC = c.begin();
 	bool erased = false;
 	while(itC != c.end())
@@ -755,7 +755,7 @@ void SimultaneousImpulseBasedConstraintSolverStrategy::Solve(float dt, std::vect
 	
 	//Assumed model :
 	//qdot = tempInvMFext + dt*extract(  &tempLambda, 1,1, qdot.getLine(), 1);
-	//qdot = tempInvMFext + extract(  &tempLambda, 1,1, qdot.getLine(), 1);
+	qdot = tempInvMFext + extract(  &tempLambda, 1,1, qdot.getLine(), 1);
 	
 	//Assumed model if the update of the integration is applied after that constraints solver :
 	//qdot += dt*extract(  &tempLambda, 1,1, qdot.getLine(), 1);//+tempInvMFext

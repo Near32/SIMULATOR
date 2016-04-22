@@ -49,7 +49,7 @@ Simulation::Simulation(Environnement* env_) : Simulation()
 				if( !( element->getName() == std::string("ground") ) )
 				{
 					simulatedObjects.insert( simulatedObjects.end(), std::unique_ptr<ISimulationObject>(new RigidBody( element->getPoseReference(), element->getName(),id, BOX) ) );
-					((RigidBody*)simulatedObjects[simulatedObjects.size()-1].get())->setMass(1e10f);
+					((RigidBody*)simulatedObjects[simulatedObjects.size()-1].get())->setMass(1e3f);
 					//((RigidBody&)(*simulatedObjects[id])).setPose( (*element)->getPoseReference());
 					//((RigidBody&)(*simulatedObjects[id])).setPtrShape( (IShape*)(new BoxShape( (RigidBody*)simulatedObjects[id].get(), ((IElementFixe&)(*(*element))).hwd)) );		
 					((BoxShape&)((RigidBody*)(simulatedObjects[id].get()))->getShapeReference()).setHWD( ((IElementFixe*)(element.get()))->hwd );
@@ -66,7 +66,7 @@ std::cout << "SIMULATION : environnement initialization : ElementFixe : Obstacle
 					
 					//IT IS THE UNMOVEABLE GROUND :
 					((RigidBody*)(simulatedObjects[id].get()))->isFixed = true;
-					((RigidBody*)(simulatedObjects[id].get()))->setIMass( 1e-20f );//numeric_limit<float>::epsilon() );
+					((RigidBody*)(simulatedObjects[id].get()))->setMass( 1e50f );//numeric_limit<float>::epsilon() );
 					
 					
 #ifdef debug
@@ -129,7 +129,7 @@ std::cout << "SIMULATION : environnement initialization : ElementMobile : id = "
 				{
 					//let us put an initial velocity :
 					((RigidBody*)(simulatedObjects[id].get()))->setLinearVelocity( Mat<float>(100.0f,3,1) );
-					((RigidBody*)(simulatedObjects[id].get()))->setIMass( 1e2f );
+					((RigidBody*)(simulatedObjects[id].get()))->setIMass( 1e20f );
 					//((RigidBody*)(simulatedObjects[id].get()))->setMass( 1e-2f );
 				}
 #endif
@@ -384,7 +384,7 @@ std::cout << "SIMULATION : runStride : robot control law update : DONE." << std:
 #ifdef debug
 std::cout << "SIMULATION : runStride : rigidbodies velocities' update : ..." << std::endl;
 #endif	
-	updater->update(timeStep);
+	//updater->update(timeStep);
 #ifdef debug
 std::cout << "SIMULATION : runStride : rigidbodies velocities' update : DONE." << std::endl;
 #endif	
