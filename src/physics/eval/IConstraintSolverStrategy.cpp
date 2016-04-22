@@ -10,11 +10,12 @@ IConstraintSolverStrategy::IConstraintSolverStrategy(Simulation* sim_) : sim(sim
 {
 	C = Mat<float>(0.0f,1,1);
 	constraintsJacobian = Mat<float>(0.0f,1,1);
+	rs = new RunningStats<float>(std::string("./stats.txt"));
 }
 
 IConstraintSolverStrategy::~IConstraintSolverStrategy()
 {
-
+	delete rs;
 }
 
 Mat<float> IConstraintSolverStrategy::getConstraints() const
@@ -249,7 +250,7 @@ void SimultaneousImpulseBasedConstraintSolverStrategy::computeConstraintsANDJaco
 	constraintsJacobian = temp;
 	//Constraint :
 	float baumgarteBAS = 0.1f;
-	float baumgarteC = 0.1f;
+	float baumgarteC = 0.5f;
 	C = tC;
 	//----------------------------------------
 	//BAUMGARTE STABILIZATION
@@ -737,7 +738,8 @@ void SimultaneousImpulseBasedConstraintSolverStrategy::Solve(float dt, std::vect
 	
 	//PREVIOUS METHOD :
 	//--------------------------------
-	
+	//David Baraff 96 STAR.pdf Interactive Simulation of Rigid Body Dynamics in Computer Graphics : Lagrange Multipliers Method :
+	//Construct A :
 	Mat<float> A( (-1.0f)*tConstraintsJacobian );
 	Mat<float> M( invGJ( invM.SM2mat() ) );
 	A = operatorL( M, A);
@@ -745,23 +747,49 @@ void SimultaneousImpulseBasedConstraintSolverStrategy::Solve(float dt, std::vect
 	
 	Mat<float> invA( invGJ(A) );//invM*tConstraintsJacobian ) * constraintsJacobian );
 	
-	Mat<float> tempLambda( invA * operatorC( Mat<float>((float)0,invA.getLine()-constraintsJacobian.getLine(),1) , constraintsJacobian*(invM*Fext) + offset ) );
+	//Construct b and compute the solution.
+	Mat<float> tempLambda( invA * operatorC( Mat<float>((float)0,invA.getLine()-constraintsJacobian.getLine(),1) , (-1.0f)*(constraintsJacobian*(invM*Fext) + offset) ) );
+	
+	//Solutions :
 	lambda = extract( &tempLambda, qdot.getLine()+1, 1, tempLambda.getLine(), 1);
+	Mat<float> udot( extract(  &tempLambda, 1,1, qdot.getLine(), 1) );
 	
 	if(isnanM(lambda))
 		lambda = Mat<float>(0.0f,lambda.getLine(),lambda.getColumn());
+	if(isnanM(udot))
+		udot = Mat<float>(0.0f,udot.getLine(),udot.getColumn());
 	
-	
+	std::cout << " SOLUTIONS : udot and lambda/Pc : " << std::endl;
+	transpose(udot).afficher();
+	transpose(lambda).afficher();
+	transpose( tConstraintsJacobian*lambda).afficher();
 	
 	//Assumed model :
 	//qdot = tempInvMFext + dt*extract(  &tempLambda, 1,1, qdot.getLine(), 1);
-	qdot = tempInvMFext + extract(  &tempLambda, 1,1, qdot.getLine(), 1);
+	qdot = tempInvMFext + udot;
+	//qdot = udot;
 	
 	//Assumed model if the update of the integration is applied after that constraints solver :
 	//qdot += dt*extract(  &tempLambda, 1,1, qdot.getLine(), 1);//+tempInvMFext
 	
 	Mat<float> t( dt*( S*qdot ) );
 	q += t;
+	
+	//std::cout << " computed Pc : " << std::endl;
+	//(tConstraintsJacobian*tempLambda).afficher();
+	std::cout << " q+ : " << std::endl;
+	q.afficher();
+	std::cout << " qdot+ : " << std::endl;
+	qdot.afficher();
+	
+	float normC = (transpose(C)*C).get(1,1);
+	Mat<float> Cdot( constraintsJacobian*qdot);
+	float normCdot = (transpose(Cdot)*Cdot).get(1,1);
+	float normQdot = (transpose(qdot)*qdot).get(1,1);
+	
+	rs->ltadd(std::string("normC"),normC);
+	rs->ltadd(std::string("normCdot"),normCdot);
+	rs->ltadd(std::string("normQdot"),normQdot);
 	
 	//END OF PREVIOUS METHOD :
 	//--------------------------------
@@ -860,6 +888,8 @@ void SimultaneousImpulseBasedConstraintSolverStrategy::Solve(float dt, std::vect
 	//std::cout << " q+ : " << std::endl;
 	//q.afficher();
 	
+	std::cout << "C : " << std::endl;
+	C.afficher();
 	std::cout << "Cdot : " << std::endl;
 	(constraintsJacobian*qdot).afficher();
 	

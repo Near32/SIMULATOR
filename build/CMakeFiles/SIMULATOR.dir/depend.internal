@@ -52,6 +52,7 @@ CMakeFiles/SIMULATOR.dir/src/ControllerEngine.cpp.o
  /home/kevin/Development/SIMULATOR/SIMULATOR/src/utils/MVG/MVG.h
  /home/kevin/Development/SIMULATOR/SIMULATOR/src/utils/Mat/Mat.h
  /home/kevin/Development/SIMULATOR/SIMULATOR/src/utils/Quaternion/Quaternion.h
+ /home/kevin/Development/SIMULATOR/SIMULATOR/src/utils/RunningStats/RunningStats.h
  /home/kevin/Development/SIMULATOR/SIMULATOR/src/utils/SparseMat/SparseMat.h
  /home/kevin/Development/SIMULATOR/SIMULATOR/src/utils/math.h
 CMakeFiles/SIMULATOR.dir/src/ElementMobile.cpp.o
@@ -147,6 +148,7 @@ CMakeFiles/SIMULATOR.dir/src/EtatEngine.cpp.o
  /home/kevin/Development/SIMULATOR/SIMULATOR/src/utils/MVG/MVG.h
  /home/kevin/Development/SIMULATOR/SIMULATOR/src/utils/Mat/Mat.h
  /home/kevin/Development/SIMULATOR/SIMULATOR/src/utils/Quaternion/Quaternion.h
+ /home/kevin/Development/SIMULATOR/SIMULATOR/src/utils/RunningStats/RunningStats.h
  /home/kevin/Development/SIMULATOR/SIMULATOR/src/utils/SparseMat/SparseMat.h
  /home/kevin/Development/SIMULATOR/SIMULATOR/src/utils/math.h
 CMakeFiles/SIMULATOR.dir/src/Fabriques.cpp.o
@@ -216,6 +218,7 @@ CMakeFiles/SIMULATOR.dir/src/Game.cpp.o
  /home/kevin/Development/SIMULATOR/SIMULATOR/src/utils/MVG/MVG.h
  /home/kevin/Development/SIMULATOR/SIMULATOR/src/utils/Mat/Mat.h
  /home/kevin/Development/SIMULATOR/SIMULATOR/src/utils/Quaternion/Quaternion.h
+ /home/kevin/Development/SIMULATOR/SIMULATOR/src/utils/RunningStats/RunningStats.h
  /home/kevin/Development/SIMULATOR/SIMULATOR/src/utils/SparseMat/SparseMat.h
  /home/kevin/Development/SIMULATOR/SIMULATOR/src/utils/math.h
 CMakeFiles/SIMULATOR.dir/src/IElement.cpp.o
@@ -295,6 +298,7 @@ CMakeFiles/SIMULATOR.dir/src/IEngine.cpp.o
  /home/kevin/Development/SIMULATOR/SIMULATOR/src/utils/MVG/MVG.h
  /home/kevin/Development/SIMULATOR/SIMULATOR/src/utils/Mat/Mat.h
  /home/kevin/Development/SIMULATOR/SIMULATOR/src/utils/Quaternion/Quaternion.h
+ /home/kevin/Development/SIMULATOR/SIMULATOR/src/utils/RunningStats/RunningStats.h
  /home/kevin/Development/SIMULATOR/SIMULATOR/src/utils/SparseMat/SparseMat.h
  /home/kevin/Development/SIMULATOR/SIMULATOR/src/utils/math.h
 CMakeFiles/SIMULATOR.dir/src/IFabricant.cpp.o
@@ -382,6 +386,7 @@ CMakeFiles/SIMULATOR.dir/src/VueEngine.cpp.o
  /home/kevin/Development/SIMULATOR/SIMULATOR/src/utils/MVG/MVG.h
  /home/kevin/Development/SIMULATOR/SIMULATOR/src/utils/Mat/Mat.h
  /home/kevin/Development/SIMULATOR/SIMULATOR/src/utils/Quaternion/Quaternion.h
+ /home/kevin/Development/SIMULATOR/SIMULATOR/src/utils/RunningStats/RunningStats.h
  /home/kevin/Development/SIMULATOR/SIMULATOR/src/utils/SparseMat/SparseMat.h
  /home/kevin/Development/SIMULATOR/SIMULATOR/src/utils/math.h
 CMakeFiles/SIMULATOR.dir/src/common/objloader.cpp.o
@@ -438,6 +443,7 @@ CMakeFiles/SIMULATOR.dir/src/mainENGINE.cpp.o
  /home/kevin/Development/SIMULATOR/SIMULATOR/src/utils/MVG/MVG.h
  /home/kevin/Development/SIMULATOR/SIMULATOR/src/utils/Mat/Mat.h
  /home/kevin/Development/SIMULATOR/SIMULATOR/src/utils/Quaternion/Quaternion.h
+ /home/kevin/Development/SIMULATOR/SIMULATOR/src/utils/RunningStats/RunningStats.h
  /home/kevin/Development/SIMULATOR/SIMULATOR/src/utils/SparseMat/SparseMat.h
  /home/kevin/Development/SIMULATOR/SIMULATOR/src/utils/math.h
 CMakeFiles/SIMULATOR.dir/src/physics/IConstraint.cpp.o
@@ -535,6 +541,7 @@ CMakeFiles/SIMULATOR.dir/src/physics/ROBOTSIM/IRobotHandler.cpp.o
  /home/kevin/Development/SIMULATOR/SIMULATOR/src/utils/MVG/MVG.h
  /home/kevin/Development/SIMULATOR/SIMULATOR/src/utils/Mat/Mat.h
  /home/kevin/Development/SIMULATOR/SIMULATOR/src/utils/Quaternion/Quaternion.h
+ /home/kevin/Development/SIMULATOR/SIMULATOR/src/utils/RunningStats/RunningStats.h
  /home/kevin/Development/SIMULATOR/SIMULATOR/src/utils/SparseMat/SparseMat.h
  /home/kevin/Development/SIMULATOR/SIMULATOR/src/utils/math.h
 CMakeFiles/SIMULATOR.dir/src/physics/RigidBody.cpp.o
@@ -601,6 +608,7 @@ CMakeFiles/SIMULATOR.dir/src/physics/Simulation.cpp.o
  /home/kevin/Development/SIMULATOR/SIMULATOR/src/utils/MVG/MVG.h
  /home/kevin/Development/SIMULATOR/SIMULATOR/src/utils/Mat/Mat.h
  /home/kevin/Development/SIMULATOR/SIMULATOR/src/utils/Quaternion/Quaternion.h
+ /home/kevin/Development/SIMULATOR/SIMULATOR/src/utils/RunningStats/RunningStats.h
  /home/kevin/Development/SIMULATOR/SIMULATOR/src/utils/SparseMat/SparseMat.h
  /home/kevin/Development/SIMULATOR/SIMULATOR/src/utils/math.h
 CMakeFiles/SIMULATOR.dir/src/physics/eval/CollisionDetector.cpp.o
@@ -642,6 +650,7 @@ CMakeFiles/SIMULATOR.dir/src/physics/eval/CollisionDetector.cpp.o
  /home/kevin/Development/SIMULATOR/SIMULATOR/src/utils/MVG/MVG.h
  /home/kevin/Development/SIMULATOR/SIMULATOR/src/utils/Mat/Mat.h
  /home/kevin/Development/SIMULATOR/SIMULATOR/src/utils/Quaternion/Quaternion.h
+ /home/kevin/Development/SIMULATOR/SIMULATOR/src/utils/RunningStats/RunningStats.h
  /home/kevin/Development/SIMULATOR/SIMULATOR/src/utils/SparseMat/SparseMat.h
  /home/kevin/Development/SIMULATOR/SIMULATOR/src/utils/math.h
 CMakeFiles/SIMULATOR.dir/src/physics/eval/Contact.cpp.o
@@ -709,6 +718,7 @@ CMakeFiles/SIMULATOR.dir/src/physics/eval/IBroadPhaseStrategy.cpp.o
  /home/kevin/Development/SIMULATOR/SIMULATOR/src/utils/MVG/MVG.h
  /home/kevin/Development/SIMULATOR/SIMULATOR/src/utils/Mat/Mat.h
  /home/kevin/Development/SIMULATOR/SIMULATOR/src/utils/Quaternion/Quaternion.h
+ /home/kevin/Development/SIMULATOR/SIMULATOR/src/utils/RunningStats/RunningStats.h
  /home/kevin/Development/SIMULATOR/SIMULATOR/src/utils/SparseMat/SparseMat.h
  /home/kevin/Development/SIMULATOR/SIMULATOR/src/utils/math.h
 CMakeFiles/SIMULATOR.dir/src/physics/eval/IConstraintSolverStrategy.cpp.o
@@ -751,6 +761,7 @@ CMakeFiles/SIMULATOR.dir/src/physics/eval/IConstraintSolverStrategy.cpp.o
  /home/kevin/Development/SIMULATOR/SIMULATOR/src/utils/MVG/MVG.h
  /home/kevin/Development/SIMULATOR/SIMULATOR/src/utils/Mat/Mat.h
  /home/kevin/Development/SIMULATOR/SIMULATOR/src/utils/Quaternion/Quaternion.h
+ /home/kevin/Development/SIMULATOR/SIMULATOR/src/utils/RunningStats/RunningStats.h
  /home/kevin/Development/SIMULATOR/SIMULATOR/src/utils/SparseMat/SparseMat.h
  /home/kevin/Development/SIMULATOR/SIMULATOR/src/utils/math.h
 CMakeFiles/SIMULATOR.dir/src/physics/eval/IContactGenerator.cpp.o
@@ -792,6 +803,7 @@ CMakeFiles/SIMULATOR.dir/src/physics/eval/IContactGenerator.cpp.o
  /home/kevin/Development/SIMULATOR/SIMULATOR/src/utils/MVG/MVG.h
  /home/kevin/Development/SIMULATOR/SIMULATOR/src/utils/Mat/Mat.h
  /home/kevin/Development/SIMULATOR/SIMULATOR/src/utils/Quaternion/Quaternion.h
+ /home/kevin/Development/SIMULATOR/SIMULATOR/src/utils/RunningStats/RunningStats.h
  /home/kevin/Development/SIMULATOR/SIMULATOR/src/utils/SparseMat/SparseMat.h
  /home/kevin/Development/SIMULATOR/SIMULATOR/src/utils/math.h
 CMakeFiles/SIMULATOR.dir/src/physics/eval/IIntegrator.cpp.o
@@ -833,6 +845,7 @@ CMakeFiles/SIMULATOR.dir/src/physics/eval/IIntegrator.cpp.o
  /home/kevin/Development/SIMULATOR/SIMULATOR/src/utils/MVG/MVG.h
  /home/kevin/Development/SIMULATOR/SIMULATOR/src/utils/Mat/Mat.h
  /home/kevin/Development/SIMULATOR/SIMULATOR/src/utils/Quaternion/Quaternion.h
+ /home/kevin/Development/SIMULATOR/SIMULATOR/src/utils/RunningStats/RunningStats.h
  /home/kevin/Development/SIMULATOR/SIMULATOR/src/utils/SparseMat/SparseMat.h
  /home/kevin/Development/SIMULATOR/SIMULATOR/src/utils/math.h
 CMakeFiles/SIMULATOR.dir/src/physics/eval/IMidNarrowPhaseStrategy.cpp.o
@@ -874,6 +887,7 @@ CMakeFiles/SIMULATOR.dir/src/physics/eval/IMidNarrowPhaseStrategy.cpp.o
  /home/kevin/Development/SIMULATOR/SIMULATOR/src/utils/MVG/MVG.h
  /home/kevin/Development/SIMULATOR/SIMULATOR/src/utils/Mat/Mat.h
  /home/kevin/Development/SIMULATOR/SIMULATOR/src/utils/Quaternion/Quaternion.h
+ /home/kevin/Development/SIMULATOR/SIMULATOR/src/utils/RunningStats/RunningStats.h
  /home/kevin/Development/SIMULATOR/SIMULATOR/src/utils/SparseMat/SparseMat.h
  /home/kevin/Development/SIMULATOR/SIMULATOR/src/utils/math.h
 CMakeFiles/SIMULATOR.dir/src/physics/eval/IUpdater.cpp.o
@@ -915,6 +929,7 @@ CMakeFiles/SIMULATOR.dir/src/physics/eval/IUpdater.cpp.o
  /home/kevin/Development/SIMULATOR/SIMULATOR/src/utils/MVG/MVG.h
  /home/kevin/Development/SIMULATOR/SIMULATOR/src/utils/Mat/Mat.h
  /home/kevin/Development/SIMULATOR/SIMULATOR/src/utils/Quaternion/Quaternion.h
+ /home/kevin/Development/SIMULATOR/SIMULATOR/src/utils/RunningStats/RunningStats.h
  /home/kevin/Development/SIMULATOR/SIMULATOR/src/utils/SparseMat/SparseMat.h
  /home/kevin/Development/SIMULATOR/SIMULATOR/src/utils/math.h
 CMakeFiles/SIMULATOR.dir/src/utils/LCPSolver/LCPSolver.cpp.o

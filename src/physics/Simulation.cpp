@@ -10,6 +10,7 @@
 //#define debug
 //#define debuglvl1
 //#define debuglvl2
+//#define debuglvl3
 
 #define benchmark
 
@@ -66,7 +67,7 @@ std::cout << "SIMULATION : environnement initialization : ElementFixe : Obstacle
 					
 					//IT IS THE UNMOVEABLE GROUND :
 					((RigidBody*)(simulatedObjects[id].get()))->isFixed = true;
-					((RigidBody*)(simulatedObjects[id].get()))->setMass( 1e50f );//numeric_limit<float>::epsilon() );
+					((RigidBody*)(simulatedObjects[id].get()))->setMass( 1e20f );//numeric_limit<float>::epsilon() );
 					
 					
 #ifdef debug
@@ -129,7 +130,7 @@ std::cout << "SIMULATION : environnement initialization : ElementMobile : id = "
 				{
 					//let us put an initial velocity :
 					((RigidBody*)(simulatedObjects[id].get()))->setLinearVelocity( Mat<float>(100.0f,3,1) );
-					((RigidBody*)(simulatedObjects[id].get()))->setMass( 1e20f );
+					((RigidBody*)(simulatedObjects[id].get()))->setMass( 1e5f );
 					//((RigidBody*)(simulatedObjects[id].get()))->setMass( 1e-2f );
 				}
 #endif
@@ -421,6 +422,18 @@ std::cout << "SIMULATION : runStride : initializing matrices : ..." << std::endl
 std::cout << "SIMULATION : runStride : initializing matrices : DONE." << std::endl;
 #endif					
 	}
+	
+	
+#ifdef debuglvl3
+std::cout << " SIMULATION : runStride : Q QDOT invM S Fext : " << std::endl;
+transpose(q).afficher();
+transpose(qdot).afficher();
+invM.print();
+S.print();
+Fext.afficher();
+#endif
+
+
 	//solve the system and update it :
 #ifdef debug
 std::cout << "SIMULATION : runStride : solving system : ..." << std::endl;
@@ -432,7 +445,14 @@ std::cout << "SIMULATION : runStride : solving system : DONE." << std::endl;
 #endif					
 	//apply changes in the state :		
 	updateStates();
-	
+
+#ifdef debuglvl3
+std::cout << " SIMULATION : runStride : Q QDOT  : END : " << std::endl;
+transpose(q).afficher();
+transpose(qdot).afficher();	
+#endif
+
+
 }
 
 void Simulation::constructQ()

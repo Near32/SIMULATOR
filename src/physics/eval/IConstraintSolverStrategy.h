@@ -5,13 +5,13 @@
 #include "../RigidBody.h"
 #include "../IConstraint.h"
 #include "../../utils/math.h"
-
+#include "../../utils/RunningStats/RunningStats.h"
 
 class Simulation;
 
 class IConstraintSolverStrategy
 {
-
+	
 	protected :
 	
 	Mat<float> C;
@@ -26,6 +26,8 @@ class IConstraintSolverStrategy
 	Simulation* sim;
 	
 	public :
+	
+	RunningStats<float>* rs;
 	
 	IConstraintSolverStrategy(Simulation* sim);
 	

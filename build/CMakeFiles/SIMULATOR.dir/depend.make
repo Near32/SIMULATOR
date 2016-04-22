@@ -51,6 +51,7 @@ CMakeFiles/SIMULATOR.dir/src/ControllerEngine.cpp.o: ../src/physics/eval/IUpdate
 CMakeFiles/SIMULATOR.dir/src/ControllerEngine.cpp.o: ../src/utils/MVG/MVG.h
 CMakeFiles/SIMULATOR.dir/src/ControllerEngine.cpp.o: ../src/utils/Mat/Mat.h
 CMakeFiles/SIMULATOR.dir/src/ControllerEngine.cpp.o: ../src/utils/Quaternion/Quaternion.h
+CMakeFiles/SIMULATOR.dir/src/ControllerEngine.cpp.o: ../src/utils/RunningStats/RunningStats.h
 CMakeFiles/SIMULATOR.dir/src/ControllerEngine.cpp.o: ../src/utils/SparseMat/SparseMat.h
 CMakeFiles/SIMULATOR.dir/src/ControllerEngine.cpp.o: ../src/utils/math.h
 
@@ -146,6 +147,7 @@ CMakeFiles/SIMULATOR.dir/src/EtatEngine.cpp.o: ../src/physics/eval/IUpdater.h
 CMakeFiles/SIMULATOR.dir/src/EtatEngine.cpp.o: ../src/utils/MVG/MVG.h
 CMakeFiles/SIMULATOR.dir/src/EtatEngine.cpp.o: ../src/utils/Mat/Mat.h
 CMakeFiles/SIMULATOR.dir/src/EtatEngine.cpp.o: ../src/utils/Quaternion/Quaternion.h
+CMakeFiles/SIMULATOR.dir/src/EtatEngine.cpp.o: ../src/utils/RunningStats/RunningStats.h
 CMakeFiles/SIMULATOR.dir/src/EtatEngine.cpp.o: ../src/utils/SparseMat/SparseMat.h
 CMakeFiles/SIMULATOR.dir/src/EtatEngine.cpp.o: ../src/utils/math.h
 
@@ -215,6 +217,7 @@ CMakeFiles/SIMULATOR.dir/src/Game.cpp.o: ../src/physics/eval/IUpdater.h
 CMakeFiles/SIMULATOR.dir/src/Game.cpp.o: ../src/utils/MVG/MVG.h
 CMakeFiles/SIMULATOR.dir/src/Game.cpp.o: ../src/utils/Mat/Mat.h
 CMakeFiles/SIMULATOR.dir/src/Game.cpp.o: ../src/utils/Quaternion/Quaternion.h
+CMakeFiles/SIMULATOR.dir/src/Game.cpp.o: ../src/utils/RunningStats/RunningStats.h
 CMakeFiles/SIMULATOR.dir/src/Game.cpp.o: ../src/utils/SparseMat/SparseMat.h
 CMakeFiles/SIMULATOR.dir/src/Game.cpp.o: ../src/utils/math.h
 
@@ -294,6 +297,7 @@ CMakeFiles/SIMULATOR.dir/src/IEngine.cpp.o: ../src/physics/eval/IUpdater.h
 CMakeFiles/SIMULATOR.dir/src/IEngine.cpp.o: ../src/utils/MVG/MVG.h
 CMakeFiles/SIMULATOR.dir/src/IEngine.cpp.o: ../src/utils/Mat/Mat.h
 CMakeFiles/SIMULATOR.dir/src/IEngine.cpp.o: ../src/utils/Quaternion/Quaternion.h
+CMakeFiles/SIMULATOR.dir/src/IEngine.cpp.o: ../src/utils/RunningStats/RunningStats.h
 CMakeFiles/SIMULATOR.dir/src/IEngine.cpp.o: ../src/utils/SparseMat/SparseMat.h
 CMakeFiles/SIMULATOR.dir/src/IEngine.cpp.o: ../src/utils/math.h
 
@@ -381,6 +385,7 @@ CMakeFiles/SIMULATOR.dir/src/VueEngine.cpp.o: ../src/physics/eval/IUpdater.h
 CMakeFiles/SIMULATOR.dir/src/VueEngine.cpp.o: ../src/utils/MVG/MVG.h
 CMakeFiles/SIMULATOR.dir/src/VueEngine.cpp.o: ../src/utils/Mat/Mat.h
 CMakeFiles/SIMULATOR.dir/src/VueEngine.cpp.o: ../src/utils/Quaternion/Quaternion.h
+CMakeFiles/SIMULATOR.dir/src/VueEngine.cpp.o: ../src/utils/RunningStats/RunningStats.h
 CMakeFiles/SIMULATOR.dir/src/VueEngine.cpp.o: ../src/utils/SparseMat/SparseMat.h
 CMakeFiles/SIMULATOR.dir/src/VueEngine.cpp.o: ../src/utils/math.h
 
@@ -437,6 +442,7 @@ CMakeFiles/SIMULATOR.dir/src/mainENGINE.cpp.o: ../src/physics/eval/IUpdater.h
 CMakeFiles/SIMULATOR.dir/src/mainENGINE.cpp.o: ../src/utils/MVG/MVG.h
 CMakeFiles/SIMULATOR.dir/src/mainENGINE.cpp.o: ../src/utils/Mat/Mat.h
 CMakeFiles/SIMULATOR.dir/src/mainENGINE.cpp.o: ../src/utils/Quaternion/Quaternion.h
+CMakeFiles/SIMULATOR.dir/src/mainENGINE.cpp.o: ../src/utils/RunningStats/RunningStats.h
 CMakeFiles/SIMULATOR.dir/src/mainENGINE.cpp.o: ../src/utils/SparseMat/SparseMat.h
 CMakeFiles/SIMULATOR.dir/src/mainENGINE.cpp.o: ../src/utils/math.h
 
@@ -534,6 +540,7 @@ CMakeFiles/SIMULATOR.dir/src/physics/ROBOTSIM/IRobotHandler.cpp.o: ../src/physic
 CMakeFiles/SIMULATOR.dir/src/physics/ROBOTSIM/IRobotHandler.cpp.o: ../src/utils/MVG/MVG.h
 CMakeFiles/SIMULATOR.dir/src/physics/ROBOTSIM/IRobotHandler.cpp.o: ../src/utils/Mat/Mat.h
 CMakeFiles/SIMULATOR.dir/src/physics/ROBOTSIM/IRobotHandler.cpp.o: ../src/utils/Quaternion/Quaternion.h
+CMakeFiles/SIMULATOR.dir/src/physics/ROBOTSIM/IRobotHandler.cpp.o: ../src/utils/RunningStats/RunningStats.h
 CMakeFiles/SIMULATOR.dir/src/physics/ROBOTSIM/IRobotHandler.cpp.o: ../src/utils/SparseMat/SparseMat.h
 CMakeFiles/SIMULATOR.dir/src/physics/ROBOTSIM/IRobotHandler.cpp.o: ../src/utils/math.h
 
@@ -600,6 +607,7 @@ CMakeFiles/SIMULATOR.dir/src/physics/Simulation.cpp.o: ../src/physics/eval/IUpda
 CMakeFiles/SIMULATOR.dir/src/physics/Simulation.cpp.o: ../src/utils/MVG/MVG.h
 CMakeFiles/SIMULATOR.dir/src/physics/Simulation.cpp.o: ../src/utils/Mat/Mat.h
 CMakeFiles/SIMULATOR.dir/src/physics/Simulation.cpp.o: ../src/utils/Quaternion/Quaternion.h
+CMakeFiles/SIMULATOR.dir/src/physics/Simulation.cpp.o: ../src/utils/RunningStats/RunningStats.h
 CMakeFiles/SIMULATOR.dir/src/physics/Simulation.cpp.o: ../src/utils/SparseMat/SparseMat.h
 CMakeFiles/SIMULATOR.dir/src/physics/Simulation.cpp.o: ../src/utils/math.h
 
@@ -641,6 +649,7 @@ CMakeFiles/SIMULATOR.dir/src/physics/eval/CollisionDetector.cpp.o: ../src/physic
 CMakeFiles/SIMULATOR.dir/src/physics/eval/CollisionDetector.cpp.o: ../src/utils/MVG/MVG.h
 CMakeFiles/SIMULATOR.dir/src/physics/eval/CollisionDetector.cpp.o: ../src/utils/Mat/Mat.h
 CMakeFiles/SIMULATOR.dir/src/physics/eval/CollisionDetector.cpp.o: ../src/utils/Quaternion/Quaternion.h
+CMakeFiles/SIMULATOR.dir/src/physics/eval/CollisionDetector.cpp.o: ../src/utils/RunningStats/RunningStats.h
 CMakeFiles/SIMULATOR.dir/src/physics/eval/CollisionDetector.cpp.o: ../src/utils/SparseMat/SparseMat.h
 CMakeFiles/SIMULATOR.dir/src/physics/eval/CollisionDetector.cpp.o: ../src/utils/math.h
 
@@ -708,6 +717,7 @@ CMakeFiles/SIMULATOR.dir/src/physics/eval/IBroadPhaseStrategy.cpp.o: ../src/phys
 CMakeFiles/SIMULATOR.dir/src/physics/eval/IBroadPhaseStrategy.cpp.o: ../src/utils/MVG/MVG.h
 CMakeFiles/SIMULATOR.dir/src/physics/eval/IBroadPhaseStrategy.cpp.o: ../src/utils/Mat/Mat.h
 CMakeFiles/SIMULATOR.dir/src/physics/eval/IBroadPhaseStrategy.cpp.o: ../src/utils/Quaternion/Quaternion.h
+CMakeFiles/SIMULATOR.dir/src/physics/eval/IBroadPhaseStrategy.cpp.o: ../src/utils/RunningStats/RunningStats.h
 CMakeFiles/SIMULATOR.dir/src/physics/eval/IBroadPhaseStrategy.cpp.o: ../src/utils/SparseMat/SparseMat.h
 CMakeFiles/SIMULATOR.dir/src/physics/eval/IBroadPhaseStrategy.cpp.o: ../src/utils/math.h
 
@@ -750,6 +760,7 @@ CMakeFiles/SIMULATOR.dir/src/physics/eval/IConstraintSolverStrategy.cpp.o: ../sr
 CMakeFiles/SIMULATOR.dir/src/physics/eval/IConstraintSolverStrategy.cpp.o: ../src/utils/MVG/MVG.h
 CMakeFiles/SIMULATOR.dir/src/physics/eval/IConstraintSolverStrategy.cpp.o: ../src/utils/Mat/Mat.h
 CMakeFiles/SIMULATOR.dir/src/physics/eval/IConstraintSolverStrategy.cpp.o: ../src/utils/Quaternion/Quaternion.h
+CMakeFiles/SIMULATOR.dir/src/physics/eval/IConstraintSolverStrategy.cpp.o: ../src/utils/RunningStats/RunningStats.h
 CMakeFiles/SIMULATOR.dir/src/physics/eval/IConstraintSolverStrategy.cpp.o: ../src/utils/SparseMat/SparseMat.h
 CMakeFiles/SIMULATOR.dir/src/physics/eval/IConstraintSolverStrategy.cpp.o: ../src/utils/math.h
 
@@ -791,6 +802,7 @@ CMakeFiles/SIMULATOR.dir/src/physics/eval/IContactGenerator.cpp.o: ../src/physic
 CMakeFiles/SIMULATOR.dir/src/physics/eval/IContactGenerator.cpp.o: ../src/utils/MVG/MVG.h
 CMakeFiles/SIMULATOR.dir/src/physics/eval/IContactGenerator.cpp.o: ../src/utils/Mat/Mat.h
 CMakeFiles/SIMULATOR.dir/src/physics/eval/IContactGenerator.cpp.o: ../src/utils/Quaternion/Quaternion.h
+CMakeFiles/SIMULATOR.dir/src/physics/eval/IContactGenerator.cpp.o: ../src/utils/RunningStats/RunningStats.h
 CMakeFiles/SIMULATOR.dir/src/physics/eval/IContactGenerator.cpp.o: ../src/utils/SparseMat/SparseMat.h
 CMakeFiles/SIMULATOR.dir/src/physics/eval/IContactGenerator.cpp.o: ../src/utils/math.h
 
@@ -832,6 +844,7 @@ CMakeFiles/SIMULATOR.dir/src/physics/eval/IIntegrator.cpp.o: ../src/physics/eval
 CMakeFiles/SIMULATOR.dir/src/physics/eval/IIntegrator.cpp.o: ../src/utils/MVG/MVG.h
 CMakeFiles/SIMULATOR.dir/src/physics/eval/IIntegrator.cpp.o: ../src/utils/Mat/Mat.h
 CMakeFiles/SIMULATOR.dir/src/physics/eval/IIntegrator.cpp.o: ../src/utils/Quaternion/Quaternion.h
+CMakeFiles/SIMULATOR.dir/src/physics/eval/IIntegrator.cpp.o: ../src/utils/RunningStats/RunningStats.h
 CMakeFiles/SIMULATOR.dir/src/physics/eval/IIntegrator.cpp.o: ../src/utils/SparseMat/SparseMat.h
 CMakeFiles/SIMULATOR.dir/src/physics/eval/IIntegrator.cpp.o: ../src/utils/math.h
 
@@ -873,6 +886,7 @@ CMakeFiles/SIMULATOR.dir/src/physics/eval/IMidNarrowPhaseStrategy.cpp.o: ../src/
 CMakeFiles/SIMULATOR.dir/src/physics/eval/IMidNarrowPhaseStrategy.cpp.o: ../src/utils/MVG/MVG.h
 CMakeFiles/SIMULATOR.dir/src/physics/eval/IMidNarrowPhaseStrategy.cpp.o: ../src/utils/Mat/Mat.h
 CMakeFiles/SIMULATOR.dir/src/physics/eval/IMidNarrowPhaseStrategy.cpp.o: ../src/utils/Quaternion/Quaternion.h
+CMakeFiles/SIMULATOR.dir/src/physics/eval/IMidNarrowPhaseStrategy.cpp.o: ../src/utils/RunningStats/RunningStats.h
 CMakeFiles/SIMULATOR.dir/src/physics/eval/IMidNarrowPhaseStrategy.cpp.o: ../src/utils/SparseMat/SparseMat.h
 CMakeFiles/SIMULATOR.dir/src/physics/eval/IMidNarrowPhaseStrategy.cpp.o: ../src/utils/math.h
 
@@ -914,6 +928,7 @@ CMakeFiles/SIMULATOR.dir/src/physics/eval/IUpdater.cpp.o: ../src/physics/eval/IU
 CMakeFiles/SIMULATOR.dir/src/physics/eval/IUpdater.cpp.o: ../src/utils/MVG/MVG.h
 CMakeFiles/SIMULATOR.dir/src/physics/eval/IUpdater.cpp.o: ../src/utils/Mat/Mat.h
 CMakeFiles/SIMULATOR.dir/src/physics/eval/IUpdater.cpp.o: ../src/utils/Quaternion/Quaternion.h
+CMakeFiles/SIMULATOR.dir/src/physics/eval/IUpdater.cpp.o: ../src/utils/RunningStats/RunningStats.h
 CMakeFiles/SIMULATOR.dir/src/physics/eval/IUpdater.cpp.o: ../src/utils/SparseMat/SparseMat.h
 CMakeFiles/SIMULATOR.dir/src/physics/eval/IUpdater.cpp.o: ../src/utils/math.h
 
