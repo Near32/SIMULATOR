@@ -20,6 +20,9 @@ class VueEngine : public IEngine
 {
 	public :
 	
+	int countInfo;
+	int limCountInfo;
+	
 	SDL_Surface* ecran;
 	TrackBallCamera* camera;
 	

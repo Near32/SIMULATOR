@@ -21,6 +21,8 @@ class IUpdater
 	~IUpdater();
 	
 	virtual void update(float dt) = 0;
+	virtual void updateVelocities(float dt) = 0;
+	virtual void updatePositions(float dt) =0;
 };
 
 

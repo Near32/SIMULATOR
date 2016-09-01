@@ -95,6 +95,13 @@ class RigidBody : public ISimulationObject, public IMoveable
 	{
 		return iInertiaWorld;
 	}
+	
+	Mat<float> getInertialWorld() const
+	{
+		Mat<float> ret(extract( Pose->exp(), 1,1, 3,3));
+		ret = (ret*Inertia)*transpose(ret);
+		return ret;
+	}
 			
 	bool getCollisionStatus()	const	
 	{	

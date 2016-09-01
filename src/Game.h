@@ -1,5 +1,5 @@
 #ifndef GAME_H
-#define GMAE_H
+#define GAME_H
 
 #include <iostream>
 

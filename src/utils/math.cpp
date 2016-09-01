@@ -2,6 +2,7 @@
 
 
 //#define debuglvl1
+//#define debuglvl2
 
 //------------------------------------
 //		Identity Matrix 3x3 :
@@ -143,6 +144,7 @@ void se3::setW(const Mat<float>& w_)
 	}
 }
 
+/*
 void se3::setOrientation( const Quat& q)
 {
 	Mat<float> so3((float)0,3,3);
@@ -161,7 +163,28 @@ void se3::setOrientation( const Quat& q)
 	
 	hasChanged = true;
 }
+/**/
 
+/**/
+void se3::setOrientation( const Quat& q)
+{
+	float roll,pitch,yaw;
+	Qt2Euler(q,&roll,&pitch,&yaw);
+	
+	Mat<float> wX(3,1);
+	w->set( -roll, 1,1);
+	w->set( -pitch, 2,1);
+	w->set( -yaw, 3,1);
+	
+#ifdef debuglvl2
+	std::cout << " SE3 : TEST APRES MODIF : " << std::endl;
+	transpose(*w).afficher();
+	transpose( Qt2Mat<float>(q) ).afficher();
+#endif	
+	
+	hasChanged = true;
+}
+/**/
 
 se3& se3::operator=(const se3& x)
 {

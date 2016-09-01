@@ -17,7 +17,6 @@ class ElementMobile : public IElementMobile
 		
 		virtual bool isComposit()	override;
 		
-		virtual bool isRobot() override;
 };
 
 

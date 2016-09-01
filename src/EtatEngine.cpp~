@@ -54,7 +54,7 @@ std::cout << "SIMULATION : run " << sim->getTime() << " : successfully !!" << st
 				//DEBUGGING :
 				case TCSimulation:
 				{
-				float timestep = 5e-3f;
+				float timestep = 1e-2f;
 				float time = sim->getTime();
 #ifdef debug
 std::cout << "SIMULATION : run : ..." << std::endl;
@@ -146,7 +146,8 @@ void EtatEngine::init()
 	//HJAxis.set( 1.0f, 1,1);
 	Mat<float> AnchorBL(0.0f,3,1);
 	AnchorBL.set( -hwd.get(3,1)/2-1.0f, 3,1);
-	cl.insert( cl.end(), ConstraintInfo(std::string("picBAS"),std::string("picHAUT"), CTBallAndSocketJoint, operatorL(AnchorAL,AnchorBL) ) ); 
+	//cl.insert( cl.end(), ConstraintInfo(std::string("picBAS"),std::string("picHAUT"), CTBallAndSocketJoint, operatorL(AnchorAL,AnchorBL) ) ); 
+	cl.insert( cl.end(), ConstraintInfo(std::string("picBAS"),std::string("picHAUT"), CTHingeJoint, operatorL(AnchorAL,AnchorBL) ) ); 
 	
 	
 	

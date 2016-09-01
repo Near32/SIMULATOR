@@ -20,14 +20,14 @@ void IRobotHandler::update(float dt)
 	{
 		if( ((RigidBody*)rb.get())->isFixed == false )
 		{
-		if( ((RigidBody*)rb.get())->isRobot == false )
-		{
+			if( ((RigidBody*)rb.get())->isRobot == true )
+			{
 			
-			bool isComputing = true;
-#ifdef debug
-			((Robot*)rb.get())->process(dt,isComputing);
-#endif
-		}
+				bool isComputing = true;
+	#ifdef debug
+				((Robot*)rb.get())->process(dt,isComputing);
+	#endif
+			}
 		}	
 	}	
 }

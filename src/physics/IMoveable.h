@@ -43,6 +43,11 @@ class IMoveable
 	
 	Mat<float> getAngularVelocity()	const;
 
+
+	Mat<float>& getLinearVelocity();
+	
+	Mat<float>& getAngularVelocity();
+
 	
 	//---------------------------------------------------------
 	//---------------------------------------------------------

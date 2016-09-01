@@ -11,22 +11,56 @@
 //#define debuglvl1
 //#define debuglvl2
 //#define debuglvl3
+#define debuglvl4
 
 #define benchmark
 
-extern mutex ressourcesMutex;
+#ifndef	ITERATIVE_IMPULSE_BASED_SOLUTION
+	
+	#define IMPULSEBASED
+	
+	#ifndef IMPULSEBASED
+		#define FORCEBASED
+	
+		#ifndef FORCEBASED
+			#define NOSOLVER
+		#endif
+	#endif
+	
+#endif
 
+
+
+extern std::mutex ressourcesMutex;
+
+#ifndef	ITERATIVE_IMPULSE_BASED_SOLUTION
 Simulation::Simulation() : time(0.0f), updater(new Updater(this, new ExplicitEulerIntegrator(this)) ), constraintsSolver( new SimultaneousImpulseBasedConstraintSolverStrategy(this) ), collisionDetector( new CollisionDetector(this) ), robotHandler( new IRobotHandler(this))
 {
 	Mat<float> g(0.0f,3,1);
 	g.set( -9.81f,3,1);
 	collectionF.insert( collectionF.begin(), std::unique_ptr<IForceEffect>(new GravityForceEffect(g))  );
 	
-#ifdef debug
+	#ifdef debug
 	std::cout << "SIMULATION : minimal initialization : OKAY." << std::endl;
-#endif	
+	#endif	
 	SimulationTimeStep = 5e-1f;
 }
+
+#else
+
+Simulation::Simulation() : time(0.0f), updater(new Updater(this, new ExplicitEulerIntegrator(this)) ), constraintsSolver( new IterativeImpulseBasedConstraintSolverStrategy(this) ), collisionDetector( new CollisionDetector(this) ), robotHandler( new IRobotHandler(this))
+{
+	Mat<float> g(0.0f,3,1);
+	g.set( -9.81f,3,1);
+	collectionF.insert( collectionF.begin(), std::unique_ptr<IForceEffect>(new GravityForceEffect(g))  );
+	
+	#ifdef debug
+	std::cout << "SIMULATION : minimal initialization : OKAY." << std::endl;
+	#endif	
+	SimulationTimeStep = 5e-1f;
+}
+
+#endif
 
 
 Simulation::Simulation(Environnement* env_) : Simulation()
@@ -109,7 +143,7 @@ std::cout << "SIMULATION : environnement initialization : ElementFixe OrbeBonus 
 #ifdef debug
 std::cout << "SIMULATION : environnement initialization : ElementMobile : id = " << id << " : ...." << std::endl;
 #endif					
-				if( ((IElementMobile*)(element.get()))->isRobot() )
+				if( !((IElementMobile*)(element.get()))->isRobot() )
 				{
 					
 					//CAREFUL : HANDLE THE HWD : with BoxShape
@@ -129,8 +163,8 @@ std::cout << "SIMULATION : environnement initialization : ElementMobile : id = "
 				if(element->getName() == std::string("picHAUT"))
 				{
 					//let us put an initial velocity :
-					((RigidBody*)(simulatedObjects[id].get()))->setLinearVelocity( Mat<float>(100.0f,3,1) );
-					((RigidBody*)(simulatedObjects[id].get()))->setMass( 1e5f );
+					//((RigidBody*)(simulatedObjects[id].get()))->setLinearVelocity( Mat<float>(1.0f,3,1) );
+					//((RigidBody*)(simulatedObjects[id].get()))->setMass( 1e3f );
 					//((RigidBody*)(simulatedObjects[id].get()))->setMass( 1e-2f );
 				}
 #endif
@@ -356,6 +390,63 @@ void Simulation::run(float timeStep, float endTime)
 //----------------------------------------------------------------
 //----------------------------------------------------------------
 
+#ifdef NOSOLVER
+void Simulation::runStride( float timeStep)
+{
+
+	std::cout << "SIMULATION TIME = " << time << " seconds." << std::endl;
+
+	//apply forces to the RigidBodies:
+#ifdef debug
+std::cout << "SIMULATION : runStride : apply Forces : ..." << std::endl;
+#endif		
+	applyForces(timeStep);
+#ifdef debug
+std::cout << "SIMULATION : runStride : apply Forces : DONE" << std::endl;
+#endif
+
+	//update the velocities of any rigid body :
+#ifdef debug
+std::cout << "SIMULATION : runStride : rigidbodies velocities' update : ..." << std::endl;
+#endif	
+	updater->updateVelocities(timeStep);
+#ifdef debug
+std::cout << "SIMULATION : runStride : rigidbodies velocities' update : DONE." << std::endl;
+#endif	
+
+	
+//update the robot control law :
+#ifdef debug
+std::cout << "SIMULATION : runStride : robot control law update : ..." << std::endl;
+#endif	
+	robotHandler->update(timeStep);
+	((RigidBody*)(simulatedObjects[4].get()))->getPose().exp().afficher();
+#ifdef debug
+std::cout << "SIMULATION : runStride : robot control law update : DONE." << std::endl;
+#endif	
+
+
+	//from sim dot to sim pos :
+	updater->updatePositions(timeStep);
+	((RigidBody*)(simulatedObjects[4].get()))->getPose().exp().afficher();
+#ifdef debug
+std::cout << "SIMULATION : runStride : solving system : DONE." << std::endl;
+#endif					
+	//apply changes in the state of the environment : from simulation to EtatEngine only
+	updateStates();
+	
+
+#ifdef debuglvl4
+std::cout << " SIMULATION : runStride : Q QDOT  : END : " << std::endl;
+transpose(q).afficher();
+transpose(qdot).afficher();	
+#endif
+
+
+}
+#endif
+
+#ifdef IMPULSEBASED
 void Simulation::runStride( float timeStep)
 {
 
@@ -385,7 +476,7 @@ std::cout << "SIMULATION : runStride : robot control law update : DONE." << std:
 #ifdef debug
 std::cout << "SIMULATION : runStride : rigidbodies velocities' update : ..." << std::endl;
 #endif	
-	//updater->update(timeStep);
+	updater->updateVelocities(timeStep);
 #ifdef debug
 std::cout << "SIMULATION : runStride : rigidbodies velocities' update : DONE." << std::endl;
 #endif	
@@ -439,14 +530,31 @@ Fext.afficher();
 std::cout << "SIMULATION : runStride : solving system : ..." << std::endl;
 #endif				
 	constraintsSolver->Solve(timeStep, collectionC, q, qdot, invM,S, Fext);
-	//updater->updatePositions(timeStep);
+	//the second part is done during the solving of the system :
+	//from qdot to sim dot;
+	updateQdot();
+	
+	
+//update the robot control law :
+#ifdef debug
+std::cout << "SIMULATION : runStride : robot control law update : ..." << std::endl;
+#endif	
+	robotHandler->update(timeStep);
+#ifdef debug
+std::cout << "SIMULATION : runStride : robot control law update : DONE." << std::endl;
+#endif	
+
+
+	//from sim dot to sim pos :
+	updater->updatePositions(timeStep);
 #ifdef debug
 std::cout << "SIMULATION : runStride : solving system : DONE." << std::endl;
 #endif					
-	//apply changes in the state :		
+	//apply changes in the state of the environment : from simulation to EtatEngine only
 	updateStates();
+	
 
-#ifdef debuglvl3
+#ifdef debuglvl4
 std::cout << " SIMULATION : runStride : Q QDOT  : END : " << std::endl;
 transpose(q).afficher();
 transpose(qdot).afficher();	
@@ -454,6 +562,259 @@ transpose(qdot).afficher();
 
 
 }
+#endif
+
+
+#ifdef FORCEBASED
+/*----------------------------------------------------------*/
+/*----------------------------------------------------------*/
+/*		FORCE BASED SOLVER : 								*/
+/*----------------------------------------------------------*/
+/*----------------------------------------------------------*/
+void Simulation::runStride( float timeStep)
+{
+
+	std::cout << "SIMULATION TIME = " << time << " seconds." << std::endl;
+	//apply forces to the RigidBodies:
+#ifdef debug
+std::cout << "SIMULATION : runStride : apply Forces : ..." << std::endl;
+#endif		
+	applyForces(timeStep);
+#ifdef debug
+std::cout << "SIMULATION : runStride : apply Forces : DONE" << std::endl;
+#endif			
+
+
+
+	//check Collisions and create the corresponding entities to deal with those :
+#ifdef debug
+std::cout << "SIMULATION : runStride : collision check : ..." << std::endl;
+#endif	
+	collisionDetector->checkForCollision(timeStep);
+#ifdef debug
+std::cout << "SIMULATION : runStride : collision check : DONE." << std::endl;
+#endif		
+
+
+
+	//construct the system to be solved...
+	if(initializedQQdotInvMFext)
+	{
+		//TODO : update QQdotInvMFext, for now on, we do not care at all about reallocation and optimization, so the matrixes are being reconstructed every time...
+#ifdef debug
+std::cout << "SIMULATION : runStride : updating matrices : ..." << std::endl;
+#endif					
+		updateInvMSFext();
+	}
+	else
+	{
+#ifdef debug
+std::cout << "SIMULATION : runStride : initializing matrices : ..." << std::endl;
+#endif			
+		constructQQdotInvMSFext();
+#ifdef debug
+std::cout << "SIMULATION : runStride : initializing matrices : DONE." << std::endl;
+#endif					
+	}
+	
+	
+#ifdef debuglvl3
+std::cout << " SIMULATION : runStride : Q QDOT invM S Fext : " << std::endl;
+transpose(q).afficher();
+transpose(qdot).afficher();
+invM.print();
+S.print();
+Fext.afficher();
+#endif
+
+
+	//solve the system and update it :
+#ifdef debug
+std::cout << "SIMULATION : runStride : solving system : ..." << std::endl;
+#endif				
+	//constraintsSolver->Solve(timeStep, collectionC, q, qdot, invM,S, Fext);
+	constraintsSolver->SolveForceBased(timeStep, collectionC, q, qdot, invM,S, Fext);
+	//the second part is done during the solving of the system :
+	//from qdot to sim dot;
+	updateQdot();
+	
+	
+//update the robot control law :
+#ifdef debug
+std::cout << "SIMULATION : runStride : robot control law update : ..." << std::endl;
+#endif	
+	robotHandler->update(timeStep);
+#ifdef debug
+std::cout << "SIMULATION : runStride : robot control law update : DONE." << std::endl;
+#endif	
+
+
+//update the velocities of any rigid body :
+#ifdef debug
+std::cout << "SIMULATION : runStride : rigidbodies velocities' update : ..." << std::endl;
+#endif	
+	updater->updateVelocities(timeStep);
+#ifdef debug
+std::cout << "SIMULATION : runStride : rigidbodies velocities' update : DONE." << std::endl;
+#endif	
+
+	//from sim dot to sim pos :
+	updater->updatePositions(timeStep);
+#ifdef debug
+std::cout << "SIMULATION : runStride : solving system : DONE." << std::endl;
+#endif					
+	//apply changes in the state of the environment : from simulation to EtatEngine only
+	updateStates();
+	
+
+#ifdef debuglvl4
+std::cout << " SIMULATION : runStride : Q QDOT  : END : " << std::endl;
+transpose(q).afficher();
+transpose(qdot).afficher();	
+#endif
+
+
+}
+
+#endif
+
+
+
+#ifdef ITERATIVE_IMPULSE_BASED_SOLUTION
+
+
+
+
+
+void Simulation::runStride( float timeStep)
+{
+
+	std::cout << "SIMULATION TIME = " << time << " seconds." << std::endl;
+	//apply forces to the RigidBodies:
+#ifdef debug
+std::cout << "SIMULATION : runStride : apply Forces : ..." << std::endl;
+#endif		
+	applyForces(timeStep);
+#ifdef debug
+std::cout << "SIMULATION : runStride : apply Forces : DONE" << std::endl;
+#endif			
+
+
+//update the robot control law :
+#ifdef debug
+std::cout << "SIMULATION : runStride : robot control law update : ..." << std::endl;
+#endif	
+	robotHandler->update(timeStep);
+#ifdef debug
+std::cout << "SIMULATION : runStride : robot control law update : DONE." << std::endl;
+#endif	
+
+
+
+	//update the velocities of any rigid body :
+#ifdef debug
+std::cout << "SIMULATION : runStride : rigidbodies velocities' update : ..." << std::endl;
+#endif	
+	updater->updateVelocities(timeStep);
+#ifdef debug
+std::cout << "SIMULATION : runStride : rigidbodies velocities' update : DONE." << std::endl;
+#endif	
+
+
+
+	//check Collisions and create the corresponding entities to deal with those :
+#ifdef debug
+std::cout << "SIMULATION : runStride : collision check : ..." << std::endl;
+#endif	
+	collisionDetector->checkForCollision(timeStep);
+#ifdef debug
+std::cout << "SIMULATION : runStride : collision check : DONE." << std::endl;
+#endif		
+
+
+
+	//construct the system to be solved...
+	if(initializedQQdotInvMFext)
+	{
+		//TODO : update QQdotInvMFext, for now on, we do not care at all about reallocation and optimization, so the matrixes are being reconstructed every time...
+#ifdef debug
+std::cout << "SIMULATION : runStride : updating matrices : ..." << std::endl;
+#endif					
+		updateInvMSFext();
+	}
+	else
+	{
+#ifdef debug
+std::cout << "SIMULATION : runStride : initializing matrices : ..." << std::endl;
+#endif			
+		constructQQdotInvMSFext();
+#ifdef debug
+std::cout << "SIMULATION : runStride : initializing matrices : DONE." << std::endl;
+#endif					
+	}
+	
+	
+#ifdef debuglvl3
+std::cout << " SIMULATION : runStride : Q QDOT invM S Fext : " << std::endl;
+transpose(q).afficher();
+transpose(qdot).afficher();
+invM.print();
+S.print();
+Fext.afficher();
+#endif
+
+
+	//solve the system and update it :
+#ifdef debug
+std::cout << "SIMULATION : runStride : solving system : ..." << std::endl;
+#endif			
+	constraintsSolver->nbrIterationSolver = 10;	
+	constraintsSolver->Solve(timeStep, collectionC, q, qdot, invM,S, Fext);
+	//the second part is done during the solving of the system :
+	//from qdot to sim dot;
+	updateQdot();
+	
+	
+//update the robot control law :
+#ifdef debug
+std::cout << "SIMULATION : runStride : robot control law update : ..." << std::endl;
+#endif	
+	robotHandler->update(timeStep);
+#ifdef debug
+std::cout << "SIMULATION : runStride : robot control law update : DONE." << std::endl;
+#endif	
+
+
+	//from sim dot to sim pos :
+	updater->updatePositions(timeStep);
+#ifdef debug
+std::cout << "SIMULATION : runStride : solving system : DONE." << std::endl;
+#endif					
+	//apply changes in the state of the environment : from simulation to EtatEngine only
+	updateStates();
+	
+
+#ifdef debuglvl4
+std::cout << " SIMULATION : runStride : Q QDOT  : END : " << std::endl;
+transpose(q).afficher();
+transpose(qdot).afficher();	
+#endif
+
+
+}
+
+
+
+
+
+
+
+#endif
+
+
+
+
+
 
 void Simulation::constructQ()
 {
@@ -722,7 +1083,7 @@ std::cout << "SIMULATION : simulated object : " << nbrB << " : DONE." << std::en
 void Simulation::constructQQdotInvMSFext()
 {
 	//TODO : uncomment once the other strategy is set on track...
-	initializedQQdotInvMFext = true;
+	initializedQQdotInvMFext = false;
 	
 	//------------------------------------------------------------------
 	//------------------------------------------------------------------	
@@ -931,7 +1292,7 @@ std::cout << "SIMULATION : simulated object : " << nbrB << " : DONE." << std::en
 void Simulation::updateInvMSFext()
 {
 	//TODO : uncomment once the other strategy is set on track...
-	initializedQQdotInvMFext = true;
+	initializedQQdotInvMFext = false;
 	
 	//------------------------------------------------------------------
 	//------------------------------------------------------------------	
@@ -1381,12 +1742,12 @@ void Simulation::applyForces(float timeStep)
 	}
 #endif
 }
+
 void Simulation::updateQQdot()
 {
 	
 	int b1 = 0;
 	int b2 = 0;
-	
 	
 	for( auto& o : simulatedObjects ) 
 	{	
@@ -1398,16 +1759,54 @@ void Simulation::updateQQdot()
 		
 		((RigidBody*)(o.get()))->setAngularVelocity( extract( qdot, b2+4,1, b2+6,1) );
 		
+		std::cout << " AVel :: " << o->getName() << std::endl;
+		transpose( ((RigidBody*)(o.get()))->getAngularVelocity() ).afficher();
+		
 		b1+=7;
 		b2+=6;	
 	}
+	
+	
+}
+
+void Simulation::updateQ()
+{
+	
+	int b1 = 0;
+	
+	for( auto& o : simulatedObjects ) 
+	{	
+		((RigidBody*)(o.get()))->setPosition( extract(q, b1+1,1, b1+3,1) );
+			
+		((RigidBody*)(o.get()))->setMatOrientation( extract(q, b1+4,1, b1+7,1) );
+		
+		b1+=7;
+	}
+	
+	
+}
+
+void Simulation::updateQdot()
+{
+	int b2 = 0;
+	
+	for( auto& o : simulatedObjects ) 
+	{
+		
+		((RigidBody*)(o.get()))->setLinearVelocity( extract( qdot, b2+1,1, b2+3,1) );
+		
+		((RigidBody*)(o.get()))->setAngularVelocity( extract( qdot, b2+4,1, b2+6,1) );
+		
+		b2+=6;	
+	}
+	
 	
 }
 
 
 void Simulation::updateStates()
 {
-	updateQQdot();
+	//updateQQdot();
 	
 	std::string name;
 	int id = 0;
@@ -1424,9 +1823,11 @@ void Simulation::updateStates()
 		if( Name2ID.count( name) )
 		{
 			id = Name2ID[name];
+			
 			ressourcesMutex.lock();
 			itEl->setPose( ((RigidBody*)(simulatedObjects[id].get()))->getPose() );
 			ressourcesMutex.unlock();
+			
 			
 			((RigidBody*)simulatedObjects[id].get())->clearUser();
 		}

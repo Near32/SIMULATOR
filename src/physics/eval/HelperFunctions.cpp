@@ -63,6 +63,7 @@ Mat<float> closestPointWOfBOXGivenPointW(RigidBody& rb, const Mat<float>& pointW
 
 bool testOBBPlane( RigidBody& box, RigidBody& plane)
 {
+	//float precision = 1e-1f;
 	BoxShape boxs = (BoxShape&)box.getShapeReference();
 	float d = ((PlaneShape&)plane.getShapeReference()).getDistance();
 	Mat<float> n( ((PlaneShape&)plane.getShapeReference()).getNormal());
@@ -76,7 +77,7 @@ bool testOBBPlane( RigidBody& box, RigidBody& plane)
 	
 	float s = dotProduct( n, box.getPosition()) - d;
 	
-	return fabs_(s) <= r;
+	return fabs_(s) <= r;//*(1.0f-precision);
 	
 }
 

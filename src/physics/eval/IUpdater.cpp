@@ -38,6 +38,11 @@ void Updater::update(float dt)
 	this->integrator->integrateVelocities(dt);
 }
 
+void Updater::updateVelocities(float dt)
+{
+	this->integrator->integrateVelocities(dt);
+}
+
 void Updater::updatePositions(float dt)
 {
 	this->integrator->integratePositions(dt);

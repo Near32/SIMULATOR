@@ -21,6 +21,7 @@ class IUpdater
 	~IUpdater();
 	
 	virtual void update(float dt) = 0;
+	virtual void updateVelocities(float dt) = 0;
 	virtual void updatePositions(float dt) =0;
 };
 
@@ -34,6 +35,7 @@ class Updater : public IUpdater
 	~Updater();
 	
 	virtual void update(float dt) override;
+	virtual void updateVelocities(float dt) override;
 	virtual void updatePositions(float dt) override;
 	
 };

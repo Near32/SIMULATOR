@@ -1,6 +1,9 @@
 #include "IIntegrator.h"
 #include "../Simulation.h"
 
+//#define NORMALIZE_QUAT
+
+
 IIntegrator::IIntegrator(Simulation* sim) : sim(sim)
 {
 
@@ -112,7 +115,6 @@ void ExplicitEulerIntegrator::integrateVelocities(float dt)
 	
 			((RigidBody*)(it.get()))->setLinearVelocity( ((RigidBody*)(it.get()))->getLinearVelocity() + dt*resultingLinearAcceleration);
 	
-			((RigidBody*)(it.get()))->getLinearVelocity().afficher();
 			//velocity *= pow( damping, duration);
 			
 			//--------------------------------------
@@ -129,6 +131,7 @@ void ExplicitEulerIntegrator::integrateVelocities(float dt)
 	}
 	
 }
+
 
 void ExplicitEulerIntegrator::integratePositions(float dt)
 {
@@ -156,6 +159,22 @@ void ExplicitEulerIntegrator::integratePositions(float dt)
 			//Quaternion : via qrond matrix : watch out for the quaternion definition : here : (x y z w)^T...
 			Mat<float> qrond(4,3);
 			Quat q( ((RigidBody*)(it.get()))->getOrientation() );
+			
+			//----------------------------
+			//let us normalize q :
+			#ifdef NORMALIZE_QUAT
+			if(q.w != 0.0f)
+			{
+				q.x /= q.w;
+				q.y /= q.w;
+				q.z /= q.w;
+				q.w = 1.0f;
+			}
+			#endif
+			//---------------------------
+			
+			//METHOD 1 :
+			/*
 			qrond.set( q.w, 1,1);
 			qrond.set( q.w, 2,2);
 			qrond.set( q.w, 3,3);
@@ -172,11 +191,153 @@ void ExplicitEulerIntegrator::integratePositions(float dt)
 			qrond.set( -q.z, 2,1);
 			qrond.set( -q.z, 4,3);
 			
-			((RigidBody*)(it.get()))->setOrientation( ((RigidBody*)(it.get()))->getOrientation()+Mat2Qt( dt * (qrond* ((RigidBody*)(it.get()))->getAngularVelocity()) ) );
-			//----------------------------------------------
+			Quat res( ((RigidBody*)(it.get()))->getOrientation()+Mat2Qt( dt * (qrond* ((RigidBody*)(it.get()))->getAngularVelocity()) ) );
+			*/
 			
+			
+			//METHOD 2 : BARAFF rigid Body 1 
+			Quat av;
+			Mat<float> avv( ((RigidBody*)(it.get()))->getAngularVelocity() );
+			av.x = avv.get(1,1);
+			av.y = avv.get(2,1);
+			av.z = avv.get(3,1);
+			av.w = 0;
+			
+			Quat res( q+0.5f * Qt_Mul( av, q) );
+			
+			//----------------------------
+			
+			//std::cout << " INTEGRATOR : BEFORE : " << it->getName() << std::endl;
+			//transpose( ((RigidBody*)(it.get()))->getMatOrientation() ).afficher();
+			float roll,pitch,yaw;
+			transpose( Qt2Mat<float>(q) ).afficher();
+			Qt2Euler( ((RigidBody*)(it.get()))->getOrientation(), &roll, &pitch, &yaw);
+			
+			/*
+			std::cout << " r p y : " << roll << " ; " << pitch << " ; " << yaw << std::endl;
+			std::cout << " VEL : " << std::endl;
+			transpose( avv ).afficher();
+			*/
+			
+			roll += avv.get(1,1)*dt;
+			pitch += avv.get(2,1)*dt;
+			yaw += avv.get(3,1)*dt;
+			
+			//std::cout << " after vel : r p y : " << roll << " ; " << pitch << " ; " << yaw << std::endl;
+			
+			
+			
+			//let us normalize res :
+			#ifdef NORMALIZE_QUAT
+			if(res.w != 0.0f)
+			{
+				res.x /= res.w;
+				res.y /= res.w;
+				res.z /= res.w;
+				res.w = 1.0f;
+			}
+			#endif
+			//---------------------------
+			
+			((RigidBody*)(it.get()))->setOrientation( res );
+			//----------------------------------------------
+
+
+			std::cout << " INTEGRATOR : " << it->getName() << std::endl;
+			transpose( ((RigidBody*)(it.get()))->getMatOrientation() ).afficher();
+			Qt2Euler( ((RigidBody*)(it.get()))->getOrientation(), &roll, &pitch, &yaw);
+			std::cout << " r p y : " << roll << " ; " << pitch << " ; " << yaw << std::endl;
+			
+							
 			//-------------------
 			((RigidBody*)(it.get()))->clearUser();
 		}
 	}
 }
+
+
+/*
+void ExplicitEulerIntegrator::integratePositions(float dt)
+{
+	assert(dt > 0.0f);
+	
+	//int nbrSimulatedObjects = sim->simulatedObjects.size();
+	std::vector<std::unique_ptr<ISimulationObject> >::iterator it = sim->simulatedObjects.begin();
+	
+	for( auto& it : sim->simulatedObjects)
+	{
+		if( it->getType() == TSORigidBody)
+		{
+			//------------------------------------------------
+			//Linear :
+			((RigidBody*)(it.get()))->setPosition( ((RigidBody*)(it.get()))->getPosition() + dt * ((RigidBody*)(it.get()))->getLinearVelocity());
+			
+			
+			//Angular :
+			Mat<float> av( ((RigidBody*)(it.get()))->getAngularVelocity() );
+			Quat q( ((RigidBody*)(it.get()))->getOrientation() );
+			
+			//----------------------------
+			//let us normalize q :
+			#ifdef NORMALIZE_QUAT
+			if(q.w != 0.0f)
+			{
+				q.x /= q.w;
+				q.y /= q.w;
+				q.z /= q.w;
+				q.w = 1.0f;
+			}
+			#endif
+			//---------------------------
+			
+			float roll,pitch,yaw;
+			Qt2Euler(q, &roll, &pitch, &yaw);
+			
+			
+			std::cout << " INTEGRATOR : BEFORE : " << it->getName() << std::endl;
+			//transpose( ((RigidBody*)(it.get()))->getMatOrientation() ).afficher();
+			transpose( Qt2Mat<float>(q) ).afficher();
+			Qt2Euler( ((RigidBody*)(it.get()))->getOrientation(), &roll, &pitch, &yaw);
+			std::cout << " r p y : " << roll << " ; " << pitch << " ; " << yaw << std::endl;
+			std::cout << " VEL : " << std::endl;
+			transpose( av ).afficher();
+			
+			roll += av.get(1,1)*dt;
+			pitch += av.get(2,1)*dt;
+			yaw += av.get(3,1)*dt;
+			
+			std::cout << " after vel : r p y : " << roll << " ; " << pitch << " ; " << yaw << std::endl;
+			
+			
+			Quat res( Euler2Qt(roll,pitch,yaw) );
+			
+			//----------------------------
+			//let us normalize res :
+			#ifdef NORMALIZE_QUAT
+			if(res.w != 0.0f)
+			{
+				res.x /= res.w;
+				res.y /= res.w;
+				res.z /= res.w;
+				res.w = 1.0f;
+			}
+			#endif
+			//---------------------------		
+			
+			
+			((RigidBody*)(it.get()))->setOrientation( res );
+			//----------------------------------------------
+			
+			std::cout << " INTEGRATOR : " << it->getName() << std::endl;
+			transpose( ((RigidBody*)(it.get()))->getMatOrientation() ).afficher();
+			Qt2Euler( ((RigidBody*)(it.get()))->getOrientation(), &roll, &pitch, &yaw);
+			std::cout << " r p y : " << roll << " ; " << pitch << " ; " << yaw << std::endl;
+			//-------------------
+			((RigidBody*)(it.get()))->clearUser();
+		}
+	}
+}
+*/
+
+
+

@@ -35,12 +35,6 @@ bool ElementMobile::isComposit()
  	return false;
 }
 
-bool ElementMobile::isRobot()
-{
- 	return false;
-}
-
-
 
 // this function takes no argument at all if you look carefully at the diagram : it is a function which enables the user to know if it tries to access to Fixed Element or a Mobile one. It is made virtual pure in the IElement class because thus each of the daugther classes have to implements it its related way : in the ElementMobile class, this function will return false, since the instance is not an instance of ElementFixe. And in the ElementFixe class, this function will return true.
 //thos type of function are very useful when we use the polymorphism quality of the inheritance:

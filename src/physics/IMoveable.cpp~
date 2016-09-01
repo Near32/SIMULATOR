@@ -128,7 +128,14 @@ void IMoveable::setLinearVelocity( const Mat<float>& lvel)
 
 void IMoveable::setAngularVelocity( const Mat<float>& avel)	
 {	
-	*AngularVelocity = avel;	
+	if(avel.getLine() == 3)
+	{
+		*AngularVelocity = avel;	
+	}
+	else
+	{
+		throw;
+	}
 }
 
 

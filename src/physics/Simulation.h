@@ -15,6 +15,8 @@
 
 #include "ROBOTSIM/IRobotHandler.h"
 
+#define ITERATIVE_IMPULSE_BASED_SOLUTION
+
 class Simulation
 {
 	public :
@@ -72,6 +74,8 @@ class Simulation
 	
 	void applyForces(float timeStep);
 	void updateQQdot();
+	void updateQdot();
+	void updateQ();
 	void updateStates();
 		
 	/*

@@ -3,12 +3,13 @@
 
 //#define debug
 //#define debuglvl1
-#define debuglvl2
+//#define debuglvl2
+//#define debuglvl3
 
 extern mutex ressourcesMutex;
 
 
-VueEngine::VueEngine(Game* game_, GameState gameState_) : IEngine(game_,gameState_)
+VueEngine::VueEngine(Game* game_, GameState gameState_) : IEngine(game_,gameState_), countInfo(0), limCountInfo(1000)
 {
 	
 }
@@ -190,6 +191,8 @@ ressourcesMutex.unlock();
 	glEnd();
 	*/
 	
+	countInfo++;
+	
 	for(int i=0;i<env->ListeElements.size();i++)
 	{
 		ressourcesMutex.lock();
@@ -208,6 +211,14 @@ ressourcesMutex.unlock();
 		
 		//Radians to degrees.
 		EulerAngles *= (float)(180.0f/PI);
+		#ifdef debuglvl3
+		if(countInfo > limCountInfo)
+		{
+			std::cout << " EULER ANGLES :: " << env->ListeElements[i]->getName() << std::endl;
+			transpose(EulerAngles).afficher();
+			
+		}
+		#endif
 		
 		//let us go in the correct configuration to draw the Element :
 		glTranslated( poseElement.get(1,4), poseElement.get(2,4), poseElement.get(3,4));
@@ -264,7 +275,12 @@ ressourcesMutex.unlock();
 		
 		
 	}
-
+	
+	if(countInfo > limCountInfo)
+	{
+		countInfo = 0;
+	}
+	
     glEnd();
 
     //glFlush();

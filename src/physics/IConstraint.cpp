@@ -219,8 +219,28 @@ void BallAndSocketJoint::computeJacobians()
 	//B : 
 	JacobianB = operatorL( (1.0f)*Identity, (-1.0f)*crossProduct(rbB.getPointInWorld(AnchorBL)-rbB.getPosition()) );
 	
-	rbB.getPointInWorld(AnchorBL).afficher();
-	rbA.getPointInWorld(AnchorAL).afficher();
+	//rbB.getPointInWorld(AnchorBL).afficher();
+	//rbA.getPointInWorld(AnchorAL).afficher();
+	//---------------------------
+	//Constraints :
+	C = rbA.getPointInWorld(AnchorAL)-rbB.getPointInWorld(AnchorBL);
+}
+
+void BallAndSocketJoint::computeDotJacobians()
+{
+	//A :
+	Mat<float> Identity(0.0f,3,3);
+	for(int i=3;i--;)	Identity.set(1.0f,i+1,i+1);
+	
+	JacobianA = operatorL( (-1.0f)*Identity, (1.0f)*crossProduct(rbA.getPointInWorld(AnchorAL)-rbA.getPosition()) );
+	
+	//---------------------
+	
+	//B : 
+	JacobianB = operatorL( (1.0f)*Identity, (-1.0f)*crossProduct(rbB.getPointInWorld(AnchorBL)-rbB.getPosition()) );
+	
+	//rbB.getPointInWorld(AnchorBL).afficher();
+	//rbA.getPointInWorld(AnchorAL).afficher();
 	//---------------------------
 	//Constraints :
 	C = rbA.getPointInWorld(AnchorAL)-rbB.getPointInWorld(AnchorBL);

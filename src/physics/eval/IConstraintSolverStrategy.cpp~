@@ -3,7 +3,10 @@
 
 #include "../../utils/LCPSolver/LCPSolver.h"
 
-#define debuglvl1
+//#define debuglvl1
+//#define debuglvl2
+//#define debuglvl3
+#define debuglvl4
 
 
 IConstraintSolverStrategy::IConstraintSolverStrategy(Simulation* sim_) : sim(sim_)
@@ -205,6 +208,8 @@ void SimultaneousImpulseBasedConstraintSolverStrategy::computeConstraintsANDJaco
 	//MAJ qdot :
 	int b1 = 0;
 	int b2 = 0;
+	
+	/*
 	for( auto& o : sim->simulatedObjects ) 
 	{	
 		//((RigidBody*)(o.get()))->setPosition( extract(q, b1+1,1, b1+3,1) );	
@@ -216,7 +221,7 @@ void SimultaneousImpulseBasedConstraintSolverStrategy::computeConstraintsANDJaco
 		b1+=7;
 		b2+=6;	
 	}
-	
+	*/
 	//-------------------------------------
 	//-------------------------------------
 	//-------------------------------------
@@ -249,8 +254,8 @@ void SimultaneousImpulseBasedConstraintSolverStrategy::computeConstraintsANDJaco
 	
 	constraintsJacobian = temp;
 	//Constraint :
-	float baumgarteBAS = 0.1f;
-	float baumgarteC = 0.5f;
+	float baumgarteBAS = 1e-1f;
+	float baumgarteC = 1e-1f;
 	C = tC;
 	//----------------------------------------
 	//BAUMGARTE STABILIZATION
@@ -260,6 +265,9 @@ void SimultaneousImpulseBasedConstraintSolverStrategy::computeConstraintsANDJaco
 	{
 		//Baumgarte stabilization :
 		//temp *= 0.1f/this->dt;
+		//float slop = -5e-1f;
+		//float pdepth = ((ContactConstraint*)(c[0].get()))->penetrationDepth;
+		//tC *= baumgarteC/this->dt*(pdepth-slop);
 		tC *= baumgarteC/this->dt;
 	}
 	//BAS JOINT :
@@ -345,7 +353,7 @@ offset.afficher();
 	}
 	
 	
-	//Let us delete the contact constraints that are ephemarous by essence :
+	//Let us delete the contact constraints that are ephemerous by essence :
 	std::vector<std::unique_ptr<IConstraint> >::iterator itC = c.begin();
 	bool erased = false;
 	while(itC != c.end())
@@ -740,56 +748,148 @@ void SimultaneousImpulseBasedConstraintSolverStrategy::Solve(float dt, std::vect
 	//--------------------------------
 	//David Baraff 96 STAR.pdf Interactive Simulation of Rigid Body Dynamics in Computer Graphics : Lagrange Multipliers Method :
 	//Construct A :
+	/*
 	Mat<float> A( (-1.0f)*tConstraintsJacobian );
 	Mat<float> M( invGJ( invM.SM2mat() ) );
 	A = operatorL( M, A);
 	A = operatorC( A , operatorL( constraintsJacobian, Mat<float>((float)0,constraintsJacobian.getLine(), constraintsJacobian.getLine()) ) );
+	*/
+	//----------------------------
+	Mat<float> A( constraintsJacobian * invM.SM2mat() * tConstraintsJacobian );
 	
+	//---------------------------
 	Mat<float> invA( invGJ(A) );//invM*tConstraintsJacobian ) * constraintsJacobian );
 	
 	//Construct b and compute the solution.
-	Mat<float> tempLambda( invA * operatorC( Mat<float>((float)0,invA.getLine()-constraintsJacobian.getLine(),1) , (-1.0f)*(constraintsJacobian*(invM*Fext) + offset) ) );
+	//----------------------------------
+	//Mat<float> tempLambda( invA * operatorC( Mat<float>((float)0,invA.getLine()-constraintsJacobian.getLine(),1) , (-1.0f)*(constraintsJacobian*(invM*Fext) + offset) ) );
+	//-----------------------------------
+	Mat<float> tempLambda( invA * ((-1.0f)*(constraintsJacobian*tempInvMFext + offset) ) );
+	//-----------------------------------
 	
 	//Solutions :
-	lambda = extract( &tempLambda, qdot.getLine()+1, 1, tempLambda.getLine(), 1);
-	Mat<float> udot( extract(  &tempLambda, 1,1, qdot.getLine(), 1) );
+	//------------------------------------
+	//lambda = extract( &tempLambda, qdot.getLine()+1, 1, tempLambda.getLine(), 1);
+	//if(isnanM(lambda))
+	//	lambda = Mat<float>(0.0f,lambda.getLine(),lambda.getColumn());
+	//Mat<float> udot( extract(  &tempLambda, 1,1, qdot.getLine(), 1) );
+	//------------------------------------
+	lambda = tempLambda;
+	Mat<float> udot(  tConstraintsJacobian * tempLambda);
+	//------------------------------------
 	
-	if(isnanM(lambda))
-		lambda = Mat<float>(0.0f,lambda.getLine(),lambda.getColumn());
 	if(isnanM(udot))
 		udot = Mat<float>(0.0f,udot.getLine(),udot.getColumn());
 	
+	
+	float clampingVal = 1e4f;
+	for(int i=1;i<=udot.getLine();i++)
+	{
+		if(udot.get(i,1) > clampingVal)
+		{
+			udot.set( clampingVal,i,1);
+		}
+	}
+	
+#ifdef debuglvl1	
 	std::cout << " SOLUTIONS : udot and lambda/Pc : " << std::endl;
 	transpose(udot).afficher();
 	transpose(lambda).afficher();
 	transpose( tConstraintsJacobian*lambda).afficher();
-	
+#endif	
 	//Assumed model :
 	//qdot = tempInvMFext + dt*extract(  &tempLambda, 1,1, qdot.getLine(), 1);
-	qdot = tempInvMFext + udot;
+	//qdot = tempInvMFext + udot;
+	qdot += tempInvMFext + invM*udot;
+	//qdot += invM*udot;
+	//qdot += tempInvMFext + udot;
+	float clampingValQ = 1e3f;
+	for(int i=1;i<=qdot.getLine();i++)
+	{
+		if( fabs_(qdot.get(i,1)) > clampingValQ)
+		{
+			qdot.set( clampingValQ * fabs_(qdot.get(i,1))/qdot.get(i,1),i,1);
+		}
+	}
 	//qdot = udot;
 	
 	//Assumed model if the update of the integration is applied after that constraints solver :
 	//qdot += dt*extract(  &tempLambda, 1,1, qdot.getLine(), 1);//+tempInvMFext
 	
-	Mat<float> t( dt*( S*qdot ) );
-	q += t;
+	Mat<float> t( dt*( S*qdot ) );	
 	
+	float clampQuat = 1e-1f;
+	float idxQuat = 3;
+	while(idxQuat < t.getLine())
+	{
+		for(int i=1;i<4;i++)
+		{
+			if( fabs_(t.get(idxQuat+i,1)) > clampQuat)
+			{
+				t.set( clampQuat*(t.get(idxQuat+i,1))/t.get(idxQuat+i,1), idxQuat+i,1);
+			}
+		}
+		
+		idxQuat += 7;
+	}
+	
+	//the update is done by the update via an accurate integration and we must construct q and qdot at every step
+	//q += t;
+	
+	//--------------------------------------	
+	//let us normalize each quaternion :
+	/*
+	idxQuat = 3;
+	while(idxQuat < q.getLine())
+	{
+		float scaler = q.get( idxQuat+4,1);
+		
+		if(scaler != 0.0f)
+		{
+			for(int i=1;i<=4;i++)
+			{
+				q.set( q.get(idxQuat+i,1)/scaler, idxQuat+i,1);
+			}
+		}
+		
+		idxQuat += 7;
+	}
+	*/
+	
+	//--------------------------------------
+	
+#ifdef debuglvl2	
 	//std::cout << " computed Pc : " << std::endl;
 	//(tConstraintsJacobian*tempLambda).afficher();
-	std::cout << " q+ : " << std::endl;
-	q.afficher();
+	//std::cout << " q+ : " << std::endl;
+	//transpose(q).afficher();
 	std::cout << " qdot+ : " << std::endl;
-	qdot.afficher();
+	transpose(qdot).afficher();
+	std::cout << " qdotminus : " << std::endl;
+	transpose(qdotminus).afficher();
+#endif
+
+#ifdef debuglvl3	
+	std::cout << "SOME VERIFICATION ON : J*qdot + c = 0 : " << std::endl;
+	transpose(constraintsJacobian*qdot+offset).afficher();
+	
 	
 	float normC = (transpose(C)*C).get(1,1);
 	Mat<float> Cdot( constraintsJacobian*qdot);
 	float normCdot = (transpose(Cdot)*Cdot).get(1,1);
 	float normQdot = (transpose(qdot)*qdot).get(1,1);
 	
-	rs->ltadd(std::string("normC"),normC);
-	rs->ltadd(std::string("normCdot"),normCdot);
+	//rs->ltadd(std::string("normC"),normC);
+	//rs->ltadd(std::string("normCdot"),normCdot);
 	rs->ltadd(std::string("normQdot"),normQdot);
+	char name[5];
+	for(int i=1;i<=t.getLine();i++)
+	{
+		sprintf(name,"dq%d",i);
+		rs->ltadd(std::string(name), t.get(i,1));
+	}
+	rs->tWriteFileTABLE();
+#endif	
 	//END OF PREVIOUS METHOD :
 	//--------------------------------
 	
@@ -886,17 +986,334 @@ void SimultaneousImpulseBasedConstraintSolverStrategy::Solve(float dt, std::vect
 	
 	//std::cout << " q+ : " << std::endl;
 	//q.afficher();
-	
-	std::cout << "C : " << std::endl;
-	C.afficher();
+#ifdef debuglvl4	
+	//BAUMGARTE STABILIZATION has been handled in the computeConstraintsANDJacobian function....
+	std::cout << "tConstraints : norme  = " << norme2(C) << std::endl;
+	transpose(C).afficher();
 	std::cout << "Cdot : " << std::endl;
 	(constraintsJacobian*qdot).afficher();
-	
+	std::cout << " JACOBIAN : " << std::endl;
+	//transpose(constraintsJacobian).afficher();
+	constraintsJacobian.afficher();
+	std::cout << " Qdot+ : " << std::endl;
+	transpose(qdot).afficher();
+#endif	
 	//BAUMGARTE STABILIZATION has been handled in the computeConstraintsANDJacobian function....
 	//std::cout << "Constraints : norme  = " << norme2(C) << std::endl;
 	//C.afficher();
 	
 }
+
+
+
+/*	FORCE BASED : */
+void SimultaneousImpulseBasedConstraintSolverStrategy::SolveForceBased(float dt, std::vector<std::unique_ptr<IConstraint> >& c, Mat<float>& q, Mat<float>& qdot, SparseMat<float>& invM, SparseMat<float>& S, const Mat<float>& Fext )
+{	
+	Mat<float> qdotminus(qdot);
+	this->dt = dt;
+	Mat<float> tempInvMFext( dt*(invM * Fext) ) ;
+
+
+	computeConstraintsANDJacobian(c,q,qdot);
+	
+	Mat<float> tConstraintsJacobian( transpose(constraintsJacobian) );
+	Mat<float> A( constraintsJacobian * invM.SM2mat() * tConstraintsJacobian );
+	
+	//---------------------------
+	Mat<float> invA( invGJ(A) );
+	
+	//Construct b and compute the solution.
+	//-----------------------------------
+	Mat<float> tempLambda( invA * ((-1.0f)*(constraintsJacobian*tempInvMFext + offset) ) );
+	//-----------------------------------
+	
+	//Solutions :
+	//------------------------------------
+	lambda = tempLambda;
+	Mat<float> udot(  tConstraintsJacobian * tempLambda);
+	//------------------------------------
+	
+	if(isnanM(udot))
+		udot = Mat<float>(0.0f,udot.getLine(),udot.getColumn());
+	
+	
+	float clampingVal = 1e4f;
+	for(int i=1;i<=udot.getLine();i++)
+	{
+		if(udot.get(i,1) > clampingVal)
+		{
+			udot.set( clampingVal,i,1);
+		}
+	}
+	
+#ifdef debuglvl1	
+	std::cout << " SOLUTIONS : udot and lambda/Pc : " << std::endl;
+	transpose(udot).afficher();
+	transpose(lambda).afficher();
+	transpose( tConstraintsJacobian*lambda).afficher();
+#endif	
+	//Assumed model :
+	qdot += tempInvMFext + dt*(invM*udot);
+	float clampingValQ = 1e3f;
+	for(int i=1;i<=qdot.getLine();i++)
+	{
+		if( fabs_(qdot.get(i,1)) > clampingValQ)
+		{
+			qdot.set( clampingValQ * fabs_(qdot.get(i,1))/qdot.get(i,1),i,1);
+		}
+	}
+	
+	//--------------------------------------
+	
+#ifdef debuglvl2	
+	//std::cout << " computed Pc : " << std::endl;
+	//(tConstraintsJacobian*tempLambda).afficher();
+	//std::cout << " q+ : " << std::endl;
+	//transpose(q).afficher();
+	std::cout << " qdot+ : " << std::endl;
+	transpose(qdot).afficher();
+	std::cout << " qdotminus : " << std::endl;
+	transpose(qdotminus).afficher();
+#endif
+
+#ifdef debuglvl3	
+	std::cout << "SOME VERIFICATION ON : J*qdot + c = 0 : " << std::endl;
+	transpose(constraintsJacobian*qdot+offset).afficher();
+	
+	
+	float normC = (transpose(C)*C).get(1,1);
+	Mat<float> Cdot( constraintsJacobian*qdot);
+	float normCdot = (transpose(Cdot)*Cdot).get(1,1);
+	float normQdot = (transpose(qdot)*qdot).get(1,1);
+	
+	//rs->ltadd(std::string("normC"),normC);
+	//rs->ltadd(std::string("normCdot"),normCdot);
+	rs->ltadd(std::string("normQdot"),normQdot);
+	char name[5];
+	for(int i=1;i<=t.getLine();i++)
+	{
+		sprintf(name,"dq%d",i);
+		rs->ltadd(std::string(name), t.get(i,1));
+	}
+	rs->tWriteFileTABLE();
+#endif	
+	//END OF PREVIOUS METHOD :
+	//--------------------------------
+	
+	
+#ifdef debuglvl4	
+	//BAUMGARTE STABILIZATION has been handled in the computeConstraintsANDJacobian function....
+	std::cout << "tConstraints : norme  = " << norme2(C) << std::endl;
+	transpose(C).afficher();
+	std::cout << "Cdot : " << std::endl;
+	(constraintsJacobian*qdot).afficher();
+	std::cout << " JACOBIAN : " << std::endl;
+	//transpose(constraintsJacobian).afficher();
+	constraintsJacobian.afficher();
+	std::cout << " Qdot+ : " << std::endl;
+	transpose(qdot).afficher();
+#endif	
+	
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//-----------------------------------------
+//-----------------------------------------
+//-----------------------------------------
+
+//-----------------------------------------
+//-----------------------------------------
+//-----------------------------------------
+
+
+IterativeImpulseBasedConstraintSolverStrategy::IterativeImpulseBasedConstraintSolverStrategy(Simulation* sim_) : IConstraintSolverStrategy(sim_)
+{
+
+}
+
+IterativeImpulseBasedConstraintSolverStrategy::~IterativeImpulseBasedConstraintSolverStrategy()
+{
+
+}
+
+
+void IterativeImpulseBasedConstraintSolverStrategy::computeConstraintsANDJacobian(std::vector<std::unique_ptr<IConstraint> >& c, const Mat<float>& q, const Mat<float>& qdot)
+{
+	//MAJ qdot :
+	int b1 = 0;
+	int b2 = 0;
+	
+	//-------------------------------------
+	//-------------------------------------
+	//-------------------------------------
+	
+	size_t size = c.size();
+	int n = sim->simulatedObjects.size();
+
+	c[0]->computeJacobians();
+	
+	int idA = 6 * ( c[0]->rbA.getID() );
+	int idB = 6 * ( c[0]->rbB.getID() );
+	
+	Mat<float> tJA(c[0]->getJacobianA());
+	Mat<float> tJB(c[0]->getJacobianB());
+	//Constraint :
+	Mat<float> tC(c[0]->getConstraint());
+	
+	int sl = tJA.getLine();
+	
+	Mat<float> temp((float)0,sl, 6*n );
+	
+	for(int i=1;i<=sl;i++)
+	{
+		for(int j=1;j<=6;j++)
+		{
+			temp.set( tJA.get(i,j) , i, idA+j);
+			temp.set( tJB.get(i,j), i, idB+j  );
+		}
+	}
+	
+	constraintsJacobian = temp;
+	//Constraint :
+	float baumgarteBAS = 1e-1f;
+	float baumgarteC = 1e-1f;
+	C = tC;
+	//----------------------------------------
+	//BAUMGARTE STABILIZATION
+	//----------------------------------------
+	//Contact offset :
+	if( c[0]->getType() == CTContactConstraint)
+	{
+		//Baumgarte stabilization :
+		//temp *= 0.1f/this->dt;
+		//float slop = -5e-1f;
+		//float pdepth = ((ContactConstraint*)(c[0].get()))->penetrationDepth;
+		//tC *= baumgarteC/this->dt*(pdepth-slop);
+		tC *= baumgarteC/this->dt;
+	}
+	//BAS JOINT :
+	if( c[0]->getType() == CTBallAndSocketJoint)
+	{
+		tC*= baumgarteBAS/this->dt;
+	}
+	//----------------------------------------
+	//----------------------------------------
+	offset = tC;
+	
+	
+#ifdef debuglvl1
+std::cout << "CONSTRAINTS : nbr = " << size << std::endl;
+std::cout << "CONSTRAINTS : 0 : type = " << c[0]->getType() << " ; ids are : " << c[0]->rbA.getID() << " : " << c[0]->rbB.getID() << std::endl;
+offset.afficher();
+/*std::cout << "local Anchor A : " << std::endl;
+c[0]->AnchorAL.afficher();
+std::cout << "global Anchor A : " << std::endl;
+c[0]->rbA.getPointInWorld(c[0]->AnchorAL).afficher();
+std::cout << "local Anchor B : " << std::endl;
+c[0]->AnchorBL.afficher();
+std::cout << "global Anchor B : " << std::endl;
+c[0]->rbB.getPointInWorld(c[0]->AnchorBL).afficher();*/
+#endif	
+	
+	for(int i=1;i<size;i++)
+	{
+
+		c[i]->computeJacobians();
+		
+		tJA = c[i]->getJacobianA();
+		tJB = c[i]->getJacobianB();
+		
+		//Constraint :
+		tC = c[i]->getConstraint();
+		
+		size_t sl = tJA.getLine();
+		int idA = 6 * ( c[i]->rbA.getID() );
+		int idB = 6 * ( c[i]->rbB.getID() );
+		
+		temp = Mat<float>((float)0,sl, 6*n );
+		
+		//Constraints :
+		C = operatorC(C, tC);
+		//----------------------------------------
+		//BAUMGARTE STABILIZATION
+		//----------------------------------------
+		//Contact offset :
+		if( c[i]->getType() == CTContactConstraint)
+		{
+			//Baumgarte stabilization :
+			//temp *= 0.1f/this->dt;
+			tC *= baumgarteC/this->dt;
+		}
+		//BAS JOINT :
+		if( c[i]->getType() == CTBallAndSocketJoint)
+		{
+			tC*= baumgarteBAS/this->dt;
+		}
+		//----------------------------------------
+		//----------------------------------------
+		
+						
+		for(int i=1;i<=sl;i++)
+		{
+			for(int j=1;j<=6;j++)
+			{
+				temp.set( tJA.get(i,j) , i, idA+j);
+				temp.set( tJB.get(i,j), i, idB+j  );
+			}
+		}
+		
+		constraintsJacobian = operatorC(constraintsJacobian, temp );
+		//Constraint :
+		offset = operatorC( offset, tC);
+		
+#ifdef debuglvl1
+std::cout << "CONSTRAINTS : " << i << " type = " << c[i]->getType() << " ; ids are : " << c[i]->rbA.getID() << " : " << c[i]->rbB.getID() << std::endl;
+offset.afficher();
+#endif
+		
+	}
+	
+	
+	//Let us delete the contact constraints that are ephemerous by essence :
+	std::vector<std::unique_ptr<IConstraint> >::iterator itC = c.begin();
+	bool erased = false;
+	while(itC != c.end())
+	{
+		if( (itC->get())->getType() == CTContactConstraint )
+		{
+			erased = true;
+			c.erase(itC);
+		}
+	
+		if(!erased)
+			itC++;
+			
+		erased = false;
+	}
+}
+
+
 
 
 

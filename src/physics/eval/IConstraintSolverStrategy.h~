@@ -6,6 +6,8 @@
 #include "../IConstraint.h"
 #include "../../utils/math.h"
 #include "../../utils/RunningStats/RunningStats.h"
+#include <stdlib.h>
+#include <stdio.h>
 
 class Simulation;
 
@@ -27,7 +29,10 @@ class IConstraintSolverStrategy
 	
 	public :
 	
-	RunningStat<float>* rs;
+	RunningStats<float>* rs;
+	int nbrIterationSolver;
+	
+	//-------------------------------------
 	
 	IConstraintSolverStrategy(Simulation* sim);
 	
@@ -35,6 +40,7 @@ class IConstraintSolverStrategy
 	
 	
 	virtual void Solve(float dt, std::vector<std::unique_ptr<IConstraint> >& c, Mat<float>& q, Mat<float>& qdot, SparseMat<float>& invM, SparseMat<float>& S, const Mat<float>& Fext) = 0;
+	virtual void SolveForceBased(float dt, std::vector<std::unique_ptr<IConstraint> >& c, Mat<float>& q, Mat<float>& qdot, SparseMat<float>& invM, SparseMat<float>& S, const Mat<float>& Fext) = 0;
 
 	//------------------------------------
 	
@@ -63,8 +69,6 @@ class SimultaneousImpulseBasedConstraintSolverStrategy : public IConstraintSolve
 {
 	private :
 	
-	//std::vector<std::unique_ptr<IConstraint> > c;
-	
 	
 	//-----------------------------
 	
@@ -80,6 +84,34 @@ class SimultaneousImpulseBasedConstraintSolverStrategy : public IConstraintSolve
 	void computeConstraintsANDJacobian(std::vector<std::unique_ptr<IConstraint> >& c, const Mat<float>& q, const Mat<float>& qdot);
 		
 	virtual void Solve(float dt, std::vector<std::unique_ptr<IConstraint> >& c, Mat<float>& q, Mat<float>& qdot, SparseMat<float>& invM, SparseMat<float>& S, const Mat<float>& Fext ) override;
+	virtual void SolveForceBased(float dt, std::vector<std::unique_ptr<IConstraint> >& c, Mat<float>& q, Mat<float>& qdot, SparseMat<float>& invM, SparseMat<float>& S, const Mat<float>& Fext ) override;
+
+};
+
+
+class IterativeImpulseBasedConstraintSolverStrategy : public IConstraintSolverStrategy
+{
+	private :
+	
+	std::vector<Mat<float> > constraintsC;
+	std::vector<Mat<float> > constraintsJacobians;
+	std::vector<Mat<float> > constraintsImpulses;
+	
+	
+	//-----------------------------
+	
+	public :
+	
+	IterativeImpulseBasedConstraintSolverStrategy(Simulation* sim);
+	
+	~IterativeImpulseBasedConstraintSolverStrategy();
+	
+	
+	void computeConstraintsANDJacobian(std::vector<std::unique_ptr<IConstraint> >& c, const Mat<float>& q, const Mat<float>& qdot);
+		
+	virtual void Solve(float dt, std::vector<std::unique_ptr<IConstraint> >& c, Mat<float>& q, Mat<float>& qdot, SparseMat<float>& invM, SparseMat<float>& S, const Mat<float>& Fext ) override;
+	
+	virtual void SolveForceBased(float dt, std::vector<std::unique_ptr<IConstraint> >& c, Mat<float>& q, Mat<float>& qdot, SparseMat<float>& invM, SparseMat<float>& S, const Mat<float>& Fext ) override;
 
 };
 

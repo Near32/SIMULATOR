@@ -116,6 +116,11 @@ void RigidBody::computeInertia()
 			Inertia.set( r, 2,2);
 			Inertia.set( r, 3,3);
 			
+			iInertia = Inertia;
+			iInertia.set( 1.0f/r, 1,1); 
+			iInertia.set( 1.0f/r, 2,2);
+			iInertia.set( 1.0f/r, 3,3);
+			
 			transformInertiaTensorL2W();
 			
 		}

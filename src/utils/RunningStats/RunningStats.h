@@ -93,7 +93,7 @@ class RunningStats
 			ltStats[ltstat].push_back(val);
 		}
 		
-		this->tWriteFileTABLE();
+		//this->tWriteFileTABLE();
 	}
 
 	inline void tWriteFile()

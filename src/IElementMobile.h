@@ -8,7 +8,7 @@ class IElementMobile : public IElement
 	public:  
 
 	Mat<float> hwd;
-	
+	bool isrobot;
 	
 	//--------------------------------------
 	//--------------------------------------
@@ -27,7 +27,7 @@ class IElementMobile : public IElement
 		 
 		 virtual bool isComposit() = 0;
 		  
-		 virtual bool isRobot() = 0;
+		 virtual bool isRobot();
 };
 
 #endif

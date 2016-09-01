@@ -4,23 +4,23 @@
 //#define debuglvl1
 
 
-RigidBody::RigidBody() : ISimulationObject(), IMoveable(), userForce( Mat<float>((float)0,3,1) ), userTorque(Mat<float>((float)0,3,1)), isFixed(false), canCollide(true), mass(1.0f), imass(1.0f), Inertia(Identity3), iInertia(Identity3), ptrShape(new SphereShape(this))
+RigidBody::RigidBody() : ISimulationObject(), IMoveable(), userForce( Mat<float>((float)0,3,1) ), userTorque(Mat<float>((float)0,3,1)), isFixed(false), canCollide(true), mass(1.0f), imass(1.0f), Inertia(Identity3), iInertia(Identity3), ptrShape(new SphereShape(this)),isRobot(false)
 {
 	type = TSORigidBody;
 }
 
 
-RigidBody::RigidBody(const std::string& name_, int id_, bool isActive_) : ISimulationObject(name_,id_,isActive_), IMoveable(), userForce( Mat<float>((float)0,3,1) ), userTorque(Mat<float>((float)0,3,1)), isFixed(false), canCollide(true), mass(1.0f), imass(1.0f), Inertia(Identity3), iInertia(Identity3), ptrShape(new SphereShape(this))
+RigidBody::RigidBody(const std::string& name_, int id_, bool isActive_) : ISimulationObject(name_,id_,isActive_), IMoveable(), userForce( Mat<float>((float)0,3,1) ), userTorque(Mat<float>((float)0,3,1)), isFixed(false), canCollide(true), mass(1.0f), imass(1.0f), Inertia(Identity3), iInertia(Identity3), ptrShape(new SphereShape(this)),isRobot(false)
 {	
 	type = TSORigidBody;
 }
 
-RigidBody::RigidBody(const se3& Pose_, const std::string& name_, int id_, bool isActive_) : ISimulationObject(name_,id_,isActive_), IMoveable(Pose_), userForce( Mat<float>((float)0,3,1) ), userTorque(Mat<float>((float)0,3,1)), isFixed(false), canCollide(true), mass(1.0f), imass(1.0f), Inertia(Identity3), iInertia(Identity3), ptrShape(new SphereShape(this))
+RigidBody::RigidBody(const se3& Pose_, const std::string& name_, int id_, bool isActive_) : ISimulationObject(name_,id_,isActive_), IMoveable(Pose_), userForce( Mat<float>((float)0,3,1) ), userTorque(Mat<float>((float)0,3,1)), isFixed(false), canCollide(true), mass(1.0f), imass(1.0f), Inertia(Identity3), iInertia(Identity3), ptrShape(new SphereShape(this)),isRobot(false)
 {	
 	type = TSORigidBody;
 }
 
-RigidBody::RigidBody(const se3& Pose_, const std::string& name_, int id_, ShapeType shtype, bool isActive_) : ISimulationObject(name_,id_,isActive_), IMoveable(Pose_), userForce( Mat<float>((float)0,3,1) ), userTorque(Mat<float>((float)0,3,1)), isFixed(false), canCollide(true), mass(1.0f), imass(1.0f), Inertia(Identity3), iInertia(Identity3)
+RigidBody::RigidBody(const se3& Pose_, const std::string& name_, int id_, ShapeType shtype, bool isActive_) : ISimulationObject(name_,id_,isActive_), IMoveable(Pose_), userForce( Mat<float>((float)0,3,1) ), userTorque(Mat<float>((float)0,3,1)), isFixed(false), canCollide(true), mass(1.0f), imass(1.0f), Inertia(Identity3), iInertia(Identity3),isRobot(false)
 {	
 
 	if(shtype == BOX)
@@ -38,18 +38,18 @@ RigidBody::RigidBody(const se3& Pose_, const std::string& name_, int id_, ShapeT
 	type = TSORigidBody;
 }
 
-RigidBody::RigidBody(const se3& Pose_, const Mat<float>& Lvel, const Mat<float>& Avel) : ISimulationObject(), IMoveable(Pose_,Lvel,Avel), userForce(Mat<float>((float)0,3,1) ), userTorque(Mat<float>((float)0,3,1) ), isFixed(false), canCollide(true), mass(1.0f), imass(1.0f), Inertia(Identity3), iInertia(Identity3), ptrShape(new SphereShape(this))
+RigidBody::RigidBody(const se3& Pose_, const Mat<float>& Lvel, const Mat<float>& Avel) : ISimulationObject(), IMoveable(Pose_,Lvel,Avel), userForce(Mat<float>((float)0,3,1) ), userTorque(Mat<float>((float)0,3,1) ), isFixed(false), canCollide(true), mass(1.0f), imass(1.0f), Inertia(Identity3), iInertia(Identity3), ptrShape(new SphereShape(this)),isRobot(false)
 {
 	type = TSORigidBody;
 }
 
 
-RigidBody::RigidBody(const std::string& name_, int id_, bool isActive_, const se3& Pose_) : ISimulationObject(name_,id_,isActive_), IMoveable(Pose_),userForce(Mat<float>((float)0,3,1) ), userTorque(Mat<float>((float)0,3,1) ), isFixed(false), canCollide(true), mass(1.0f), imass(1.0f), Inertia(Identity3), iInertia(Identity3), ptrShape(new SphereShape(this))
+RigidBody::RigidBody(const std::string& name_, int id_, bool isActive_, const se3& Pose_) : ISimulationObject(name_,id_,isActive_), IMoveable(Pose_),userForce(Mat<float>((float)0,3,1) ), userTorque(Mat<float>((float)0,3,1) ), isFixed(false), canCollide(true), mass(1.0f), imass(1.0f), Inertia(Identity3), iInertia(Identity3), ptrShape(new SphereShape(this)),isRobot(false)
 {
 	type = TSORigidBody;
 }
 
-RigidBody::RigidBody(const std::string& name_, int id_, bool isActive_, const se3& Pose_, const Mat<float>& Lvel, const Mat<float>& Avel) : ISimulationObject(name_,id_,isActive_), IMoveable(Pose_,Lvel,Avel),userForce(Mat<float>((float)0,3,1) ), userTorque(Mat<float>((float)0,3,1) ), isFixed(false), canCollide(true), mass(1.0f), imass(1.0f), Inertia(Identity3), iInertia(Identity3), ptrShape(new SphereShape(this))
+RigidBody::RigidBody(const std::string& name_, int id_, bool isActive_, const se3& Pose_, const Mat<float>& Lvel, const Mat<float>& Avel) : ISimulationObject(name_,id_,isActive_), IMoveable(Pose_,Lvel,Avel),userForce(Mat<float>((float)0,3,1) ), userTorque(Mat<float>((float)0,3,1) ), isFixed(false), canCollide(true), mass(1.0f), imass(1.0f), Inertia(Identity3), iInertia(Identity3), ptrShape(new SphereShape(this)),isRobot(false)
 {
 	type = TSORigidBody;
 }

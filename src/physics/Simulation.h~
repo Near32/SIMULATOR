@@ -13,7 +13,7 @@
 #include "eval/IConstraintSolverStrategy.h"
 #include "eval/CollisionDetector.h"
 
-#include "Robot.h"
+#include "ROBOTSIM/IRobotHandler.h"
 
 class Simulation
 {
@@ -72,6 +72,8 @@ class Simulation
 	
 	void applyForces(float timeStep);
 	void updateQQdot();
+	void updateQdot();
+	void updateQ();
 	void updateStates();
 		
 	/*

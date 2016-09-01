@@ -37,6 +37,8 @@ class IConstraint
 	
 	Mat<float> JacobianA;
 	Mat<float> JacobianB;
+	Mat<float> DotJacobianA;
+	Mat<float> DotJacobianB;
 	
 	Mat<float> C;
 	//-----------------------------------
@@ -53,6 +55,11 @@ class IConstraint
 	virtual void applyPositionCorrection(float dt = 0.001f) = 0;
 	virtual void computeJacobians() = 0;
 	
+	virtual void computeDotJacobians()
+	{
+	
+	}
+	
 	
 	Mat<float> getJacobianA() const
 	{
@@ -62,6 +69,16 @@ class IConstraint
 	Mat<float> getJacobianB() const
 	{
 		return JacobianB;
+	}
+	
+	Mat<float> getDotJacobianA() const
+	{
+		return DotJacobianA;
+	}
+	
+	Mat<float> getDotJacobianB() const
+	{
+		return DotJacobianB;
 	}
 	
 	Mat<float> getConstraint()	const
@@ -130,6 +147,7 @@ class BallAndSocketJoint : public IConstraint
 	virtual void applyPositionCorrection(float dt = 0.001f) override;
 	
 	virtual void computeJacobians() override;
+	virtual void computeDotJacobians()	override;
 	
 	
 	

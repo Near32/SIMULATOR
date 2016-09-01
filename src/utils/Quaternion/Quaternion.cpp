@@ -45,6 +45,34 @@ Quat Euler2Qt(float roll, float pitch, float yaw)
 	Quat qy(0.0f,sin(pitch/2),0.0f,cos(pitch/2));
 	Quat qz(0.0f,0.0f,sin(yaw/2),cos(yaw/2));
 	
+	/*
+	//Let us normalize :
+	if( qx.w != 0.0f)
+	{
+		qx.x /= qx.w;
+		qx.y /= qx.w;
+		qx.z /= qx.w;
+		qx.w = 1;
+	}
+	
+	if( qy.w != 0.0f)
+	{
+		qy.x /= qy.w;
+		qy.y /= qy.w;
+		qy.z /= qy.w;
+		qy.w = 1;
+	}
+	
+	if( qz.w != 0.0f)
+	{
+		qz.x /= qz.w;
+		qz.y /= qz.w;
+		qz.z /= qz.w;
+		qz.w = 1;
+	}
+	*/
+	
+	
 	Quat q = Qt_Mul(qy,qx);
 	q = Qt_Mul(qz,q);
 	
@@ -55,9 +83,30 @@ Quat Euler2Qt(float roll, float pitch, float yaw)
 /* Returns the corresponding euler angles from a quaternion */
 void Qt2Euler( const Quat& q, float* roll, float* pitch, float* yaw)
 {
-	*roll = atan2( 2*(q.w*q.x+q.y*q.z), 1.0f-2*(q.x*q.x+q.y*q.y) );
-	*pitch = asin( 2*(q.w*q.y-q.z*q.x) );
-	*yaw = atan2( 2*(q.w*q.z+q.x*q.y), 1.0f-(q.y*q.y+q.z*q.z) );
+	*roll = atan21( 2.0f*(q.w*q.x+q.y*q.z), 1.0f-2.0f*(q.x*q.x+q.y*q.y) );
+	float sinpitch = 2.0f*(q.w*q.y-q.z*q.x);
+	while( sinpitch > 1.0f)
+	{
+		sinpitch -= 2.0f;
+	}
+	while( sinpitch < -1.0f)
+	{
+		sinpitch += 2.0f;
+	}
+	
+	float precision = 1e-2f;
+	if( fabs_(sinpitch) > 1.0f+precision || fabs_(sinpitch) < 1.0f-precision)
+	{
+		*pitch = asin( sinpitch );
+	}
+	else
+	{
+		if( sinpitch < 0.0f)	*pitch = -PI/2.0f;
+		if( sinpitch < 0.0f)	*pitch = PI/2.0f;
+	}
+
+	//*yaw = atan21( 2.0f*(q.w*q.z+q.x*q.y), 1.0f-(q.y*q.y+q.z*q.z) );
+	*yaw = atan21( 2.0f*(q.w*q.z+q.x*q.y), 1.0f-2.0f*(q.y*q.y+q.z*q.z) );
 }
 
 /* Returns the corresponding SO(3) matrix from Euler angles*/
