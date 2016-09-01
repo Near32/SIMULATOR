@@ -23,6 +23,8 @@ class EtatEngine : public IEngine
 	void loop() override ;
 
 	void init();
+	
+	void init1();
 
 };
 
