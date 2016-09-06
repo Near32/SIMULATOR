@@ -11,7 +11,9 @@ EtatEngine::EtatEngine(Game* game_, GameState gameState_) : IEngine(game_,gameSt
 {
 	env = new Environnement();
 	
-	init();
+	//init();
+	//init1();
+	init2();
 	
 }
 
@@ -160,8 +162,8 @@ void EtatEngine::init()
 		hwd.set( 20.0f, 3,1);
 		//--------------------------------
 		angle+= step;
-		t.set( radius*cos(angle*PI/180.0f), 1,1); 
-		t.set( radius*sin(angle*PI/180.0f),2,1);
+		t.set( radius*cos(angle), 1,1); 
+		t.set( radius*sin(angle),2,1);
 		
 		t.set( hwd.get(3,1), 3,1);
 			
@@ -428,4 +430,91 @@ void EtatEngine::init1()
 
 
 
+void EtatEngine::init2()
+{
+	//let's create the Elements that we need.
+	Mat<float> hwd(500.0f,3,1);
+	Mat<float> t((float)0,3,1);
+	
+	ConstraintsList cl;
+	
+	//--------------------------------
+	//create the elements :
+	//map : ground :
+	//ground :
+	t.set( -hwd.get(3,1)/2,3,1);
+	env->addElement( env->fabriques->fabriquer(ELFObstacle, std::string("ground"), new se3(t), hwd ) );
+	//
+	//sa position est bien à l'origine..
+	//resetting :
+	t *= 0.0f;
+	hwd = Mat<float>(1.0f,3,1);
+	//--------------------------------
+	
+	
+	//Gunvarrel :
+	float offset = 30.0f;
+	hwd *= 10.0f;
+	hwd.set(20.0f,3,1);
+	
+	t.set( hwd.get(2,1)/2+1.0f, 3,1);
+	t.set( hwd.get(1,1),1,1);
+	se3 obs_se3(t);
+	t.set( 0.0f,1,1);
+	t.set( hwd.get(3,1)/2, 3,1);
+	
+	float roll = +PI/2-0.1f;
+	float pitch = 0.0f;
+	float yaw = 0.0f;
+	Quat q = Euler2Qt(roll,pitch,yaw);
+	//Quat q;
+	//q.x = sin(-PI/4);
+	//q.w = cos(-PI/4);
+	//std::cout << " Quat : " << q.x << " : " << q.y << " : " << q.z << " : " << q.w << std::endl;
+	//Qt2Euler(q, &roll, &pitch, &yaw);
+	//std::cout << " Quat2Euler results : " << roll << " : " << pitch << " : " << yaw << std::endl;
+	obs_se3.setOrientation( q );
+	env->addElement( new ElementMobile(std::string("OBS"), new se3(obs_se3), hwd) );
+	
+	/*
+	t.set( t.get(3,1)+2.0f+offset, 3,1);	
+	env->addElement( new ElementMobile(std::string("picBAS"), new se3(t), hwd) );
+	
+	t.set( t.get(3,1)+hwd.get(3,1)+2.0f, 3,1);
+	
+	t.set( t.get(2,1)+0.0f, 2,1);
+		
+	env->addElement( new ElementMobile(std::string("picHAUT"), new se3(t), hwd) );
+	*/
+	
+	//constraints :
+	
+	//CONSTAINTS PIC BAS PIC HAUT ...:
+	/*
+	Mat<float> AnchorAL(0.0f,3,1);
+	AnchorAL.set( hwd.get(3,1)/2+1.0f, 3,1);
+	//Mat<float> HJAxis(0.0f,3,1);
+	//HJAxis.set( 1.0f, 1,1);
+	Mat<float> AnchorBL(0.0f,3,1);
+	AnchorBL.set( -hwd.get(3,1)/2-1.0f, 3,1);
+	cl.insert( cl.end(), ConstraintInfo(std::string("picBAS"),std::string("picHAUT"), CTBallAndSocketJoint, operatorL(AnchorAL,AnchorBL) ) ); */
+	
+	
+	
+	//TESTING ROBOT 1 :
+	
+	//resetting :
+	t = Mat<float>(0.0f,3,1);
+	hwd = Mat<float>(10.0f,3,1);
+	hwd.set( 20.0f, 3,1);
+	//--------------------------------
+	t.set(50.0f,2,1);
+	t.set( hwd.get(3,1), 3,1);	
+	env->addElement( new ElementRobot(std::string("R1"), new se3(t), hwd) );
+	//--------------------------------
+	
+	
+	sim = new Simulation(env,cl);
+		
+}
 

@@ -1,5 +1,7 @@
 #include "Quaternion.h"
 
+//#define normalize
+
 
 /* Returns quaternion product qL * qR. */
 Quat Qt_Mul(Quat qL, Quat qR)
@@ -275,6 +277,7 @@ Quat Qt_FromMatrix(const HMatrix& mat)
 		}
 	}
 	
+#ifdef normalize	
 	if (mat[3][3] != 1.0) 
 	{
 		s = 1.0/sqrt(mat[3][3]);
@@ -283,6 +286,7 @@ Quat Qt_FromMatrix(const HMatrix& mat)
 		qu.y *= s;
 		qu.z *= s;
 	}
+#endif
 	
 	return (qu);
 }

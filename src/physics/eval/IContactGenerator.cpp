@@ -63,9 +63,15 @@ std::cout << "COLLISION DETECTOR : CONTACT GENERATOR : contact forces creations 
 			Mat<float> anchorALProjected( contact.rbA->getPointInLocal(contact.contactPoint[i]) );
 			
 			Mat<float> normalAB(0.0f,3,1);
+			//innerVoronoiProjectionANDNormal( *(contact.rbA), anchorALProjected, normalAB);
 			innerVoronoiProjectionANDNormal( *(contact.rbA), anchorALProjected, normalAB);
+			//Mat<float> normalAB( contact.normal[0]);
+			float penetrationDepth = ( transpose(normalAB)*(anchorALProjected-anchorAL) ).get(1,1);
+			std::cout << "CONTACT : " << i << " : penetration depth = " << penetrationDepth << std::endl;
+			normalAB.afficher();
 			
-			float penetrationDepth = fabs(( transpose(normalAB)*(anchorALProjected-anchorAL) ).get(1,1));
+			
+			penetrationDepth = fabs(penetrationDepth);
 			
 			sim->collectionC.insert( sim->collectionC.end(), std::unique_ptr<IConstraint>( new ContactConstraint( *(contact.rbA), *(contact.rbB), anchorAL, anchorALProjected, normalAB, penetrationDepth) ) );
 		}

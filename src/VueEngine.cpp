@@ -199,9 +199,21 @@ ressourcesMutex.unlock();
 		Mat<float> poseElement = env->ListeElements[i]->pose->exp();
 		ressourcesMutex.unlock();
 		
-		Mat<float> SO3( extract( poseElement, 1,1, 3,3) );
 		Mat<float> EulerAngles(3,1);
-		Rot2Euler(SO3, EulerAngles);
+		//------------------------------------------
+		//------------------------------------------
+		//METHOD 1:
+		//Mat<float> SO3( extract( poseElement, 1,1, 3,3) );
+		//Rot2Euler(SO3, EulerAngles);
+		//------------------------------------------
+		//------------------------------------------
+		//------------------------------------------
+		//------------------------------------------
+		//METHOD2 :
+		EulerAngles = (-1.0f) * env->ListeElements[i]->pose->getW();
+		//------------------------------------------
+		//------------------------------------------
+		
 		
 		for(int i = 1;i<=3;i++)
 		{

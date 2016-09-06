@@ -56,6 +56,7 @@ class IMoveable
 	void setPosition( const Mat<float>& t_);
 	void setOrientation( const Quat& q);
 	void setMatOrientation( const Mat<float>& q);
+	void setW( const Mat<float>& w);
 	void setLinearVelocity( const Mat<float>& lvel);
 	void setAngularVelocity( const Mat<float>& avel);
 	

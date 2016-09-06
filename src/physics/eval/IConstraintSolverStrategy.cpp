@@ -5,8 +5,8 @@
 
 //#define debuglvl1
 //#define debuglvl2
-//#define debuglvl3
-#define debuglvl4
+#define debuglvl3
+//#define debuglvl4
 
 
 IConstraintSolverStrategy::IConstraintSolverStrategy(Simulation* sim_) : sim(sim_)
@@ -1076,27 +1076,6 @@ void SimultaneousImpulseBasedConstraintSolverStrategy::SolveForceBased(float dt,
 	transpose(qdotminus).afficher();
 #endif
 
-#ifdef debuglvl3	
-	std::cout << "SOME VERIFICATION ON : J*qdot + c = 0 : " << std::endl;
-	transpose(constraintsJacobian*qdot+offset).afficher();
-	
-	
-	float normC = (transpose(C)*C).get(1,1);
-	Mat<float> Cdot( constraintsJacobian*qdot);
-	float normCdot = (transpose(Cdot)*Cdot).get(1,1);
-	float normQdot = (transpose(qdot)*qdot).get(1,1);
-	
-	//rs->ltadd(std::string("normC"),normC);
-	//rs->ltadd(std::string("normCdot"),normCdot);
-	rs->ltadd(std::string("normQdot"),normQdot);
-	char name[5];
-	for(int i=1;i<=t.getLine();i++)
-	{
-		sprintf(name,"dq%d",i);
-		rs->ltadd(std::string(name), t.get(i,1));
-	}
-	rs->tWriteFileTABLE();
-#endif	
 	//END OF PREVIOUS METHOD :
 	//--------------------------------
 	
@@ -1158,135 +1137,132 @@ IterativeImpulseBasedConstraintSolverStrategy::~IterativeImpulseBasedConstraintS
 }
 
 
-void IterativeImpulseBasedConstraintSolverStrategy::computeConstraintsANDJacobian(std::vector<std::unique_ptr<IConstraint> >& c, const Mat<float>& q, const Mat<float>& qdot)
+void IterativeImpulseBasedConstraintSolverStrategy::computeConstraintsANDJacobian(std::vector<std::unique_ptr<IConstraint> >& c, const Mat<float>& q, const Mat<float>& qdot, const SparseMat<float>& invM)
 {
-	//MAJ qdot :
-	int b1 = 0;
-	int b2 = 0;
-	
 	//-------------------------------------
 	//-------------------------------------
 	//-------------------------------------
 	
 	size_t size = c.size();
 	int n = sim->simulatedObjects.size();
-
-	c[0]->computeJacobians();
+	float baumgarteBAS = 0.0f;//1e-1f;
+	float baumgarteC = 0.1f;//1e-1f;
+	float baumgarteH = 0.0f;//1e-1f;
 	
-	int idA = 6 * ( c[0]->rbA.getID() );
-	int idB = 6 * ( c[0]->rbB.getID() );
+	//---------------
+	//	RESETTING :
+	constraintsC.clear();
+	constraintsJacobians.clear();
+	constraintsOffsets.clear();
+	constraintsIndexes.clear();
+	constraintsInvM.clear();
+	constraintsV.clear();
+	//----------------------
 	
-	Mat<float> tJA(c[0]->getJacobianA());
-	Mat<float> tJB(c[0]->getJacobianB());
-	//Constraint :
-	Mat<float> tC(c[0]->getConstraint());
-	
-	int sl = tJA.getLine();
-	
-	Mat<float> temp((float)0,sl, 6*n );
-	
-	for(int i=1;i<=sl;i++)
+	if( size > 0)
 	{
-		for(int j=1;j<=6;j++)
+		
+		for(int k=0;k<size;k++)
 		{
-			temp.set( tJA.get(i,j) , i, idA+j);
-			temp.set( tJB.get(i,j), i, idB+j  );
-		}
-	}
+			int idA = ( c[k]->rbA.getID() );
+			int idB = ( c[k]->rbB.getID() );
+			std::vector<int> indexes(2);
+			//indexes are set during the creation of the simulation and they begin at 0.
+			indexes[0] = idA;
+			indexes[1] = idB;
+			
+			constraintsIndexes.push_back( indexes );
+			
+			//---------------------------
+			//Constraint :
+			c[k]->computeJacobians();
+			
+			
+			Mat<float> tJA(c[k]->getJacobianA());
+			Mat<float> tJB(c[k]->getJacobianB());
+		
+			
+			Mat<float> tC(c[k]->getConstraint());
+			constraintsC.push_back( tC );
 	
-	constraintsJacobian = temp;
-	//Constraint :
-	float baumgarteBAS = 1e-1f;
-	float baumgarteC = 1e-1f;
-	C = tC;
-	//----------------------------------------
-	//BAUMGARTE STABILIZATION
-	//----------------------------------------
-	//Contact offset :
-	if( c[0]->getType() == CTContactConstraint)
-	{
-		//Baumgarte stabilization :
-		//temp *= 0.1f/this->dt;
-		//float slop = -5e-1f;
-		//float pdepth = ((ContactConstraint*)(c[0].get()))->penetrationDepth;
-		//tC *= baumgarteC/this->dt*(pdepth-slop);
-		tC *= baumgarteC/this->dt;
-	}
-	//BAS JOINT :
-	if( c[0]->getType() == CTBallAndSocketJoint)
-	{
-		tC*= baumgarteBAS/this->dt;
-	}
-	//----------------------------------------
-	//----------------------------------------
-	offset = tC;
-	
-	
-#ifdef debuglvl1
-std::cout << "CONSTRAINTS : nbr = " << size << std::endl;
-std::cout << "CONSTRAINTS : 0 : type = " << c[0]->getType() << " ; ids are : " << c[0]->rbA.getID() << " : " << c[0]->rbB.getID() << std::endl;
-offset.afficher();
-#endif	
-	
-	for(int i=1;i<size;i++)
-	{
-
-		c[i]->computeJacobians();
-		
-		tJA = c[i]->getJacobianA();
-		tJB = c[i]->getJacobianB();
-		
-		//Constraint :
-		tC = c[i]->getConstraint();
-		
-		size_t sl = tJA.getLine();
-		int idA = 6 * ( c[i]->rbA.getID() );
-		int idB = 6 * ( c[i]->rbB.getID() );
-		
-		temp = Mat<float>((float)0,sl, 6*n );
-		
-		//Constraints :
-		C = operatorC(C, tC);
-		//----------------------------------------
-		//BAUMGARTE STABILIZATION
-		//----------------------------------------
-		//Contact offset :
-		if( c[i]->getType() == CTContactConstraint)
-		{
-			//Baumgarte stabilization :
-			//temp *= 0.1f/this->dt;
-			tC *= baumgarteC/this->dt;
-		}
-		//BAS JOINT :
-		if( c[i]->getType() == CTBallAndSocketJoint)
-		{
-			tC*= baumgarteBAS/this->dt;
-		}
-		//----------------------------------------
-		//----------------------------------------
-		
-						
-		for(int i=1;i<=sl;i++)
-		{
-			for(int j=1;j<=6;j++)
+			int nbrlineJ = tJA.getLine();
+			Mat<float> JacobianAB( operatorL(tJA, tJB)  );
+			constraintsJacobians.push_back( JacobianAB );
+			
+			//----------------------------------------
+			//BAUMGARTE STABILIZATION
+			//----------------------------------------
+			//Contact offset :
+			if( c[k]->getType() == CTContactConstraint)
 			{
-				temp.set( tJA.get(i,j) , i, idA+j);
-				temp.set( tJB.get(i,j), i, idB+j  );
+				//Baumgarte stabilization :
+				//SLOP METHOD :
+				//float slop = 5e-1f;
+				//float pdepth = ((ContactConstraint*)(c[0].get()))->penetrationDepth;
+				//tC *= baumgarteC/this->dt*(pdepth-slop);			
+				
+				//METHOD 1:
+				tC *= baumgarteC/this->dt;
 			}
+			//BAS JOINT :
+			if( c[k]->getType() == CTBallAndSocketJoint)
+			{
+				tC *= baumgarteBAS/this->dt;
+			}
+			
+			//HINGE JOINT :
+			if( c[k]->getType() == CTHingeJoint)
+			{
+				tC *= baumgarteH/this->dt;
+			}
+			
+			//BAUMGARTE OFFSET for the moments...
+			constraintsOffsets.push_back( tC );
+			
+			//----------------------------------------
+			//----------------------------------------
+			
+			
+			//-------------------
+			//	invM matrixes :
+			Mat<float> invmij(0.0f,12,12);
+			for(int k=0;k<=1;k++)
+			{
+				for(int i=1;i<=6;i++)
+				{
+					for(int j=1;j<=6;j++)
+					{
+						invmij.set( invM.get( indexes[k]*6+i, indexes[k]*6+j), k*6+i,k*6+j);
+						
+					}
+				}
+			}
+			
+			constraintsInvM.push_back( invmij);
+			
+			
+			//-------------------
+			//	Vdot matrixes :
+			Mat<float> vij(0.0f,12,1);
+			for(int k=0;k<=1;k++)
+			{
+				for(int i=1;i<=6;i++)
+				{
+					vij.set( qdot.get( indexes[k]*6+i, 1), k*6+i,1);
+				}
+			}
+			
+			constraintsV.push_back( vij);
+			
+			
+			
 		}
 		
-		constraintsJacobian = operatorC(constraintsJacobian, temp );
-		//Constraint :
-		offset = operatorC( offset, tC);
-		
-#ifdef debuglvl1
-std::cout << "CONSTRAINTS : " << i << " type = " << c[i]->getType() << " ; ids are : " << c[i]->rbA.getID() << " : " << c[i]->rbB.getID() << std::endl;
-offset.afficher();
-#endif
-		
-	}
-	
-	
+	}	
+}
+
+void IterativeImpulseBasedConstraintSolverStrategy::wrappingUp(std::vector<std::unique_ptr<IConstraint> >& c, const Mat<float>& q, const Mat<float>& qdot)
+{
 	//Let us delete the contact constraints that are ephemerous by essence :
 	std::vector<std::unique_ptr<IConstraint> >::iterator itC = c.begin();
 	bool erased = false;
@@ -1297,13 +1273,132 @@ offset.afficher();
 			erased = true;
 			c.erase(itC);
 		}
-	
+
 		if(!erased)
 			itC++;
-			
+		
 		erased = false;
 	}
 }
+
+
+void IterativeImpulseBasedConstraintSolverStrategy::Solve(float dt, std::vector<std::unique_ptr<IConstraint> >& c, Mat<float>& q, Mat<float>& qdot, SparseMat<float>& invM, SparseMat<float>& S, const Mat<float>& Fext )
+{
+	Mat<float> qdotminus(qdot);
+	this->dt = dt;
+	Mat<float> tempInvMFext( dt*(invM * Fext) ) ;
+	
+	computeConstraintsANDJacobian(c,q,qdot,invM);	
+	
+	bool continuer = true;
+	while( continuer)
+	{
+		constraintsImpulses.clear();
+		std::vector<Mat<float> > constraintsCAfterImpulses;
+		std::vector<Mat<float> > constraintsVAfterImpulses;
+		
+		for(int k=0;k<constraintsC.size();k++)
+		{
+			Mat<float> tConstraintsJacobian( transpose( constraintsJacobians[k] ) );
+			Mat<float> A( constraintsJacobians[k] * constraintsInvM[k] * tConstraintsJacobian );
+	
+			//Construct the inverse matrix :
+			//---------------------------
+			Mat<float> invA( invGJ(A) );
+	
+			//Construct b and compute the solution.
+			//----------------------------------
+			Mat<float> tempLambda( invA * ((-1.0f)*(constraintsJacobians[k]*constraintsV[k] + constraintsOffsets[k]) ) );
+			//-----------------------------------
+	
+			//Solution Impulse :
+			//------------------------------------
+			constraintsImpulses.push_back(  tConstraintsJacobian * tempLambda);
+			Mat<float> udot( dt*constraintsInvM[k]*constraintsImpulses[k]);
+			//------------------------------------
+	
+			if(isnanM(udot))
+			{
+				udot = Mat<float>(0.0f,udot.getLine(),udot.getColumn());
+			}
+	
+	
+			float clampingVal = 1e4f;
+			for(int i=1;i<=udot.getLine();i++)
+			{
+				if(udot.get(i,1) > clampingVal)
+				{
+					udot.set( clampingVal,i,1);
+				}
+			}
+			
+			//---------------------------------			
+			// UPDATE OF THE VELOCITY :
+			//---------------------------------
+			std::vector<int> indexes = constraintsIndexes[k];
+			constraintsVAfterImpulses.push_back( constraintsV[k]-udot);
+			
+			std::cout << " UDOT : ids : " << indexes[0] << "  and " << indexes[1] << std::endl;
+			udot.afficher();
+			
+			for(int kk=0;kk<=1;kk++)
+			{
+				for(int i=1;i<=6;i++)
+				{
+					qdot.set( constraintsVAfterImpulses[k].get(kk*6+i,1), indexes[kk]*6+i, 1);
+				}
+			}
+			
+			//---------------------------------	
+	
+			float clampingValQ = 1e3f;
+			for(int i=1;i<=qdot.getLine();i++)
+			{
+				if( fabs_(qdot.get(i,1)) > clampingValQ)
+				{
+					qdot.set( clampingValQ * fabs_(qdot.get(i,1))/qdot.get(i,1),i,1);
+				}
+			}
+			
+			
+#ifdef debuglvl3	
+			std::cout << "SOME VERIFICATION ON : J*qdot + c = 0 : " << std::endl;
+			Mat<float> cdot( constraintsJacobians[k]*constraintsVAfterImpulses[k]+constraintsOffsets[k]);
+			cdot.afficher();
+	
+	
+			float normCdot = (transpose(cdot)*cdot).get(1,1);
+	
+			std::cout << "NORME : "<< k << " : " << normCdot << std::endl;
+			
+#endif				
+		}
+	
+	continuer = false;
+	//--------------------------------------
+		
+#ifdef debuglvl4	
+	std::cout << " Qdot+ : " << std::endl;
+	transpose(qdot).afficher();
+#endif
+
+	
+	}
+	
+	wrappingUp(c,q,qdot);
+}
+
+
+
+
+
+/*	FORCE BASED : */
+void IterativeImpulseBasedConstraintSolverStrategy::SolveForceBased(float dt, std::vector<std::unique_ptr<IConstraint> >& c, Mat<float>& q, Mat<float>& qdot, SparseMat<float>& invM, SparseMat<float>& S, const Mat<float>& Fext )
+{	
+
+	
+}
+
 
 
 

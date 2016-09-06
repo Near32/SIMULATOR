@@ -114,17 +114,19 @@ void BroadPhaseStrategyA::checkForCollisions(std::vector<Contact>& c)
 					{
 						if( ((RigidBody*)(simul[o].get()))->getCollisionStatus() )
 						{
-							Mat<float> midline( ((RigidBody*)(simul[i].get()))->getPosition()-((RigidBody*)(simul[o].get()))->getPosition());
+							Mat<float> midline( ((RigidBody*)(simul[o].get()))->getPosition()-((RigidBody*)(simul[i].get()))->getPosition());
 							float magnitude = norme2(midline);
 					
 							if(magnitude < ((RigidBody*)(simul[i].get()))->getShapeReference().getBRadius() + ((RigidBody*)(simul[o].get()))->getShapeReference().getBRadius() )
 							{
 								// then there is a potentiel contact :
+								//NORMAL is from  rbA to rbB :
 								Contact contact( ((RigidBody*)(simul[i].get())), ((RigidBody*)(simul[o].get())) );
 								//contact.contactPoint.insert( contact.contactPoint.end(), ((RigidBody*)(simul[o].get()))->getPosition()+(1.0f/2.0f)*midline);
-								contact.normal.insert( contact.normal.end(), (1.0f/magnitude)*midline);
+								
+								//contact.normal.insert( contact.normal.end(), (1.0f/magnitude)*midline);
 						
-								c.insert(c.end(), contact );
+								c.push_back( contact );
 							}
 						}
 						 

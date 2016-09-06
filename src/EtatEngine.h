@@ -25,6 +25,8 @@ class EtatEngine : public IEngine
 	void init();
 	
 	void init1();
+	
+	void init2();
 
 };
 

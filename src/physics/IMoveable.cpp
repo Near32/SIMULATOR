@@ -112,6 +112,11 @@ void IMoveable::setOrientation( const Quat& q)
 	Pose->setOrientation(q);	
 }
 
+void IMoveable::setW( const Mat<float>& w)	
+{
+	Pose->setW(w);	
+}
+
 void IMoveable::setMatOrientation( const Mat<float>& q)	
 {	
 	

@@ -7,7 +7,7 @@
 
 #include <mutex>
 
-//#define debug
+#define debug
 //#define debuglvl1
 //#define debuglvl2
 //#define debuglvl3
@@ -15,12 +15,14 @@
 
 #define benchmark
 
+
+#define ITERATIVE_IMPULSE_BASED_SOLUTION
 #ifndef	ITERATIVE_IMPULSE_BASED_SOLUTION
 	
-	#define IMPULSEBASED
+	//#define IMPULSEBASED
 	
 	#ifndef IMPULSEBASED
-		#define FORCEBASED
+		//#define FORCEBASED
 	
 		#ifndef FORCEBASED
 			#define NOSOLVER
@@ -683,12 +685,10 @@ transpose(qdot).afficher();
 #ifdef ITERATIVE_IMPULSE_BASED_SOLUTION
 
 
-
-
-
 void Simulation::runStride( float timeStep)
 {
-
+	clock_t timeclock = clock();
+	
 	std::cout << "SIMULATION TIME = " << time << " seconds." << std::endl;
 	//apply forces to the RigidBodies:
 #ifdef debug
@@ -763,7 +763,8 @@ S.print();
 Fext.afficher();
 #endif
 
-
+	((RigidBody*)(simulatedObjects[1].get()))->getMatOrientation().afficher();
+	
 	//solve the system and update it :
 #ifdef debug
 std::cout << "SIMULATION : runStride : solving system : ..." << std::endl;
@@ -794,12 +795,13 @@ std::cout << "SIMULATION : runStride : solving system : DONE." << std::endl;
 	updateStates();
 	
 
-#ifdef debuglvl4
+#ifdef debug
 std::cout << " SIMULATION : runStride : Q QDOT  : END : " << std::endl;
 transpose(q).afficher();
-transpose(qdot).afficher();	
+transpose(qdot).afficher();
 #endif
 
+	std::cout << " RUNSTRIDE took : " << (float)(clock()-timeclock)/CLOCKS_PER_SEC << " seconds." << std::endl;
 
 }
 
@@ -1796,6 +1798,11 @@ void Simulation::updateQdot()
 		((RigidBody*)(o.get()))->setLinearVelocity( extract( qdot, b2+1,1, b2+3,1) );
 		
 		((RigidBody*)(o.get()))->setAngularVelocity( extract( qdot, b2+4,1, b2+6,1) );
+//#define debugUpdateQdot		
+#ifdef debugUpdateQdot
+		std::cout << " UPDATE QDOT :: Angular Velocity : " << ((RigidBody*)(o.get()))->getName() << std::endl;
+		extract(qdot, b2+4,1, b2+6,1).afficher();
+#endif		
 		
 		b2+=6;	
 	}
@@ -1823,9 +1830,19 @@ void Simulation::updateStates()
 		if( Name2ID.count( name) )
 		{
 			id = Name2ID[name];
+
+//#define debugUpdateState
+#ifdef debugUpdateState			
+			std::cout << " POSE : BEFORE " << name << std::endl;
+			itEl->getPose().exp().afficher(); 
+#endif
 			
 			ressourcesMutex.lock();
 			itEl->setPose( ((RigidBody*)(simulatedObjects[id].get()))->getPose() );
+#ifdef debugUpdateState			
+			std::cout << " POSE : AFTER " << name << std::endl;
+			((RigidBody*)(simulatedObjects[id].get()))->getPose().exp().afficher(); 
+#endif			
 			ressourcesMutex.unlock();
 			
 			

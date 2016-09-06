@@ -27,11 +27,11 @@ class CollisionDetector
 	
 	public :
 	
-	CollisionDetector(Simulation* sim_, float eps = (float)1e-10);
+	CollisionDetector(Simulation* sim_, float eps = (float)1e-3);
 	
 	~CollisionDetector();
 	
-	void checkForCollision(float dt = 0.0001f);	
+	void checkForCollision(float dt = 1e-4f);	
 	
 	
 	//-------------------------------

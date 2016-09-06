@@ -87,6 +87,16 @@ Mat<float> IMoveable::getAngularVelocity()	const
 	return *(this->AngularVelocity);
 }
 
+Mat<float>& IMoveable::getLinearVelocity()
+{
+	return *(this->LinearVelocity);
+}
+
+Mat<float>& IMoveable::getAngularVelocity()
+{
+	return *(this->AngularVelocity);
+}
+
 void IMoveable::setPose( const se3& pose_)	
 {	
 	*Pose = pose_;

@@ -38,6 +38,11 @@ class IElement
 		//(*pose) = p;
 	}
 	
+	se3 getPose()	const
+	{
+		return *(pose.get());
+	}
+	
 	std::string getName()	const
 	{
 		return name;

@@ -107,6 +107,26 @@ class SparseMat
 		return mat.at(i).at(j);	
 	}
 	
+	inline T get(size_t i, size_t j)	const
+	{
+		if( !(i>0 && i<=n && j>0 && j<=m) )
+		{
+			throw;
+		}
+		
+		if( mat.count(i) == 0) 
+		{
+			return (T)0;//mat[0][0];
+		}
+		
+		if( mat.at(i).count(j) == 0)
+		{
+			return (T)0;//mat[0][0];
+		}
+		
+		return mat.at(i).at(j);	
+	}
+	
 	/*SparseMat<T>& operator=( SparseMat<T>& sm)
 	{
 		n = sm.getLine();

@@ -243,6 +243,16 @@ std::cout << "COLLISION DETECTOR : midnarrowphase : b2 into b1 : box-box case : 
 						RigidBody* temp = contact->rbA;
 						contact->rbA = contact->rbB;
 						contact->rbA = temp;
+						
+						//let us exchange the normal direction :
+						if(contact->normal.size() >= 1)
+						{
+							contact->normal[0] *= (-1.0f);
+						}
+						else
+						{
+							throw;
+						}
 					}
 				}
 				//------------------ end of other view -------------------

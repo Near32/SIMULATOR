@@ -122,7 +122,7 @@ void Robot::process( float timeStep, bool& isComputing)
 	//float lvR = kv * ( Rdot * cos( theta ) + currentR * kapla * sin( theta ) );
 	float lvR = 1.0f;
 	//float avR = kw * ( currentR * kapla * cos( theta ) - Rdot * sin( theta ) );
-	float avR = PI/2;//2*PI*10;
+	float avR = PI/8;//2*PI*10;
 	
 	//Global XY velocities :
 	Mat<float> lv(0.0f,3,1);

@@ -95,8 +95,13 @@ class IterativeImpulseBasedConstraintSolverStrategy : public IConstraintSolverSt
 	
 	std::vector<Mat<float> > constraintsC;
 	std::vector<Mat<float> > constraintsJacobians;
+	std::vector<Mat<float> > constraintsOffsets;
+	std::vector<std::vector<int> > constraintsIndexes;
+	std::vector<Mat<float> > constraintsInvM;
+	std::vector<Mat<float> > constraintsV;
+	
 	std::vector<Mat<float> > constraintsImpulses;
-	std::vector<Mat<float> > constrainstInvM;
+	
 	
 	//-----------------------------
 	
@@ -107,11 +112,15 @@ class IterativeImpulseBasedConstraintSolverStrategy : public IConstraintSolverSt
 	~IterativeImpulseBasedConstraintSolverStrategy();
 	
 	
-	void computeConstraintsANDJacobian(std::vector<std::unique_ptr<IConstraint> >& c, const Mat<float>& q, const Mat<float>& qdot);
+	void computeConstraintsANDJacobian(std::vector<std::unique_ptr<IConstraint> >& c, const Mat<float>& q, const Mat<float>& qdot, const SparseMat<float>& invM);
 		
 	virtual void Solve(float dt, std::vector<std::unique_ptr<IConstraint> >& c, Mat<float>& q, Mat<float>& qdot, SparseMat<float>& invM, SparseMat<float>& S, const Mat<float>& Fext ) override;
 	
 	virtual void SolveForceBased(float dt, std::vector<std::unique_ptr<IConstraint> >& c, Mat<float>& q, Mat<float>& qdot, SparseMat<float>& invM, SparseMat<float>& S, const Mat<float>& Fext ) override;
+	
+	protected :
+	
+	void wrappingUp(std::vector<std::unique_ptr<IConstraint> >& c, const Mat<float>& q, const Mat<float>& qdot);
 
 };
 

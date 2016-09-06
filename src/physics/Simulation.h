@@ -15,8 +15,6 @@
 
 #include "ROBOTSIM/IRobotHandler.h"
 
-#define ITERATIVE_IMPULSE_BASED_SOLUTION
-
 class Simulation
 {
 	public :
