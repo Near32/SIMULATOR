@@ -1294,93 +1294,130 @@ void IterativeImpulseBasedConstraintSolverStrategy::Solve(float dt, std::vector<
 	this->dt = dt;
 	Mat<float> tempInvMFext( dt*(invM * Fext) ) ;
 	
-	computeConstraintsANDJacobian(c,q,qdot,invM);	
+	
+	std::vector<float> constraintsNormeCdotAfterImpulses(c.size(),1.0f);
+	std::vector<Mat<float> > constraintsVAfterImpulses;
+	
 	
 	bool continuer = true;
+	int nbrIteration = 0;
 	while( continuer)
 	{
-		constraintsImpulses.clear();
-		std::vector<Mat<float> > constraintsCAfterImpulses;
-		std::vector<Mat<float> > constraintsVAfterImpulses;
+		
+		computeConstraintsANDJacobian(c,q,qdot,invM);	
+		constraintsImpulses.clear();	
+		constraintsImpulses.resize(constraintsC.size());
+		
+		if( nbrIteration == 0)
+		{
+			constraintsVAfterImpulses = constraintsV;
+		}
+		
+		int nbrConstraintsSolved = 0;	
 		
 		for(int k=0;k<constraintsC.size();k++)
 		{
-			Mat<float> tConstraintsJacobian( transpose( constraintsJacobians[k] ) );
-			Mat<float> A( constraintsJacobians[k] * constraintsInvM[k] * tConstraintsJacobian );
-	
-			//Construct the inverse matrix :
-			//---------------------------
-			Mat<float> invA( invGJ(A) );
-	
-			//Construct b and compute the solution.
-			//----------------------------------
-			Mat<float> tempLambda( invA * ((-1.0f)*(constraintsJacobians[k]*constraintsV[k] + constraintsOffsets[k]) ) );
-			//-----------------------------------
-	
-			//Solution Impulse :
-			//------------------------------------
-			constraintsImpulses.push_back(  tConstraintsJacobian * tempLambda);
-			Mat<float> udot( constraintsInvM[k]*constraintsImpulses[k]);
-			//------------------------------------
-	
-			if(isnanM(udot))
+			if(constraintsNormeCdotAfterImpulses[k] >= 0.0f)
 			{
-				udot = Mat<float>(0.0f,udot.getLine(),udot.getColumn());
-			}
+				Mat<float> tConstraintsJacobian( transpose( constraintsJacobians[k] ) );
+				Mat<float> A( constraintsJacobians[k] * constraintsInvM[k] * tConstraintsJacobian );
 	
+				//Construct the inverse matrix :
+				//---------------------------
+				Mat<float> invA( invGJ(A) );
 	
-			float clampingVal = 1e4f;
-			for(int i=1;i<=udot.getLine();i++)
-			{
-				if(udot.get(i,1) > clampingVal)
+				//Construct b and compute the solution.
+				//----------------------------------
+				Mat<float> tempLambda( invA * ((-1.0f)*(constraintsJacobians[k]*constraintsV[k] + constraintsOffsets[k]) ) );
+				//-----------------------------------
+	
+				//Solution Impulse :
+				//------------------------------------
+				constraintsImpulses[k] =  tConstraintsJacobian * tempLambda;
+				Mat<float> udot( constraintsInvM[k]*constraintsImpulses[k]);
+				//------------------------------------
+	
+				if(isnanM(udot))
 				{
-					udot.set( clampingVal,i,1);
+					udot = Mat<float>(0.0f,udot.getLine(),udot.getColumn());
 				}
-			}
-			
-			//---------------------------------			
-			// UPDATE OF THE VELOCITY :
-			//---------------------------------
-			std::vector<int> indexes = constraintsIndexes[k];
-			constraintsVAfterImpulses.push_back( constraintsV[k]-udot);
-			
-			std::cout << " UDOT : ids : " << indexes[0] << "  and " << indexes[1] << std::endl;
-			udot.afficher();
-			
-			for(int kk=0;kk<=1;kk++)
-			{
-				for(int i=1;i<=6;i++)
+	
+	
+				float clampingVal = 1e4f;
+				for(int i=1;i<=udot.getLine();i++)
 				{
-					qdot.set( constraintsVAfterImpulses[k].get(kk*6+i,1), indexes[kk]*6+i, 1);
+					if(udot.get(i,1) > clampingVal)
+					{
+						udot.set( clampingVal,i,1);
+					}
 				}
-			}
 			
-			//---------------------------------	
-	
-			float clampingValQ = 1e3f;
-			for(int i=1;i<=qdot.getLine();i++)
-			{
-				if( fabs_(qdot.get(i,1)) > clampingValQ)
+				//---------------------------------			
+				// UPDATE OF THE VELOCITY :
+				//---------------------------------
+				std::vector<int> indexes = constraintsIndexes[k];
+				//constraintsVAfterImpulses[k] = constraintsV[k]-udot;
+				constraintsVAfterImpulses[k] = constraintsV[k]+udot;
+			
+				std::cout << " UDOT : ids : " << indexes[0] << "  and " << indexes[1] << std::endl;
+				transpose(udot).afficher();
+			
+				for(int kk=0;kk<=1;kk++)
 				{
-					qdot.set( clampingValQ * fabs_(qdot.get(i,1))/qdot.get(i,1),i,1);
+					for(int i=1;i<=6;i++)
+					{
+						qdot.set( constraintsVAfterImpulses[k].get(kk*6+i,1), indexes[kk]*6+i, 1);
+					}
 				}
+			
+				//---------------------------------	
+	
+				float clampingValQ = 1e3f;
+				for(int i=1;i<=qdot.getLine();i++)
+				{
+					if( fabs_(qdot.get(i,1)) > clampingValQ)
+					{
+						qdot.set( clampingValQ * fabs_(qdot.get(i,1))/qdot.get(i,1),i,1);
+					}
+				}
+			
+			
+	#ifdef debuglvl3	
+				std::cout << "SOME VERIFICATION ON : J*qdot + c = 0 :  k = " << k << std::endl;
+				Mat<float> cdot( constraintsJacobians[k]*constraintsVAfterImpulses[k]+constraintsOffsets[k]);
+				transpose(cdot).afficher();
+	
+	
+				constraintsNormeCdotAfterImpulses[k] = (transpose(cdot)*cdot).get(1,1);
+	
+				std::cout << "NORME : "<< k << " : " << constraintsNormeCdotAfterImpulses[k] << std::endl;
+			
+	#endif		
 			}
-			
-			
-#ifdef debuglvl3	
-			std::cout << "SOME VERIFICATION ON : J*qdot + c = 0 : " << std::endl;
-			Mat<float> cdot( constraintsJacobians[k]*constraintsVAfterImpulses[k]+constraintsOffsets[k]);
-			cdot.afficher();
-	
-	
-			float normCdot = (transpose(cdot)*cdot).get(1,1);
-	
-			std::cout << "NORME : "<< k << " : " << normCdot << std::endl;
-			
-#endif				
+			else
+			{
+				std::cout << "CONSTRAINTS : " << k << "/" << constraintsC.size() << " : has been solved for." << std::endl;
+				nbrConstraintsSolved++;
+			}
+					
 		}
 	
-	continuer = false;
+	if(nbrConstraintsSolved == constraintsC.size() )
+	{
+		continuer = false;
+		std::cout << " IterativeImpulseBasedConstraintsSolver::Solve :: ENDED CLEANLY." << std::endl;
+	}
+	else
+	{
+		continuer = true;
+		nbrIteration++;
+		
+		if(nbrIteration > this->nbrIterationSolver)
+		{
+			continuer = false;
+			std::cout << " IterativeImpulseBasedConstraintsSolver::Solve :: ENDED WITH UNRESOLVED CONSTRAINTS." << std::endl;
+		}
+	}
 	//--------------------------------------
 		
 #ifdef debuglvl4	
