@@ -58,22 +58,52 @@ std::cout << "COLLISION DETECTOR : CONTACT GENERATOR : contact forces creations 
 		{
 			//let us create a contact constraints for every contact point :
 			
-			//let us find the anchors in local frames :
+			//let us find the anchors in local frames : A ...
 			Mat<float> anchorAL( contact.rbA->getPointInLocal(contact.contactPoint[i]) );
 			Mat<float> anchorALProjected( contact.rbA->getPointInLocal(contact.contactPoint[i]) );
 			
+			//----------------------------------------------------------------------------------
+			// ... then B :
+			//----------------------------------------------------------------------------------
 			Mat<float> normalAB(0.0f,3,1);
 			//innerVoronoiProjectionANDNormal( *(contact.rbA), anchorALProjected, normalAB);
 			innerVoronoiProjectionANDNormal( *(contact.rbA), anchorALProjected, normalAB);
 			//Mat<float> normalAB( contact.normal[0]);
 			float penetrationDepth = ( transpose(normalAB)*(anchorALProjected-anchorAL) ).get(1,1);
-			std::cout << "CONTACT : " << i << " : penetration depth = " << penetrationDepth << std::endl;
-			normalAB.afficher();
+			std::cout << "CONTACT GENERATOR :: Contact  : " << i << " : penetration depth = " << penetrationDepth << std::endl;
+			transpose(normalAB).afficher();
+			//----------------------------------------------------------------------------------
+			//----------------------------------------------------------------------------------
 			
-			
+			//----------------------------------------------------------------------------------
 			penetrationDepth = fabs(penetrationDepth);
+			//----------------------------------------------------------------------------------
+			//----------------------------------------------------------------------------------
 			
-			sim->collectionC.insert( sim->collectionC.end(), std::unique_ptr<IConstraint>( new ContactConstraint( *(contact.rbA), *(contact.rbB), anchorAL, anchorALProjected, normalAB, penetrationDepth) ) );
+			//----------------------------------------------------------------------------------
+			//Creation of the ContactConstraint :
+			//----------------------------------------------------------------------------------
+			ContactConstraint* ptrCst = new ContactConstraint( *(contact.rbA), *(contact.rbB), anchorAL, anchorALProjected, normalAB, penetrationDepth, contact.restitutionFactor);
+			//----------------------------------------------------------------------------------
+			//----------------------------------------------------------------------------------
+			
+			//----------------------------------------------------------------------------------
+			//Computation of the relative velocity :
+			//----------------------------------------------------------------------------------
+			Mat<float> pointW( contact.rbA->getPointInWorld( contact.contactPoint[i] ) );
+			Mat<float> vAPW( contact.rbA->getVelocityPointWInWorld( pointW ) );
+			Mat<float> vBPW( contact.rbB->getVelocityPointWInWorld( pointW ) );
+			//  relative velocity from A to B :
+			ptrCst->setVrel( vBPW-vAPW);
+			//----------------------------------------------------------------------------------
+			//----------------------------------------------------------------------------------
+			
+			//----------------------------------------------------------------------------------
+			//	Registration of the ContactConstraint :
+			//----------------------------------------------------------------------------------
+			sim->collectionC.insert( sim->collectionC.end(), std::unique_ptr<IConstraint>( ptrCst ) );
+			//----------------------------------------------------------------------------------
+			//----------------------------------------------------------------------------------
 		}
 	}
 	

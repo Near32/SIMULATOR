@@ -11,6 +11,7 @@ class Contact
 	RigidBody* rbB;
 	std::vector<Mat<float> > contactPoint;	//there can be multiple contact points...
 	std::vector<Mat<float> > normal;
+	float restitutionFactor;
 	
 	//Contact();
 	Contact(Contact& c); 

@@ -99,6 +99,8 @@ class ContactConstraint : public IConstraint
 {
 	public :
 	
+	float restitutionFactor;
+	Mat<float> Vrel;	//relative velocity between the two points : Vb-Va
 	float penetrationDepth;
 	Mat<float> normalAL;	//normal of the face of rbA that is being penetrating. From rbA to rbB.
 							// So, Cdot = (vpB - vpA)*nAB
@@ -109,9 +111,10 @@ class ContactConstraint : public IConstraint
 	//Penetration depth is initialized to 0, by default.	
 	//Anchors can be iniatilized to the center of mass, by default.
 	//Axises can be initialized to the local coordinate frame axises.
-	ContactConstraint(RigidBody& rbA_, RigidBody& rbB_, float penetrationDepth_ = 0.0f);
-	ContactConstraint(RigidBody& rbA_, RigidBody& rbB_, const Mat<float>& cPointAL, const Mat<float>& cPointBL, float penetrationDepth_=0.0f);
-	ContactConstraint(RigidBody& rbA_, RigidBody& rbB_, const Mat<float>& cPointAL, const Mat<float>& cPointBL, const Mat<float>& normalAL_, float penetrationDepth_=0.0f);
+	//Vrel can be initialized to the normal by default and then configured.
+	ContactConstraint(RigidBody& rbA_, RigidBody& rbB_,const float& penetrationDepth_ = 0.0f, const float& restitutionFactor_ = 0.1f);
+	ContactConstraint(RigidBody& rbA_, RigidBody& rbB_, const Mat<float>& cPointAL, const Mat<float>& cPointBL,const float& penetrationDepth_=0.0f, const float& restitutionFactor_ = 0.1f);
+	ContactConstraint(RigidBody& rbA_, RigidBody& rbB_, const Mat<float>& cPointAL, const Mat<float>& cPointBL, const Mat<float>& normalAL_,const float& penetrationDepth_=0.0f,const float& restitutionFactor_ = 0.1f);
 	
 	
 	~ContactConstraint();	
@@ -121,6 +124,22 @@ class ContactConstraint : public IConstraint
 	virtual void applyPositionCorrection(float dt = 0.001f) override;
 	virtual void computeJacobians() override;
 	
+	Mat<float> getNormalVector()	const
+	{
+		return normalAL;
+	}
+	
+	Mat<float> getRelativeVelocity()	const
+	{
+		return Vrel;
+	}
+	
+	float getRestitutionFactor()	const
+	{
+		return restitutionFactor;
+	}
+	
+	void setVrel(const Mat<float>& vrel_);
 	
 };
 

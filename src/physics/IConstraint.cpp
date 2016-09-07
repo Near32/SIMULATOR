@@ -74,17 +74,18 @@ IConstraint::~IConstraint()
 //Penetration depth is initialized to 0, by default.	
 //Anchors can be iniatilized to the center of mass, by default.
 //Axises can be initialized to the local coordinate frame axises.
-ContactConstraint::ContactConstraint(RigidBody& rbA_, RigidBody& rbB_, float penetrationDepth_) : penetrationDepth(penetrationDepth_), IConstraint( rbA_, rbB_)
+ContactConstraint::ContactConstraint(RigidBody& rbA_, RigidBody& rbB_,const float& penetrationDepth_, const float& restitutionFactor_) : penetrationDepth(penetrationDepth_),restitutionFactor(restitutionFactor_), IConstraint( rbA_, rbB_)
 {
 	type = CTContactConstraint;
 	normalAL = Mat<float>(0.0f,3,1);
 	normalAL.set( 1.0f,3,1);
+	Vrel = normalAL;
 	
 	//C = transpose(rbA.getAxisInWorld(normalAL))*(rbB.getPointInWorld(AnchorBL)-rbA.getPointInWorld(AnchorAL));
 	C = Mat<float>(penetrationDepth,1,1);
 }
 
-ContactConstraint::ContactConstraint(RigidBody& rbA_, RigidBody& rbB_, const Mat<float>& cPointAL, const Mat<float>& cPointBL, float penetrationDepth_) : penetrationDepth(penetrationDepth_), IConstraint( rbA_, rbB_)
+ContactConstraint::ContactConstraint(RigidBody& rbA_, RigidBody& rbB_, const Mat<float>& cPointAL, const Mat<float>& cPointBL,const float& penetrationDepth_, const float& restitutionFactor_) : penetrationDepth(penetrationDepth_), restitutionFactor(restitutionFactor_), IConstraint( rbA_, rbB_)
 {
 	AnchorAL = cPointAL;
 	AnchorBL = cPointBL;
@@ -92,18 +93,20 @@ ContactConstraint::ContactConstraint(RigidBody& rbA_, RigidBody& rbB_, const Mat
 	type = CTContactConstraint;
 	normalAL = Mat<float>(0.0f,3,1);
 	normalAL.set( 1.0f,3,1);
+	Vrel = normalAL;
 	
 	C = Mat<float>(penetrationDepth,1,1);
 
 }
 
-ContactConstraint::ContactConstraint(RigidBody& rbA_, RigidBody& rbB_, const Mat<float>& cPointAL, const Mat<float>& cPointBL, const Mat<float>& normalAL_, float penetrationDepth_) : penetrationDepth(penetrationDepth_), IConstraint( rbA_, rbB_)
+ContactConstraint::ContactConstraint(RigidBody& rbA_, RigidBody& rbB_, const Mat<float>& cPointAL, const Mat<float>& cPointBL, const Mat<float>& normalAL_,const float& penetrationDepth_, const float& restitutionFactor_) : penetrationDepth(penetrationDepth_), restitutionFactor(restitutionFactor_), IConstraint( rbA_, rbB_)
 {
 	AnchorAL = cPointAL;
 	AnchorBL = cPointBL;
 	
 	type = CTContactConstraint;
 	normalAL = normalAL_;
+	Vrel = normalAL;
 	
 	C = Mat<float>(penetrationDepth,1,1);
 
@@ -153,7 +156,10 @@ void ContactConstraint::computeJacobians()
 	//anchorBL is AnchorALProjected.
 }
 
-
+void ContactConstraint::setVrel(const Mat<float>& vrel_)
+{
+	Vrel = vrel_;
+}
 
 
 

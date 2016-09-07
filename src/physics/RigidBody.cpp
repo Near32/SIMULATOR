@@ -194,6 +194,13 @@ Mat<float> RigidBody::getPointInLocal( const Mat<float>& pointW)
 	return extract(Pose->exp(), 1,1, 3,3) *pointW - extract(Pose->exp(), 1,4, 3,4) ;	
 }
 
+
+Mat<float> RigidBody::getVelocityPointWInWorld( const Mat<float>& pointW)
+{
+	Mat<float> pointL( this->getPointInLocal( pointW) );
+	return this->getLinearVelocity()+crossproductV(this->getAngularVelocity(),pointL);
+}
+
 Mat<float> RigidBody::getAxisInWorld( const Mat<float>& aL)
 {
 	return transpose( extract(Pose->exp(), 1,1, 3,3)) * aL;	

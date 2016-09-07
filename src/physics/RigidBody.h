@@ -140,6 +140,7 @@ class RigidBody : public ISimulationObject, public IMoveable
 	Mat<float> getAxisInWorld( const Mat<float>& aL);
 	Mat<float> getAxisInLocal( const Mat<float>& aW);
 	
+	Mat<float> getVelocityPointWInWorld( const Mat<float>& pointW);
 	
 	//------------------------------------------
 	

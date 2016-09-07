@@ -11,16 +11,19 @@ Contact::Contact( Contact& c) : rbA(c.rbA), rbB(c.rbB)
 {
 	contactPoint = c.contactPoint;
 	normal = c.normal;
+	restitutionFactor = 0.1f;
 }
 
 Contact::Contact(const Contact& c) : rbA(c.rbA), rbB(c.rbB)
 {
 	contactPoint = c.contactPoint;
 	normal = c.normal;
+	restitutionFactor = c.restitutionFactor;	
 }
 
 Contact::Contact(RigidBody* rbA_, RigidBody* rbB_) : rbA(rbA_), rbB(rbB_)
 {
+	restitutionFactor = 0.1f;
 	normal.push_back( rbB->getPosition()-rbA->getPosition());
 	float magnitude = norme2(normal[0]);
 	if(magnitude > 0.0f)

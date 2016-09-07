@@ -1203,6 +1203,12 @@ void IterativeImpulseBasedConstraintSolverStrategy::computeConstraintsANDJacobia
 				
 				//METHOD 1:
 				tC *= baumgarteC/this->dt;
+				
+				//METHOD 2 :
+				float restitFactor = ( (ContactConstraint*) (c[k].get()) )->getRestitutionFactor();
+				Mat<float> Vrel( ( (ContactConstraint*) (c[k].get()) )->getRelativeVelocity() );
+				Mat<float> normal( ( (ContactConstraint*) (c[k].get()) )->getNormalVector() );
+				tC +=  restitFactor * transpose(Vrel)*normal; 
 			}
 			//BAS JOINT :
 			if( c[k]->getType() == CTBallAndSocketJoint)
@@ -1314,7 +1320,7 @@ void IterativeImpulseBasedConstraintSolverStrategy::Solve(float dt, std::vector<
 			//Solution Impulse :
 			//------------------------------------
 			constraintsImpulses.push_back(  tConstraintsJacobian * tempLambda);
-			Mat<float> udot( dt*constraintsInvM[k]*constraintsImpulses[k]);
+			Mat<float> udot( constraintsInvM[k]*constraintsImpulses[k]);
 			//------------------------------------
 	
 			if(isnanM(udot))
