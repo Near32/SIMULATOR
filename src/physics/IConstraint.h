@@ -14,6 +14,8 @@ enum ConstraintType{
 };
 */
 
+#define defRestFactor 0.5f
+
 class IConstraint
 {
 	public :
@@ -112,9 +114,9 @@ class ContactConstraint : public IConstraint
 	//Anchors can be iniatilized to the center of mass, by default.
 	//Axises can be initialized to the local coordinate frame axises.
 	//Vrel can be initialized to the normal by default and then configured.
-	ContactConstraint(RigidBody& rbA_, RigidBody& rbB_,const float& penetrationDepth_ = 0.0f, const float& restitutionFactor_ = 0.1f);
-	ContactConstraint(RigidBody& rbA_, RigidBody& rbB_, const Mat<float>& cPointAL, const Mat<float>& cPointBL,const float& penetrationDepth_=0.0f, const float& restitutionFactor_ = 0.1f);
-	ContactConstraint(RigidBody& rbA_, RigidBody& rbB_, const Mat<float>& cPointAL, const Mat<float>& cPointBL, const Mat<float>& normalAL_,const float& penetrationDepth_=0.0f,const float& restitutionFactor_ = 0.1f);
+	ContactConstraint(RigidBody& rbA_, RigidBody& rbB_,const float& penetrationDepth_ = 0.0f, const float& restitutionFactor_ = defRestFactor);
+	ContactConstraint(RigidBody& rbA_, RigidBody& rbB_, const Mat<float>& cPointAL, const Mat<float>& cPointBL,const float& penetrationDepth_=0.0f, const float& restitutionFactor_ = defRestFactor);
+	ContactConstraint(RigidBody& rbA_, RigidBody& rbB_, const Mat<float>& cPointAL, const Mat<float>& cPointBL, const Mat<float>& normalAL_,const float& penetrationDepth_=0.0f,const float& restitutionFactor_ = defRestFactor);
 	
 	
 	~ContactConstraint();	

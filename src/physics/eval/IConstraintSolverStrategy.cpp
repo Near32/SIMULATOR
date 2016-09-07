@@ -1146,7 +1146,7 @@ void IterativeImpulseBasedConstraintSolverStrategy::computeConstraintsANDJacobia
 	size_t size = c.size();
 	int n = sim->simulatedObjects.size();
 	float baumgarteBAS = 0.0f;//1e-1f;
-	float baumgarteC = 0.1f;//1e-1f;
+	float baumgarteC = 0.9f;//1e-1f;
 	float baumgarteH = 0.0f;//1e-1f;
 	
 	//---------------

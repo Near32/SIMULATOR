@@ -473,7 +473,10 @@ void EtatEngine::init2()
 	//std::cout << " Quat : " << q.x << " : " << q.y << " : " << q.z << " : " << q.w << std::endl;
 	//Qt2Euler(q, &roll, &pitch, &yaw);
 	//std::cout << " Quat2Euler results : " << roll << " : " << pitch << " : " << yaw << std::endl;
-	obs_se3.setOrientation( q );
+	
+	//set tiny rotation :
+	//obs_se3.setOrientation( q );
+	
 	env->addElement( new ElementMobile(std::string("OBS"), new se3(obs_se3), hwd) );
 	
 	/*

@@ -1,5 +1,7 @@
 #include "Contact.h"
 
+#define defRestFactor 0.5f
+
 /*
 Contact::Contact()
 {
@@ -11,7 +13,7 @@ Contact::Contact( Contact& c) : rbA(c.rbA), rbB(c.rbB)
 {
 	contactPoint = c.contactPoint;
 	normal = c.normal;
-	restitutionFactor = 0.1f;
+	restitutionFactor = defRestFactor;
 }
 
 Contact::Contact(const Contact& c) : rbA(c.rbA), rbB(c.rbB)
@@ -23,7 +25,7 @@ Contact::Contact(const Contact& c) : rbA(c.rbA), rbB(c.rbB)
 
 Contact::Contact(RigidBody* rbA_, RigidBody* rbB_) : rbA(rbA_), rbB(rbB_)
 {
-	restitutionFactor = 0.1f;
+	restitutionFactor = defRestFactor;
 	normal.push_back( rbB->getPosition()-rbA->getPosition());
 	float magnitude = norme2(normal[0]);
 	if(magnitude > 0.0f)
