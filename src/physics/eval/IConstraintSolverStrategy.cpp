@@ -1146,7 +1146,7 @@ void IterativeImpulseBasedConstraintSolverStrategy::computeConstraintsANDJacobia
 	size_t size = c.size();
 	int n = sim->simulatedObjects.size();
 	float baumgarteBAS = 0.0f;//1e-1f;
-	float baumgarteC = 0.9f;//1e-1f;
+	float baumgarteC = 1.0f;//1e-1f;
 	float baumgarteH = 0.0f;//1e-1f;
 	
 	//---------------
@@ -1197,18 +1197,22 @@ void IterativeImpulseBasedConstraintSolverStrategy::computeConstraintsANDJacobia
 			{
 				//Baumgarte stabilization :
 				//SLOP METHOD :
-				//float slop = 5e-1f;
-				//float pdepth = ((ContactConstraint*)(c[0].get()))->penetrationDepth;
-				//tC *= baumgarteC/this->dt*(pdepth-slop);			
+				float slop = 1e-4f;
+				float pdepth = ((ContactConstraint*)(c[k].get()))->penetrationDepth;
+				tC *= baumgarteC/this->dt * fabs_(pdepth-slop);			
 				
 				//METHOD 1:
-				tC *= baumgarteC/this->dt;
+				//tC *= baumgarteC/this->dt;
 				
 				//METHOD 2 :
 				float restitFactor = ( (ContactConstraint*) (c[k].get()) )->getRestitutionFactor();
 				Mat<float> Vrel( ( (ContactConstraint*) (c[k].get()) )->getRelativeVelocity() );
 				Mat<float> normal( ( (ContactConstraint*) (c[k].get()) )->getNormalVector() );
 				tC +=  restitFactor * transpose(Vrel)*normal; 
+				
+				std::cout << " ITERATIVE SOLVER :: CONTACT : restitFactor = " << restitFactor << std::endl;
+				std::cout << " ITERATIVE SOLVER :: CONTACT : pDepth = " << pdepth << std::endl;
+				
 			}
 			//BAS JOINT :
 			if( c[k]->getType() == CTBallAndSocketJoint)
@@ -1339,6 +1343,8 @@ void IterativeImpulseBasedConstraintSolverStrategy::Solve(float dt, std::vector<
 	
 				if(isnanM(udot))
 				{
+					std::cout << " ITERATIVE SOLVER :: udot :: NAN ISSUE : " << std::endl;
+					transpose(udot).afficher();
 					udot = Mat<float>(0.0f,udot.getLine(),udot.getColumn());
 				}
 	
@@ -1380,49 +1386,57 @@ void IterativeImpulseBasedConstraintSolverStrategy::Solve(float dt, std::vector<
 						qdot.set( clampingValQ * fabs_(qdot.get(i,1))/qdot.get(i,1),i,1);
 					}
 				}
-			
-			
-	#ifdef debuglvl3	
-				std::cout << "SOME VERIFICATION ON : J*qdot + c = 0 :  k = " << k << std::endl;
-				Mat<float> cdot( constraintsJacobians[k]*constraintsVAfterImpulses[k]+constraintsOffsets[k]);
-				transpose(cdot).afficher();
-	
-	
-				constraintsNormeCdotAfterImpulses[k] = (transpose(cdot)*cdot).get(1,1);
-	
-				std::cout << "NORME : "<< k << " : " << constraintsNormeCdotAfterImpulses[k] << std::endl;
-			
-	#endif		
+					
 			}
 			else
 			{
 				std::cout << "CONSTRAINTS : " << k << "/" << constraintsC.size() << " : has been solved for." << std::endl;
-				nbrConstraintsSolved++;
+				
 			}
 					
 		}
 	
-	if(nbrConstraintsSolved == constraintsC.size() )
-	{
-		continuer = false;
-		std::cout << " IterativeImpulseBasedConstraintsSolver::Solve :: ENDED CLEANLY." << std::endl;
-	}
-	else
-	{
-		continuer = true;
-		nbrIteration++;
+	
+		for(int k=0;k<constraintsC.size();k++)
+		{
+//#ifdef debuglvl3	
+				std::cout << "SOME VERIFICATION ON : J*qdot + c = 0 :  k = " << k << std::endl;
+				Mat<float> cdot( constraintsJacobians[k]*constraintsVAfterImpulses[k]+constraintsOffsets[k]);
+				transpose(cdot).afficher();
+					
+				constraintsNormeCdotAfterImpulses[k] = (transpose(cdot)*cdot).get(1,1);
+	
+				std::cout << "NORME : "<< k << " : " << constraintsNormeCdotAfterImpulses[k] << std::endl;
+				
+				if( constraintsNormeCdotAfterImpulses[k] <= 1e-20f)
+				{
+					nbrConstraintsSolved++;
+				}
+//#endif
+		}
 		
-		if(nbrIteration > this->nbrIterationSolver)
+		
+		if(nbrConstraintsSolved == constraintsC.size() )
 		{
 			continuer = false;
-			std::cout << " IterativeImpulseBasedConstraintsSolver::Solve :: ENDED WITH UNRESOLVED CONSTRAINTS." << std::endl;
+			std::cout << " IterativeImpulseBasedConstraintsSolver::Solve :: Constraints solved : " << nbrConstraintsSolved << " / " << constraintsC.size() << " :: ENDED CLEANLY." << std::endl;
 		}
-	}
-	//--------------------------------------
+		else
+		{
+			continuer = true;
+			nbrIteration++;
+		
+			if(nbrIteration > this->nbrIterationSolver)
+			{
+				continuer = false;
+				std::cout << " IterativeImpulseBasedConstraintsSolver::Solve :: Constraints solved : " << nbrConstraintsSolved << " / " << constraintsC.size() << " :: ENDED WITH UNRESOLVED CONSTRAINTS." << std::endl;
+			}
+		}
+		//--------------------------------------
 		
 #ifdef debuglvl4	
-	std::cout << " Qdot+ : " << std::endl;
-	transpose(qdot).afficher();
+		std::cout << " Qdot+ : " << std::endl;
+		transpose(qdot).afficher();
 #endif
 
 	

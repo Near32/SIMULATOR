@@ -1,6 +1,6 @@
 #include "Contact.h"
 
-#define defRestFactor 0.5f
+#define defRestFactor 1.0f
 
 /*
 Contact::Contact()

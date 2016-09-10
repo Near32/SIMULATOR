@@ -769,7 +769,7 @@ Fext.afficher();
 #ifdef debug
 std::cout << "SIMULATION : runStride : solving system : ..." << std::endl;
 #endif			
-	constraintsSolver->nbrIterationSolver = 10;	
+	constraintsSolver->nbrIterationSolver = 2;	
 	constraintsSolver->Solve(timeStep, collectionC, q, qdot, invM,S, Fext);
 	//the second part is done during the solving of the system :
 	//from qdot to sim dot;

@@ -39,7 +39,7 @@ void EtatEngine::loop()
 				//DEBUGGING :
 				case TCSimulateStride:
 				{
-				float timestep = 1e-2f;
+				float timestep = 5e-3f;
 				float time = sim->getTime();
 #ifdef debug
 std::cout << "SIMULATION : run : ..." << std::endl;
@@ -457,13 +457,14 @@ void EtatEngine::init2()
 	hwd *= 10.0f;
 	hwd.set(20.0f,3,1);
 	
-	t.set( hwd.get(2,1)/2+1.0f, 3,1);
+	t.set( hwd.get(2,1)/2+0.2f, 3,1);
 	t.set( hwd.get(1,1),1,1);
 	se3 obs_se3(t);
 	t.set( 0.0f,1,1);
 	t.set( hwd.get(3,1)/2, 3,1);
 	
-	float roll = +PI/2-0.1f;
+	//float roll = +PI/2-0.1f;
+	float roll = +PI/2;
 	float pitch = 0.0f;
 	float yaw = 0.0f;
 	Quat q = Euler2Qt(roll,pitch,yaw);
@@ -475,7 +476,7 @@ void EtatEngine::init2()
 	//std::cout << " Quat2Euler results : " << roll << " : " << pitch << " : " << yaw << std::endl;
 	
 	//set tiny rotation :
-	//obs_se3.setOrientation( q );
+	obs_se3.setOrientation( q );
 	
 	env->addElement( new ElementMobile(std::string("OBS"), new se3(obs_se3), hwd) );
 	
