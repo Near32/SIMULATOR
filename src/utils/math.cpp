@@ -144,28 +144,22 @@ void se3::setW(const Mat<float>& w_)
 	}
 }
 
-/*
+/**/
 void se3::setOrientation( const Quat& q)
 {
-	Mat<float> so3((float)0,3,3);
-	Quat2SO3(q,&so3);
-	
+	Mat<float> so3( q.mat() );
+
 	Mat<float> wX( logMEuler(so3));
 	w->set( -wX.get(2,3), 1,1);
 	w->set( wX.get(1,3), 2,1);
 	w->set( -wX.get(1,2), 3,1);
 	
-#ifdef debuglvl1
-	std::cout << " SE3 : TEST APRES MODIF : " << std::endl;
-	w->afficher();
-	wX.afficher();
-#endif	
 	
 	hasChanged = true;
 }
 /**/
 
-/**/
+/*
 void se3::setOrientation( const Quat& q)
 {
 	float roll,pitch,yaw;

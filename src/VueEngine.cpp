@@ -111,9 +111,9 @@ std::cout << " VUE : command handled..." << std::endl;
 		ellapsed_time = SDL_GetTicks() - start_time;
         
         
-        if (ellapsed_time < 20)
+        if (ellapsed_time < 1000)
         {
-            SDL_Delay(20 - ellapsed_time);
+            SDL_Delay(1000 - ellapsed_time);
         }
         
 		//DESSINERSDL();
@@ -142,7 +142,7 @@ void VueEngine::init()
 	glClearColor(1.0f,1.0f,1.0f,1.0f);
     glMatrixMode( GL_PROJECTION );
     glLoadIdentity();
-    gluPerspective(70,(double)800/600,1,1000);
+    gluPerspective(110,(double)800/600,1,1000);
     glEnable(GL_DEPTH_TEST);
     
     
@@ -250,24 +250,59 @@ ressourcesMutex.unlock();
 			//drawElement( pathElement );
 			drawElement( containerV[pathElement], containerUV[pathElement], containerN[pathElement] );
 			
+			Mat<float>& hwd = ((IElementMobile*)(env->ListeElements[i]).get())->hwd;
+			float xs = hwd.get(1,1)/2;
+			float ys = hwd.get(2,1)/2;
+			float zs = hwd.get(3,1)/2;
+			
 			glBegin(GL_QUADS);
 			glColor3ub(0,0,200);
-			glVertex3d(-10,-10,0);
-			glVertex3d(10,-10,0);
-			glVertex3d(10,10,0);
-			glVertex3d(-10,10,0);
+			glVertex3d(-xs,-ys,0);
+			glVertex3d(xs,-ys,0);
+			glVertex3d(xs,ys,0);
+			glVertex3d(-xs,ys,0);
+			glEnd();
+
+			glBegin(GL_QUADS);
+			glColor3ub(0,0,200);
+			glVertex3d(0,-ys,-zs);
+			glVertex3d(0,-ys,zs);
+			glVertex3d(0,ys,zs);
+			glVertex3d(0,ys,-zs);
 			glEnd();
 		}
 		else
 		{
 			ressourcesMutex.unlock();
 			//ground...
+			Mat<float>& hwd = ((IElementMobile*)(env->ListeElements[i]).get())->hwd;
+			float xs = hwd.get(1,1)/2;
+			float ys = hwd.get(2,1)/2;
+			float zs = hwd.get(3,1)/2;
+			
 			glBegin(GL_QUADS);
 			glColor3ub(230,230,230);
-			glVertex3d(-500,-500,250);
-			glVertex3d(500,-500,250);
-			glVertex3d(500,500,250);
-			glVertex3d(-500,500,250);
+			glVertex3d(-xs,-ys,zs);
+			glVertex3d(xs,-ys,zs);
+			glVertex3d(xs,ys,zs);
+			glVertex3d(-xs,ys,zs);
+			glEnd();
+
+			
+			glBegin(GL_QUADS);
+			glColor3ub(0,0,200);
+			glVertex3d(-xs,-ys,0);
+			glVertex3d(xs,-ys,0);
+			glVertex3d(xs,ys,0);
+			glVertex3d(-xs,ys,0);
+			glEnd();
+			
+			glBegin(GL_QUADS);
+			glColor3ub(0,200,0);
+			glVertex3d(0,-ys,-zs);
+			glVertex3d(0,-ys,zs);
+			glVertex3d(0,ys,zs);
+			glVertex3d(0,ys,-zs);
 			glEnd();
 		}
 #ifdef debuglvl1		

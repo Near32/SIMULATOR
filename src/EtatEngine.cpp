@@ -39,7 +39,7 @@ void EtatEngine::loop()
 				//DEBUGGING :
 				case TCSimulateStride:
 				{
-				float timestep = 5e-3f;
+				float timestep = 5e-2f;
 				float time = sim->getTime();
 #ifdef debug
 std::cout << "SIMULATION : run : ..." << std::endl;
@@ -56,14 +56,15 @@ std::cout << "SIMULATION : run " << sim->getTime() << " : successfully !!" << st
 				//DEBUGGING :
 				case TCSimulation:
 				{
-				float timestep = 1e-2f;
+				float timestep = 5e-2f;
+				float duration = 2.0f;
 				float time = sim->getTime();
 #ifdef debug
 std::cout << "SIMULATION : run : ..." << std::endl;
 #endif					
-				sim->run(timestep,time+5.0f);
+				sim->run(timestep,time+duration);
 #ifdef debug
-std::cout << "SIMULATION : run " << sim->getTime() << " / " << time+5.0f << " : successfully !!" << std::endl;
+std::cout << "SIMULATION : run " << sim->getTime() << " / " << time+duration << " : successfully !!" << std::endl;
 #endif				
 				
 				commandsToHandle.erase(commandsToHandle.begin());
@@ -457,7 +458,7 @@ void EtatEngine::init2()
 	hwd *= 10.0f;
 	hwd.set(20.0f,3,1);
 	
-	t.set( hwd.get(2,1)/2+0.2f, 3,1);
+	t.set( hwd.get(2,1)/2+10.0f, 3,1);
 	t.set( hwd.get(1,1),1,1);
 	se3 obs_se3(t);
 	t.set( 0.0f,1,1);
@@ -512,9 +513,9 @@ void EtatEngine::init2()
 	hwd = Mat<float>(10.0f,3,1);
 	hwd.set( 20.0f, 3,1);
 	//--------------------------------
-	t.set(50.0f,2,1);
+	t.set(25.0f,2,1);
 	t.set( hwd.get(3,1), 3,1);	
-	env->addElement( new ElementRobot(std::string("R1"), new se3(t), hwd) );
+	//env->addElement( new ElementRobot(std::string("R1"), new se3(t), hwd) );
 	//--------------------------------
 	
 	

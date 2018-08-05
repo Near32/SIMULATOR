@@ -1,7 +1,7 @@
 #include "IContactGenerator.h"
 #include "../Simulation.h"
 
-//#define debug
+#define debug
 
 
 IContactGenerator::IContactGenerator(Simulation* sim_) : sim(sim_)

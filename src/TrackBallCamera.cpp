@@ -68,12 +68,12 @@ TrackBallCamera::TrackBallCamera()
     //SDL_SetCursor(hand1); //activation du curseur normal
     hold = false; //au départ on part du principe que le bouton n'est pas maintenu
 
-    angleY = 0;
-    angleZ = 0;
+    angleY = 45;
+    angleZ = 45;
 
-    distance = 20; //distance initiale de la caméra avec le centre de la scène
-    motionSensitivity = 0.3;
-    scrollSensitivity = 1.0;
+    distance = 60; //distance initiale de la caméra avec le centre de la scène
+    motionSensitivity = 0.4;
+    scrollSensitivity = 0.8;
 
 }
 

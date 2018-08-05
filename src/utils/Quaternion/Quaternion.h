@@ -16,12 +16,25 @@ class Quat
 	Quat() : x(0.0f),y(0.0f),z(0.0f),w(1.0f) {}
 	
 	~Quat()	{}
+
+	float norm()
+	{
+		return sqrt( pow(x,2) + pow(y,2) + pow(z,2) + pow(w,2));
+	}
+
+	void normalize();
 	
+	void updateOrientation(const float& dt, const Mat<float>& av);
+
+	void mult(const float& v);
+
+	Mat<float> mat() const;
+
 };
 
 
 /* Return norm of quaternion, the sum of the squares of the components. */
-#define Qt_Norm(q) ((q).x*(q).x + (q).y*(q).y + (q).z*(q).z + (q).w*(q).w)
+#define Qt_Norm(q) sqrt((q).x*(q).x + (q).y*(q).y + (q).z*(q).z + (q).w*(q).w)
 Quat operator+(const Quat& q1, const Quat& q2);
 Quat operator*(float val, const Quat& q);
 

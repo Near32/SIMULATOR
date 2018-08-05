@@ -34,14 +34,11 @@ RM = /usr/bin/cmake -E remove -f
 # Escaping for special characters.
 EQUALS = =
 
-# The program to use to edit the cache.
-CMAKE_EDIT_COMMAND = /usr/bin/ccmake
-
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/kevin/Development/SIMULATOR/SIMULATOR
+CMAKE_SOURCE_DIR = /home/kevin/Development/git/SIMULATOR
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/kevin/Development/SIMULATOR/SIMULATOR/build
+CMAKE_BINARY_DIR = /home/kevin/Development/git/SIMULATOR/build
 
 # Include any dependencies generated for this target.
 include CMakeFiles/SIMULATOR.dir/depend.make
@@ -54,17 +51,17 @@ include CMakeFiles/SIMULATOR.dir/flags.make
 
 CMakeFiles/SIMULATOR.dir/src/mainENGINE.cpp.o: CMakeFiles/SIMULATOR.dir/flags.make
 CMakeFiles/SIMULATOR.dir/src/mainENGINE.cpp.o: ../src/mainENGINE.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/kevin/Development/SIMULATOR/SIMULATOR/build/CMakeFiles $(CMAKE_PROGRESS_1)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/kevin/Development/git/SIMULATOR/build/CMakeFiles $(CMAKE_PROGRESS_1)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/SIMULATOR.dir/src/mainENGINE.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/SIMULATOR.dir/src/mainENGINE.cpp.o -c /home/kevin/Development/SIMULATOR/SIMULATOR/src/mainENGINE.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/SIMULATOR.dir/src/mainENGINE.cpp.o -c /home/kevin/Development/git/SIMULATOR/src/mainENGINE.cpp
 
 CMakeFiles/SIMULATOR.dir/src/mainENGINE.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/SIMULATOR.dir/src/mainENGINE.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/kevin/Development/SIMULATOR/SIMULATOR/src/mainENGINE.cpp > CMakeFiles/SIMULATOR.dir/src/mainENGINE.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/kevin/Development/git/SIMULATOR/src/mainENGINE.cpp > CMakeFiles/SIMULATOR.dir/src/mainENGINE.cpp.i
 
 CMakeFiles/SIMULATOR.dir/src/mainENGINE.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/SIMULATOR.dir/src/mainENGINE.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/kevin/Development/SIMULATOR/SIMULATOR/src/mainENGINE.cpp -o CMakeFiles/SIMULATOR.dir/src/mainENGINE.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/kevin/Development/git/SIMULATOR/src/mainENGINE.cpp -o CMakeFiles/SIMULATOR.dir/src/mainENGINE.cpp.s
 
 CMakeFiles/SIMULATOR.dir/src/mainENGINE.cpp.o.requires:
 .PHONY : CMakeFiles/SIMULATOR.dir/src/mainENGINE.cpp.o.requires
@@ -77,17 +74,17 @@ CMakeFiles/SIMULATOR.dir/src/mainENGINE.cpp.o.provides.build: CMakeFiles/SIMULAT
 
 CMakeFiles/SIMULATOR.dir/src/EtatEngine.cpp.o: CMakeFiles/SIMULATOR.dir/flags.make
 CMakeFiles/SIMULATOR.dir/src/EtatEngine.cpp.o: ../src/EtatEngine.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/kevin/Development/SIMULATOR/SIMULATOR/build/CMakeFiles $(CMAKE_PROGRESS_2)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/kevin/Development/git/SIMULATOR/build/CMakeFiles $(CMAKE_PROGRESS_2)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/SIMULATOR.dir/src/EtatEngine.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/SIMULATOR.dir/src/EtatEngine.cpp.o -c /home/kevin/Development/SIMULATOR/SIMULATOR/src/EtatEngine.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/SIMULATOR.dir/src/EtatEngine.cpp.o -c /home/kevin/Development/git/SIMULATOR/src/EtatEngine.cpp
 
 CMakeFiles/SIMULATOR.dir/src/EtatEngine.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/SIMULATOR.dir/src/EtatEngine.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/kevin/Development/SIMULATOR/SIMULATOR/src/EtatEngine.cpp > CMakeFiles/SIMULATOR.dir/src/EtatEngine.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/kevin/Development/git/SIMULATOR/src/EtatEngine.cpp > CMakeFiles/SIMULATOR.dir/src/EtatEngine.cpp.i
 
 CMakeFiles/SIMULATOR.dir/src/EtatEngine.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/SIMULATOR.dir/src/EtatEngine.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/kevin/Development/SIMULATOR/SIMULATOR/src/EtatEngine.cpp -o CMakeFiles/SIMULATOR.dir/src/EtatEngine.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/kevin/Development/git/SIMULATOR/src/EtatEngine.cpp -o CMakeFiles/SIMULATOR.dir/src/EtatEngine.cpp.s
 
 CMakeFiles/SIMULATOR.dir/src/EtatEngine.cpp.o.requires:
 .PHONY : CMakeFiles/SIMULATOR.dir/src/EtatEngine.cpp.o.requires
@@ -100,17 +97,17 @@ CMakeFiles/SIMULATOR.dir/src/EtatEngine.cpp.o.provides.build: CMakeFiles/SIMULAT
 
 CMakeFiles/SIMULATOR.dir/src/IEngine.cpp.o: CMakeFiles/SIMULATOR.dir/flags.make
 CMakeFiles/SIMULATOR.dir/src/IEngine.cpp.o: ../src/IEngine.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/kevin/Development/SIMULATOR/SIMULATOR/build/CMakeFiles $(CMAKE_PROGRESS_3)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/kevin/Development/git/SIMULATOR/build/CMakeFiles $(CMAKE_PROGRESS_3)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/SIMULATOR.dir/src/IEngine.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/SIMULATOR.dir/src/IEngine.cpp.o -c /home/kevin/Development/SIMULATOR/SIMULATOR/src/IEngine.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/SIMULATOR.dir/src/IEngine.cpp.o -c /home/kevin/Development/git/SIMULATOR/src/IEngine.cpp
 
 CMakeFiles/SIMULATOR.dir/src/IEngine.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/SIMULATOR.dir/src/IEngine.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/kevin/Development/SIMULATOR/SIMULATOR/src/IEngine.cpp > CMakeFiles/SIMULATOR.dir/src/IEngine.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/kevin/Development/git/SIMULATOR/src/IEngine.cpp > CMakeFiles/SIMULATOR.dir/src/IEngine.cpp.i
 
 CMakeFiles/SIMULATOR.dir/src/IEngine.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/SIMULATOR.dir/src/IEngine.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/kevin/Development/SIMULATOR/SIMULATOR/src/IEngine.cpp -o CMakeFiles/SIMULATOR.dir/src/IEngine.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/kevin/Development/git/SIMULATOR/src/IEngine.cpp -o CMakeFiles/SIMULATOR.dir/src/IEngine.cpp.s
 
 CMakeFiles/SIMULATOR.dir/src/IEngine.cpp.o.requires:
 .PHONY : CMakeFiles/SIMULATOR.dir/src/IEngine.cpp.o.requires
@@ -123,17 +120,17 @@ CMakeFiles/SIMULATOR.dir/src/IEngine.cpp.o.provides.build: CMakeFiles/SIMULATOR.
 
 CMakeFiles/SIMULATOR.dir/src/VueEngine.cpp.o: CMakeFiles/SIMULATOR.dir/flags.make
 CMakeFiles/SIMULATOR.dir/src/VueEngine.cpp.o: ../src/VueEngine.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/kevin/Development/SIMULATOR/SIMULATOR/build/CMakeFiles $(CMAKE_PROGRESS_4)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/kevin/Development/git/SIMULATOR/build/CMakeFiles $(CMAKE_PROGRESS_4)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/SIMULATOR.dir/src/VueEngine.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/SIMULATOR.dir/src/VueEngine.cpp.o -c /home/kevin/Development/SIMULATOR/SIMULATOR/src/VueEngine.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/SIMULATOR.dir/src/VueEngine.cpp.o -c /home/kevin/Development/git/SIMULATOR/src/VueEngine.cpp
 
 CMakeFiles/SIMULATOR.dir/src/VueEngine.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/SIMULATOR.dir/src/VueEngine.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/kevin/Development/SIMULATOR/SIMULATOR/src/VueEngine.cpp > CMakeFiles/SIMULATOR.dir/src/VueEngine.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/kevin/Development/git/SIMULATOR/src/VueEngine.cpp > CMakeFiles/SIMULATOR.dir/src/VueEngine.cpp.i
 
 CMakeFiles/SIMULATOR.dir/src/VueEngine.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/SIMULATOR.dir/src/VueEngine.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/kevin/Development/SIMULATOR/SIMULATOR/src/VueEngine.cpp -o CMakeFiles/SIMULATOR.dir/src/VueEngine.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/kevin/Development/git/SIMULATOR/src/VueEngine.cpp -o CMakeFiles/SIMULATOR.dir/src/VueEngine.cpp.s
 
 CMakeFiles/SIMULATOR.dir/src/VueEngine.cpp.o.requires:
 .PHONY : CMakeFiles/SIMULATOR.dir/src/VueEngine.cpp.o.requires
@@ -146,17 +143,17 @@ CMakeFiles/SIMULATOR.dir/src/VueEngine.cpp.o.provides.build: CMakeFiles/SIMULATO
 
 CMakeFiles/SIMULATOR.dir/src/ControllerEngine.cpp.o: CMakeFiles/SIMULATOR.dir/flags.make
 CMakeFiles/SIMULATOR.dir/src/ControllerEngine.cpp.o: ../src/ControllerEngine.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/kevin/Development/SIMULATOR/SIMULATOR/build/CMakeFiles $(CMAKE_PROGRESS_5)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/kevin/Development/git/SIMULATOR/build/CMakeFiles $(CMAKE_PROGRESS_5)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/SIMULATOR.dir/src/ControllerEngine.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/SIMULATOR.dir/src/ControllerEngine.cpp.o -c /home/kevin/Development/SIMULATOR/SIMULATOR/src/ControllerEngine.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/SIMULATOR.dir/src/ControllerEngine.cpp.o -c /home/kevin/Development/git/SIMULATOR/src/ControllerEngine.cpp
 
 CMakeFiles/SIMULATOR.dir/src/ControllerEngine.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/SIMULATOR.dir/src/ControllerEngine.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/kevin/Development/SIMULATOR/SIMULATOR/src/ControllerEngine.cpp > CMakeFiles/SIMULATOR.dir/src/ControllerEngine.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/kevin/Development/git/SIMULATOR/src/ControllerEngine.cpp > CMakeFiles/SIMULATOR.dir/src/ControllerEngine.cpp.i
 
 CMakeFiles/SIMULATOR.dir/src/ControllerEngine.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/SIMULATOR.dir/src/ControllerEngine.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/kevin/Development/SIMULATOR/SIMULATOR/src/ControllerEngine.cpp -o CMakeFiles/SIMULATOR.dir/src/ControllerEngine.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/kevin/Development/git/SIMULATOR/src/ControllerEngine.cpp -o CMakeFiles/SIMULATOR.dir/src/ControllerEngine.cpp.s
 
 CMakeFiles/SIMULATOR.dir/src/ControllerEngine.cpp.o.requires:
 .PHONY : CMakeFiles/SIMULATOR.dir/src/ControllerEngine.cpp.o.requires
@@ -169,17 +166,17 @@ CMakeFiles/SIMULATOR.dir/src/ControllerEngine.cpp.o.provides.build: CMakeFiles/S
 
 CMakeFiles/SIMULATOR.dir/src/Game.cpp.o: CMakeFiles/SIMULATOR.dir/flags.make
 CMakeFiles/SIMULATOR.dir/src/Game.cpp.o: ../src/Game.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/kevin/Development/SIMULATOR/SIMULATOR/build/CMakeFiles $(CMAKE_PROGRESS_6)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/kevin/Development/git/SIMULATOR/build/CMakeFiles $(CMAKE_PROGRESS_6)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/SIMULATOR.dir/src/Game.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/SIMULATOR.dir/src/Game.cpp.o -c /home/kevin/Development/SIMULATOR/SIMULATOR/src/Game.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/SIMULATOR.dir/src/Game.cpp.o -c /home/kevin/Development/git/SIMULATOR/src/Game.cpp
 
 CMakeFiles/SIMULATOR.dir/src/Game.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/SIMULATOR.dir/src/Game.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/kevin/Development/SIMULATOR/SIMULATOR/src/Game.cpp > CMakeFiles/SIMULATOR.dir/src/Game.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/kevin/Development/git/SIMULATOR/src/Game.cpp > CMakeFiles/SIMULATOR.dir/src/Game.cpp.i
 
 CMakeFiles/SIMULATOR.dir/src/Game.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/SIMULATOR.dir/src/Game.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/kevin/Development/SIMULATOR/SIMULATOR/src/Game.cpp -o CMakeFiles/SIMULATOR.dir/src/Game.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/kevin/Development/git/SIMULATOR/src/Game.cpp -o CMakeFiles/SIMULATOR.dir/src/Game.cpp.s
 
 CMakeFiles/SIMULATOR.dir/src/Game.cpp.o.requires:
 .PHONY : CMakeFiles/SIMULATOR.dir/src/Game.cpp.o.requires
@@ -192,17 +189,17 @@ CMakeFiles/SIMULATOR.dir/src/Game.cpp.o.provides.build: CMakeFiles/SIMULATOR.dir
 
 CMakeFiles/SIMULATOR.dir/src/Environnement.cpp.o: CMakeFiles/SIMULATOR.dir/flags.make
 CMakeFiles/SIMULATOR.dir/src/Environnement.cpp.o: ../src/Environnement.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/kevin/Development/SIMULATOR/SIMULATOR/build/CMakeFiles $(CMAKE_PROGRESS_7)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/kevin/Development/git/SIMULATOR/build/CMakeFiles $(CMAKE_PROGRESS_7)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/SIMULATOR.dir/src/Environnement.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/SIMULATOR.dir/src/Environnement.cpp.o -c /home/kevin/Development/SIMULATOR/SIMULATOR/src/Environnement.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/SIMULATOR.dir/src/Environnement.cpp.o -c /home/kevin/Development/git/SIMULATOR/src/Environnement.cpp
 
 CMakeFiles/SIMULATOR.dir/src/Environnement.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/SIMULATOR.dir/src/Environnement.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/kevin/Development/SIMULATOR/SIMULATOR/src/Environnement.cpp > CMakeFiles/SIMULATOR.dir/src/Environnement.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/kevin/Development/git/SIMULATOR/src/Environnement.cpp > CMakeFiles/SIMULATOR.dir/src/Environnement.cpp.i
 
 CMakeFiles/SIMULATOR.dir/src/Environnement.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/SIMULATOR.dir/src/Environnement.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/kevin/Development/SIMULATOR/SIMULATOR/src/Environnement.cpp -o CMakeFiles/SIMULATOR.dir/src/Environnement.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/kevin/Development/git/SIMULATOR/src/Environnement.cpp -o CMakeFiles/SIMULATOR.dir/src/Environnement.cpp.s
 
 CMakeFiles/SIMULATOR.dir/src/Environnement.cpp.o.requires:
 .PHONY : CMakeFiles/SIMULATOR.dir/src/Environnement.cpp.o.requires
@@ -215,17 +212,17 @@ CMakeFiles/SIMULATOR.dir/src/Environnement.cpp.o.provides.build: CMakeFiles/SIMU
 
 CMakeFiles/SIMULATOR.dir/src/IElement.cpp.o: CMakeFiles/SIMULATOR.dir/flags.make
 CMakeFiles/SIMULATOR.dir/src/IElement.cpp.o: ../src/IElement.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/kevin/Development/SIMULATOR/SIMULATOR/build/CMakeFiles $(CMAKE_PROGRESS_8)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/kevin/Development/git/SIMULATOR/build/CMakeFiles $(CMAKE_PROGRESS_8)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/SIMULATOR.dir/src/IElement.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/SIMULATOR.dir/src/IElement.cpp.o -c /home/kevin/Development/SIMULATOR/SIMULATOR/src/IElement.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/SIMULATOR.dir/src/IElement.cpp.o -c /home/kevin/Development/git/SIMULATOR/src/IElement.cpp
 
 CMakeFiles/SIMULATOR.dir/src/IElement.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/SIMULATOR.dir/src/IElement.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/kevin/Development/SIMULATOR/SIMULATOR/src/IElement.cpp > CMakeFiles/SIMULATOR.dir/src/IElement.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/kevin/Development/git/SIMULATOR/src/IElement.cpp > CMakeFiles/SIMULATOR.dir/src/IElement.cpp.i
 
 CMakeFiles/SIMULATOR.dir/src/IElement.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/SIMULATOR.dir/src/IElement.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/kevin/Development/SIMULATOR/SIMULATOR/src/IElement.cpp -o CMakeFiles/SIMULATOR.dir/src/IElement.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/kevin/Development/git/SIMULATOR/src/IElement.cpp -o CMakeFiles/SIMULATOR.dir/src/IElement.cpp.s
 
 CMakeFiles/SIMULATOR.dir/src/IElement.cpp.o.requires:
 .PHONY : CMakeFiles/SIMULATOR.dir/src/IElement.cpp.o.requires
@@ -238,17 +235,17 @@ CMakeFiles/SIMULATOR.dir/src/IElement.cpp.o.provides.build: CMakeFiles/SIMULATOR
 
 CMakeFiles/SIMULATOR.dir/src/IElementFixe.cpp.o: CMakeFiles/SIMULATOR.dir/flags.make
 CMakeFiles/SIMULATOR.dir/src/IElementFixe.cpp.o: ../src/IElementFixe.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/kevin/Development/SIMULATOR/SIMULATOR/build/CMakeFiles $(CMAKE_PROGRESS_9)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/kevin/Development/git/SIMULATOR/build/CMakeFiles $(CMAKE_PROGRESS_9)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/SIMULATOR.dir/src/IElementFixe.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/SIMULATOR.dir/src/IElementFixe.cpp.o -c /home/kevin/Development/SIMULATOR/SIMULATOR/src/IElementFixe.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/SIMULATOR.dir/src/IElementFixe.cpp.o -c /home/kevin/Development/git/SIMULATOR/src/IElementFixe.cpp
 
 CMakeFiles/SIMULATOR.dir/src/IElementFixe.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/SIMULATOR.dir/src/IElementFixe.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/kevin/Development/SIMULATOR/SIMULATOR/src/IElementFixe.cpp > CMakeFiles/SIMULATOR.dir/src/IElementFixe.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/kevin/Development/git/SIMULATOR/src/IElementFixe.cpp > CMakeFiles/SIMULATOR.dir/src/IElementFixe.cpp.i
 
 CMakeFiles/SIMULATOR.dir/src/IElementFixe.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/SIMULATOR.dir/src/IElementFixe.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/kevin/Development/SIMULATOR/SIMULATOR/src/IElementFixe.cpp -o CMakeFiles/SIMULATOR.dir/src/IElementFixe.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/kevin/Development/git/SIMULATOR/src/IElementFixe.cpp -o CMakeFiles/SIMULATOR.dir/src/IElementFixe.cpp.s
 
 CMakeFiles/SIMULATOR.dir/src/IElementFixe.cpp.o.requires:
 .PHONY : CMakeFiles/SIMULATOR.dir/src/IElementFixe.cpp.o.requires
@@ -261,17 +258,17 @@ CMakeFiles/SIMULATOR.dir/src/IElementFixe.cpp.o.provides.build: CMakeFiles/SIMUL
 
 CMakeFiles/SIMULATOR.dir/src/Obstacle.cpp.o: CMakeFiles/SIMULATOR.dir/flags.make
 CMakeFiles/SIMULATOR.dir/src/Obstacle.cpp.o: ../src/Obstacle.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/kevin/Development/SIMULATOR/SIMULATOR/build/CMakeFiles $(CMAKE_PROGRESS_10)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/kevin/Development/git/SIMULATOR/build/CMakeFiles $(CMAKE_PROGRESS_10)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/SIMULATOR.dir/src/Obstacle.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/SIMULATOR.dir/src/Obstacle.cpp.o -c /home/kevin/Development/SIMULATOR/SIMULATOR/src/Obstacle.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/SIMULATOR.dir/src/Obstacle.cpp.o -c /home/kevin/Development/git/SIMULATOR/src/Obstacle.cpp
 
 CMakeFiles/SIMULATOR.dir/src/Obstacle.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/SIMULATOR.dir/src/Obstacle.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/kevin/Development/SIMULATOR/SIMULATOR/src/Obstacle.cpp > CMakeFiles/SIMULATOR.dir/src/Obstacle.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/kevin/Development/git/SIMULATOR/src/Obstacle.cpp > CMakeFiles/SIMULATOR.dir/src/Obstacle.cpp.i
 
 CMakeFiles/SIMULATOR.dir/src/Obstacle.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/SIMULATOR.dir/src/Obstacle.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/kevin/Development/SIMULATOR/SIMULATOR/src/Obstacle.cpp -o CMakeFiles/SIMULATOR.dir/src/Obstacle.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/kevin/Development/git/SIMULATOR/src/Obstacle.cpp -o CMakeFiles/SIMULATOR.dir/src/Obstacle.cpp.s
 
 CMakeFiles/SIMULATOR.dir/src/Obstacle.cpp.o.requires:
 .PHONY : CMakeFiles/SIMULATOR.dir/src/Obstacle.cpp.o.requires
@@ -284,17 +281,17 @@ CMakeFiles/SIMULATOR.dir/src/Obstacle.cpp.o.provides.build: CMakeFiles/SIMULATOR
 
 CMakeFiles/SIMULATOR.dir/src/OrbeBonus.cpp.o: CMakeFiles/SIMULATOR.dir/flags.make
 CMakeFiles/SIMULATOR.dir/src/OrbeBonus.cpp.o: ../src/OrbeBonus.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/kevin/Development/SIMULATOR/SIMULATOR/build/CMakeFiles $(CMAKE_PROGRESS_11)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/kevin/Development/git/SIMULATOR/build/CMakeFiles $(CMAKE_PROGRESS_11)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/SIMULATOR.dir/src/OrbeBonus.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/SIMULATOR.dir/src/OrbeBonus.cpp.o -c /home/kevin/Development/SIMULATOR/SIMULATOR/src/OrbeBonus.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/SIMULATOR.dir/src/OrbeBonus.cpp.o -c /home/kevin/Development/git/SIMULATOR/src/OrbeBonus.cpp
 
 CMakeFiles/SIMULATOR.dir/src/OrbeBonus.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/SIMULATOR.dir/src/OrbeBonus.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/kevin/Development/SIMULATOR/SIMULATOR/src/OrbeBonus.cpp > CMakeFiles/SIMULATOR.dir/src/OrbeBonus.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/kevin/Development/git/SIMULATOR/src/OrbeBonus.cpp > CMakeFiles/SIMULATOR.dir/src/OrbeBonus.cpp.i
 
 CMakeFiles/SIMULATOR.dir/src/OrbeBonus.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/SIMULATOR.dir/src/OrbeBonus.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/kevin/Development/SIMULATOR/SIMULATOR/src/OrbeBonus.cpp -o CMakeFiles/SIMULATOR.dir/src/OrbeBonus.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/kevin/Development/git/SIMULATOR/src/OrbeBonus.cpp -o CMakeFiles/SIMULATOR.dir/src/OrbeBonus.cpp.s
 
 CMakeFiles/SIMULATOR.dir/src/OrbeBonus.cpp.o.requires:
 .PHONY : CMakeFiles/SIMULATOR.dir/src/OrbeBonus.cpp.o.requires
@@ -307,17 +304,17 @@ CMakeFiles/SIMULATOR.dir/src/OrbeBonus.cpp.o.provides.build: CMakeFiles/SIMULATO
 
 CMakeFiles/SIMULATOR.dir/src/IFabricant.cpp.o: CMakeFiles/SIMULATOR.dir/flags.make
 CMakeFiles/SIMULATOR.dir/src/IFabricant.cpp.o: ../src/IFabricant.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/kevin/Development/SIMULATOR/SIMULATOR/build/CMakeFiles $(CMAKE_PROGRESS_12)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/kevin/Development/git/SIMULATOR/build/CMakeFiles $(CMAKE_PROGRESS_12)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/SIMULATOR.dir/src/IFabricant.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/SIMULATOR.dir/src/IFabricant.cpp.o -c /home/kevin/Development/SIMULATOR/SIMULATOR/src/IFabricant.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/SIMULATOR.dir/src/IFabricant.cpp.o -c /home/kevin/Development/git/SIMULATOR/src/IFabricant.cpp
 
 CMakeFiles/SIMULATOR.dir/src/IFabricant.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/SIMULATOR.dir/src/IFabricant.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/kevin/Development/SIMULATOR/SIMULATOR/src/IFabricant.cpp > CMakeFiles/SIMULATOR.dir/src/IFabricant.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/kevin/Development/git/SIMULATOR/src/IFabricant.cpp > CMakeFiles/SIMULATOR.dir/src/IFabricant.cpp.i
 
 CMakeFiles/SIMULATOR.dir/src/IFabricant.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/SIMULATOR.dir/src/IFabricant.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/kevin/Development/SIMULATOR/SIMULATOR/src/IFabricant.cpp -o CMakeFiles/SIMULATOR.dir/src/IFabricant.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/kevin/Development/git/SIMULATOR/src/IFabricant.cpp -o CMakeFiles/SIMULATOR.dir/src/IFabricant.cpp.s
 
 CMakeFiles/SIMULATOR.dir/src/IFabricant.cpp.o.requires:
 .PHONY : CMakeFiles/SIMULATOR.dir/src/IFabricant.cpp.o.requires
@@ -330,17 +327,17 @@ CMakeFiles/SIMULATOR.dir/src/IFabricant.cpp.o.provides.build: CMakeFiles/SIMULAT
 
 CMakeFiles/SIMULATOR.dir/src/Fabriques.cpp.o: CMakeFiles/SIMULATOR.dir/flags.make
 CMakeFiles/SIMULATOR.dir/src/Fabriques.cpp.o: ../src/Fabriques.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/kevin/Development/SIMULATOR/SIMULATOR/build/CMakeFiles $(CMAKE_PROGRESS_13)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/kevin/Development/git/SIMULATOR/build/CMakeFiles $(CMAKE_PROGRESS_13)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/SIMULATOR.dir/src/Fabriques.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/SIMULATOR.dir/src/Fabriques.cpp.o -c /home/kevin/Development/SIMULATOR/SIMULATOR/src/Fabriques.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/SIMULATOR.dir/src/Fabriques.cpp.o -c /home/kevin/Development/git/SIMULATOR/src/Fabriques.cpp
 
 CMakeFiles/SIMULATOR.dir/src/Fabriques.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/SIMULATOR.dir/src/Fabriques.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/kevin/Development/SIMULATOR/SIMULATOR/src/Fabriques.cpp > CMakeFiles/SIMULATOR.dir/src/Fabriques.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/kevin/Development/git/SIMULATOR/src/Fabriques.cpp > CMakeFiles/SIMULATOR.dir/src/Fabriques.cpp.i
 
 CMakeFiles/SIMULATOR.dir/src/Fabriques.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/SIMULATOR.dir/src/Fabriques.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/kevin/Development/SIMULATOR/SIMULATOR/src/Fabriques.cpp -o CMakeFiles/SIMULATOR.dir/src/Fabriques.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/kevin/Development/git/SIMULATOR/src/Fabriques.cpp -o CMakeFiles/SIMULATOR.dir/src/Fabriques.cpp.s
 
 CMakeFiles/SIMULATOR.dir/src/Fabriques.cpp.o.requires:
 .PHONY : CMakeFiles/SIMULATOR.dir/src/Fabriques.cpp.o.requires
@@ -353,17 +350,17 @@ CMakeFiles/SIMULATOR.dir/src/Fabriques.cpp.o.provides.build: CMakeFiles/SIMULATO
 
 CMakeFiles/SIMULATOR.dir/src/IElementMobile.cpp.o: CMakeFiles/SIMULATOR.dir/flags.make
 CMakeFiles/SIMULATOR.dir/src/IElementMobile.cpp.o: ../src/IElementMobile.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/kevin/Development/SIMULATOR/SIMULATOR/build/CMakeFiles $(CMAKE_PROGRESS_14)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/kevin/Development/git/SIMULATOR/build/CMakeFiles $(CMAKE_PROGRESS_14)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/SIMULATOR.dir/src/IElementMobile.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/SIMULATOR.dir/src/IElementMobile.cpp.o -c /home/kevin/Development/SIMULATOR/SIMULATOR/src/IElementMobile.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/SIMULATOR.dir/src/IElementMobile.cpp.o -c /home/kevin/Development/git/SIMULATOR/src/IElementMobile.cpp
 
 CMakeFiles/SIMULATOR.dir/src/IElementMobile.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/SIMULATOR.dir/src/IElementMobile.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/kevin/Development/SIMULATOR/SIMULATOR/src/IElementMobile.cpp > CMakeFiles/SIMULATOR.dir/src/IElementMobile.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/kevin/Development/git/SIMULATOR/src/IElementMobile.cpp > CMakeFiles/SIMULATOR.dir/src/IElementMobile.cpp.i
 
 CMakeFiles/SIMULATOR.dir/src/IElementMobile.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/SIMULATOR.dir/src/IElementMobile.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/kevin/Development/SIMULATOR/SIMULATOR/src/IElementMobile.cpp -o CMakeFiles/SIMULATOR.dir/src/IElementMobile.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/kevin/Development/git/SIMULATOR/src/IElementMobile.cpp -o CMakeFiles/SIMULATOR.dir/src/IElementMobile.cpp.s
 
 CMakeFiles/SIMULATOR.dir/src/IElementMobile.cpp.o.requires:
 .PHONY : CMakeFiles/SIMULATOR.dir/src/IElementMobile.cpp.o.requires
@@ -376,17 +373,17 @@ CMakeFiles/SIMULATOR.dir/src/IElementMobile.cpp.o.provides.build: CMakeFiles/SIM
 
 CMakeFiles/SIMULATOR.dir/src/ElementMobile.cpp.o: CMakeFiles/SIMULATOR.dir/flags.make
 CMakeFiles/SIMULATOR.dir/src/ElementMobile.cpp.o: ../src/ElementMobile.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/kevin/Development/SIMULATOR/SIMULATOR/build/CMakeFiles $(CMAKE_PROGRESS_15)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/kevin/Development/git/SIMULATOR/build/CMakeFiles $(CMAKE_PROGRESS_15)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/SIMULATOR.dir/src/ElementMobile.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/SIMULATOR.dir/src/ElementMobile.cpp.o -c /home/kevin/Development/SIMULATOR/SIMULATOR/src/ElementMobile.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/SIMULATOR.dir/src/ElementMobile.cpp.o -c /home/kevin/Development/git/SIMULATOR/src/ElementMobile.cpp
 
 CMakeFiles/SIMULATOR.dir/src/ElementMobile.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/SIMULATOR.dir/src/ElementMobile.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/kevin/Development/SIMULATOR/SIMULATOR/src/ElementMobile.cpp > CMakeFiles/SIMULATOR.dir/src/ElementMobile.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/kevin/Development/git/SIMULATOR/src/ElementMobile.cpp > CMakeFiles/SIMULATOR.dir/src/ElementMobile.cpp.i
 
 CMakeFiles/SIMULATOR.dir/src/ElementMobile.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/SIMULATOR.dir/src/ElementMobile.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/kevin/Development/SIMULATOR/SIMULATOR/src/ElementMobile.cpp -o CMakeFiles/SIMULATOR.dir/src/ElementMobile.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/kevin/Development/git/SIMULATOR/src/ElementMobile.cpp -o CMakeFiles/SIMULATOR.dir/src/ElementMobile.cpp.s
 
 CMakeFiles/SIMULATOR.dir/src/ElementMobile.cpp.o.requires:
 .PHONY : CMakeFiles/SIMULATOR.dir/src/ElementMobile.cpp.o.requires
@@ -399,17 +396,17 @@ CMakeFiles/SIMULATOR.dir/src/ElementMobile.cpp.o.provides.build: CMakeFiles/SIMU
 
 CMakeFiles/SIMULATOR.dir/src/TrackBallCamera.cpp.o: CMakeFiles/SIMULATOR.dir/flags.make
 CMakeFiles/SIMULATOR.dir/src/TrackBallCamera.cpp.o: ../src/TrackBallCamera.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/kevin/Development/SIMULATOR/SIMULATOR/build/CMakeFiles $(CMAKE_PROGRESS_16)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/kevin/Development/git/SIMULATOR/build/CMakeFiles $(CMAKE_PROGRESS_16)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/SIMULATOR.dir/src/TrackBallCamera.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/SIMULATOR.dir/src/TrackBallCamera.cpp.o -c /home/kevin/Development/SIMULATOR/SIMULATOR/src/TrackBallCamera.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/SIMULATOR.dir/src/TrackBallCamera.cpp.o -c /home/kevin/Development/git/SIMULATOR/src/TrackBallCamera.cpp
 
 CMakeFiles/SIMULATOR.dir/src/TrackBallCamera.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/SIMULATOR.dir/src/TrackBallCamera.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/kevin/Development/SIMULATOR/SIMULATOR/src/TrackBallCamera.cpp > CMakeFiles/SIMULATOR.dir/src/TrackBallCamera.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/kevin/Development/git/SIMULATOR/src/TrackBallCamera.cpp > CMakeFiles/SIMULATOR.dir/src/TrackBallCamera.cpp.i
 
 CMakeFiles/SIMULATOR.dir/src/TrackBallCamera.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/SIMULATOR.dir/src/TrackBallCamera.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/kevin/Development/SIMULATOR/SIMULATOR/src/TrackBallCamera.cpp -o CMakeFiles/SIMULATOR.dir/src/TrackBallCamera.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/kevin/Development/git/SIMULATOR/src/TrackBallCamera.cpp -o CMakeFiles/SIMULATOR.dir/src/TrackBallCamera.cpp.s
 
 CMakeFiles/SIMULATOR.dir/src/TrackBallCamera.cpp.o.requires:
 .PHONY : CMakeFiles/SIMULATOR.dir/src/TrackBallCamera.cpp.o.requires
@@ -422,17 +419,17 @@ CMakeFiles/SIMULATOR.dir/src/TrackBallCamera.cpp.o.provides.build: CMakeFiles/SI
 
 CMakeFiles/SIMULATOR.dir/src/utils/math.cpp.o: CMakeFiles/SIMULATOR.dir/flags.make
 CMakeFiles/SIMULATOR.dir/src/utils/math.cpp.o: ../src/utils/math.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/kevin/Development/SIMULATOR/SIMULATOR/build/CMakeFiles $(CMAKE_PROGRESS_17)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/kevin/Development/git/SIMULATOR/build/CMakeFiles $(CMAKE_PROGRESS_17)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/SIMULATOR.dir/src/utils/math.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/SIMULATOR.dir/src/utils/math.cpp.o -c /home/kevin/Development/SIMULATOR/SIMULATOR/src/utils/math.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/SIMULATOR.dir/src/utils/math.cpp.o -c /home/kevin/Development/git/SIMULATOR/src/utils/math.cpp
 
 CMakeFiles/SIMULATOR.dir/src/utils/math.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/SIMULATOR.dir/src/utils/math.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/kevin/Development/SIMULATOR/SIMULATOR/src/utils/math.cpp > CMakeFiles/SIMULATOR.dir/src/utils/math.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/kevin/Development/git/SIMULATOR/src/utils/math.cpp > CMakeFiles/SIMULATOR.dir/src/utils/math.cpp.i
 
 CMakeFiles/SIMULATOR.dir/src/utils/math.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/SIMULATOR.dir/src/utils/math.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/kevin/Development/SIMULATOR/SIMULATOR/src/utils/math.cpp -o CMakeFiles/SIMULATOR.dir/src/utils/math.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/kevin/Development/git/SIMULATOR/src/utils/math.cpp -o CMakeFiles/SIMULATOR.dir/src/utils/math.cpp.s
 
 CMakeFiles/SIMULATOR.dir/src/utils/math.cpp.o.requires:
 .PHONY : CMakeFiles/SIMULATOR.dir/src/utils/math.cpp.o.requires
@@ -445,17 +442,17 @@ CMakeFiles/SIMULATOR.dir/src/utils/math.cpp.o.provides.build: CMakeFiles/SIMULAT
 
 CMakeFiles/SIMULATOR.dir/src/utils/Quaternion/Quaternion.cpp.o: CMakeFiles/SIMULATOR.dir/flags.make
 CMakeFiles/SIMULATOR.dir/src/utils/Quaternion/Quaternion.cpp.o: ../src/utils/Quaternion/Quaternion.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/kevin/Development/SIMULATOR/SIMULATOR/build/CMakeFiles $(CMAKE_PROGRESS_18)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/kevin/Development/git/SIMULATOR/build/CMakeFiles $(CMAKE_PROGRESS_18)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/SIMULATOR.dir/src/utils/Quaternion/Quaternion.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/SIMULATOR.dir/src/utils/Quaternion/Quaternion.cpp.o -c /home/kevin/Development/SIMULATOR/SIMULATOR/src/utils/Quaternion/Quaternion.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/SIMULATOR.dir/src/utils/Quaternion/Quaternion.cpp.o -c /home/kevin/Development/git/SIMULATOR/src/utils/Quaternion/Quaternion.cpp
 
 CMakeFiles/SIMULATOR.dir/src/utils/Quaternion/Quaternion.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/SIMULATOR.dir/src/utils/Quaternion/Quaternion.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/kevin/Development/SIMULATOR/SIMULATOR/src/utils/Quaternion/Quaternion.cpp > CMakeFiles/SIMULATOR.dir/src/utils/Quaternion/Quaternion.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/kevin/Development/git/SIMULATOR/src/utils/Quaternion/Quaternion.cpp > CMakeFiles/SIMULATOR.dir/src/utils/Quaternion/Quaternion.cpp.i
 
 CMakeFiles/SIMULATOR.dir/src/utils/Quaternion/Quaternion.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/SIMULATOR.dir/src/utils/Quaternion/Quaternion.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/kevin/Development/SIMULATOR/SIMULATOR/src/utils/Quaternion/Quaternion.cpp -o CMakeFiles/SIMULATOR.dir/src/utils/Quaternion/Quaternion.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/kevin/Development/git/SIMULATOR/src/utils/Quaternion/Quaternion.cpp -o CMakeFiles/SIMULATOR.dir/src/utils/Quaternion/Quaternion.cpp.s
 
 CMakeFiles/SIMULATOR.dir/src/utils/Quaternion/Quaternion.cpp.o.requires:
 .PHONY : CMakeFiles/SIMULATOR.dir/src/utils/Quaternion/Quaternion.cpp.o.requires
@@ -468,17 +465,17 @@ CMakeFiles/SIMULATOR.dir/src/utils/Quaternion/Quaternion.cpp.o.provides.build: C
 
 CMakeFiles/SIMULATOR.dir/src/utils/MVG/MVG.cpp.o: CMakeFiles/SIMULATOR.dir/flags.make
 CMakeFiles/SIMULATOR.dir/src/utils/MVG/MVG.cpp.o: ../src/utils/MVG/MVG.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/kevin/Development/SIMULATOR/SIMULATOR/build/CMakeFiles $(CMAKE_PROGRESS_19)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/kevin/Development/git/SIMULATOR/build/CMakeFiles $(CMAKE_PROGRESS_19)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/SIMULATOR.dir/src/utils/MVG/MVG.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/SIMULATOR.dir/src/utils/MVG/MVG.cpp.o -c /home/kevin/Development/SIMULATOR/SIMULATOR/src/utils/MVG/MVG.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/SIMULATOR.dir/src/utils/MVG/MVG.cpp.o -c /home/kevin/Development/git/SIMULATOR/src/utils/MVG/MVG.cpp
 
 CMakeFiles/SIMULATOR.dir/src/utils/MVG/MVG.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/SIMULATOR.dir/src/utils/MVG/MVG.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/kevin/Development/SIMULATOR/SIMULATOR/src/utils/MVG/MVG.cpp > CMakeFiles/SIMULATOR.dir/src/utils/MVG/MVG.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/kevin/Development/git/SIMULATOR/src/utils/MVG/MVG.cpp > CMakeFiles/SIMULATOR.dir/src/utils/MVG/MVG.cpp.i
 
 CMakeFiles/SIMULATOR.dir/src/utils/MVG/MVG.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/SIMULATOR.dir/src/utils/MVG/MVG.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/kevin/Development/SIMULATOR/SIMULATOR/src/utils/MVG/MVG.cpp -o CMakeFiles/SIMULATOR.dir/src/utils/MVG/MVG.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/kevin/Development/git/SIMULATOR/src/utils/MVG/MVG.cpp -o CMakeFiles/SIMULATOR.dir/src/utils/MVG/MVG.cpp.s
 
 CMakeFiles/SIMULATOR.dir/src/utils/MVG/MVG.cpp.o.requires:
 .PHONY : CMakeFiles/SIMULATOR.dir/src/utils/MVG/MVG.cpp.o.requires
@@ -491,17 +488,17 @@ CMakeFiles/SIMULATOR.dir/src/utils/MVG/MVG.cpp.o.provides.build: CMakeFiles/SIMU
 
 CMakeFiles/SIMULATOR.dir/src/common/objloader.cpp.o: CMakeFiles/SIMULATOR.dir/flags.make
 CMakeFiles/SIMULATOR.dir/src/common/objloader.cpp.o: ../src/common/objloader.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/kevin/Development/SIMULATOR/SIMULATOR/build/CMakeFiles $(CMAKE_PROGRESS_20)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/kevin/Development/git/SIMULATOR/build/CMakeFiles $(CMAKE_PROGRESS_20)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/SIMULATOR.dir/src/common/objloader.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/SIMULATOR.dir/src/common/objloader.cpp.o -c /home/kevin/Development/SIMULATOR/SIMULATOR/src/common/objloader.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/SIMULATOR.dir/src/common/objloader.cpp.o -c /home/kevin/Development/git/SIMULATOR/src/common/objloader.cpp
 
 CMakeFiles/SIMULATOR.dir/src/common/objloader.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/SIMULATOR.dir/src/common/objloader.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/kevin/Development/SIMULATOR/SIMULATOR/src/common/objloader.cpp > CMakeFiles/SIMULATOR.dir/src/common/objloader.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/kevin/Development/git/SIMULATOR/src/common/objloader.cpp > CMakeFiles/SIMULATOR.dir/src/common/objloader.cpp.i
 
 CMakeFiles/SIMULATOR.dir/src/common/objloader.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/SIMULATOR.dir/src/common/objloader.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/kevin/Development/SIMULATOR/SIMULATOR/src/common/objloader.cpp -o CMakeFiles/SIMULATOR.dir/src/common/objloader.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/kevin/Development/git/SIMULATOR/src/common/objloader.cpp -o CMakeFiles/SIMULATOR.dir/src/common/objloader.cpp.s
 
 CMakeFiles/SIMULATOR.dir/src/common/objloader.cpp.o.requires:
 .PHONY : CMakeFiles/SIMULATOR.dir/src/common/objloader.cpp.o.requires
@@ -514,17 +511,17 @@ CMakeFiles/SIMULATOR.dir/src/common/objloader.cpp.o.provides.build: CMakeFiles/S
 
 CMakeFiles/SIMULATOR.dir/src/physics/IConstraint.cpp.o: CMakeFiles/SIMULATOR.dir/flags.make
 CMakeFiles/SIMULATOR.dir/src/physics/IConstraint.cpp.o: ../src/physics/IConstraint.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/kevin/Development/SIMULATOR/SIMULATOR/build/CMakeFiles $(CMAKE_PROGRESS_21)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/kevin/Development/git/SIMULATOR/build/CMakeFiles $(CMAKE_PROGRESS_21)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/SIMULATOR.dir/src/physics/IConstraint.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/SIMULATOR.dir/src/physics/IConstraint.cpp.o -c /home/kevin/Development/SIMULATOR/SIMULATOR/src/physics/IConstraint.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/SIMULATOR.dir/src/physics/IConstraint.cpp.o -c /home/kevin/Development/git/SIMULATOR/src/physics/IConstraint.cpp
 
 CMakeFiles/SIMULATOR.dir/src/physics/IConstraint.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/SIMULATOR.dir/src/physics/IConstraint.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/kevin/Development/SIMULATOR/SIMULATOR/src/physics/IConstraint.cpp > CMakeFiles/SIMULATOR.dir/src/physics/IConstraint.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/kevin/Development/git/SIMULATOR/src/physics/IConstraint.cpp > CMakeFiles/SIMULATOR.dir/src/physics/IConstraint.cpp.i
 
 CMakeFiles/SIMULATOR.dir/src/physics/IConstraint.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/SIMULATOR.dir/src/physics/IConstraint.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/kevin/Development/SIMULATOR/SIMULATOR/src/physics/IConstraint.cpp -o CMakeFiles/SIMULATOR.dir/src/physics/IConstraint.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/kevin/Development/git/SIMULATOR/src/physics/IConstraint.cpp -o CMakeFiles/SIMULATOR.dir/src/physics/IConstraint.cpp.s
 
 CMakeFiles/SIMULATOR.dir/src/physics/IConstraint.cpp.o.requires:
 .PHONY : CMakeFiles/SIMULATOR.dir/src/physics/IConstraint.cpp.o.requires
@@ -537,17 +534,17 @@ CMakeFiles/SIMULATOR.dir/src/physics/IConstraint.cpp.o.provides.build: CMakeFile
 
 CMakeFiles/SIMULATOR.dir/src/physics/IForceEffect.cpp.o: CMakeFiles/SIMULATOR.dir/flags.make
 CMakeFiles/SIMULATOR.dir/src/physics/IForceEffect.cpp.o: ../src/physics/IForceEffect.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/kevin/Development/SIMULATOR/SIMULATOR/build/CMakeFiles $(CMAKE_PROGRESS_22)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/kevin/Development/git/SIMULATOR/build/CMakeFiles $(CMAKE_PROGRESS_22)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/SIMULATOR.dir/src/physics/IForceEffect.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/SIMULATOR.dir/src/physics/IForceEffect.cpp.o -c /home/kevin/Development/SIMULATOR/SIMULATOR/src/physics/IForceEffect.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/SIMULATOR.dir/src/physics/IForceEffect.cpp.o -c /home/kevin/Development/git/SIMULATOR/src/physics/IForceEffect.cpp
 
 CMakeFiles/SIMULATOR.dir/src/physics/IForceEffect.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/SIMULATOR.dir/src/physics/IForceEffect.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/kevin/Development/SIMULATOR/SIMULATOR/src/physics/IForceEffect.cpp > CMakeFiles/SIMULATOR.dir/src/physics/IForceEffect.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/kevin/Development/git/SIMULATOR/src/physics/IForceEffect.cpp > CMakeFiles/SIMULATOR.dir/src/physics/IForceEffect.cpp.i
 
 CMakeFiles/SIMULATOR.dir/src/physics/IForceEffect.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/SIMULATOR.dir/src/physics/IForceEffect.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/kevin/Development/SIMULATOR/SIMULATOR/src/physics/IForceEffect.cpp -o CMakeFiles/SIMULATOR.dir/src/physics/IForceEffect.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/kevin/Development/git/SIMULATOR/src/physics/IForceEffect.cpp -o CMakeFiles/SIMULATOR.dir/src/physics/IForceEffect.cpp.s
 
 CMakeFiles/SIMULATOR.dir/src/physics/IForceEffect.cpp.o.requires:
 .PHONY : CMakeFiles/SIMULATOR.dir/src/physics/IForceEffect.cpp.o.requires
@@ -560,17 +557,17 @@ CMakeFiles/SIMULATOR.dir/src/physics/IForceEffect.cpp.o.provides.build: CMakeFil
 
 CMakeFiles/SIMULATOR.dir/src/physics/IMoveable.cpp.o: CMakeFiles/SIMULATOR.dir/flags.make
 CMakeFiles/SIMULATOR.dir/src/physics/IMoveable.cpp.o: ../src/physics/IMoveable.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/kevin/Development/SIMULATOR/SIMULATOR/build/CMakeFiles $(CMAKE_PROGRESS_23)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/kevin/Development/git/SIMULATOR/build/CMakeFiles $(CMAKE_PROGRESS_23)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/SIMULATOR.dir/src/physics/IMoveable.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/SIMULATOR.dir/src/physics/IMoveable.cpp.o -c /home/kevin/Development/SIMULATOR/SIMULATOR/src/physics/IMoveable.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/SIMULATOR.dir/src/physics/IMoveable.cpp.o -c /home/kevin/Development/git/SIMULATOR/src/physics/IMoveable.cpp
 
 CMakeFiles/SIMULATOR.dir/src/physics/IMoveable.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/SIMULATOR.dir/src/physics/IMoveable.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/kevin/Development/SIMULATOR/SIMULATOR/src/physics/IMoveable.cpp > CMakeFiles/SIMULATOR.dir/src/physics/IMoveable.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/kevin/Development/git/SIMULATOR/src/physics/IMoveable.cpp > CMakeFiles/SIMULATOR.dir/src/physics/IMoveable.cpp.i
 
 CMakeFiles/SIMULATOR.dir/src/physics/IMoveable.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/SIMULATOR.dir/src/physics/IMoveable.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/kevin/Development/SIMULATOR/SIMULATOR/src/physics/IMoveable.cpp -o CMakeFiles/SIMULATOR.dir/src/physics/IMoveable.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/kevin/Development/git/SIMULATOR/src/physics/IMoveable.cpp -o CMakeFiles/SIMULATOR.dir/src/physics/IMoveable.cpp.s
 
 CMakeFiles/SIMULATOR.dir/src/physics/IMoveable.cpp.o.requires:
 .PHONY : CMakeFiles/SIMULATOR.dir/src/physics/IMoveable.cpp.o.requires
@@ -583,17 +580,17 @@ CMakeFiles/SIMULATOR.dir/src/physics/IMoveable.cpp.o.provides.build: CMakeFiles/
 
 CMakeFiles/SIMULATOR.dir/src/physics/IShape.cpp.o: CMakeFiles/SIMULATOR.dir/flags.make
 CMakeFiles/SIMULATOR.dir/src/physics/IShape.cpp.o: ../src/physics/IShape.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/kevin/Development/SIMULATOR/SIMULATOR/build/CMakeFiles $(CMAKE_PROGRESS_24)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/kevin/Development/git/SIMULATOR/build/CMakeFiles $(CMAKE_PROGRESS_24)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/SIMULATOR.dir/src/physics/IShape.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/SIMULATOR.dir/src/physics/IShape.cpp.o -c /home/kevin/Development/SIMULATOR/SIMULATOR/src/physics/IShape.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/SIMULATOR.dir/src/physics/IShape.cpp.o -c /home/kevin/Development/git/SIMULATOR/src/physics/IShape.cpp
 
 CMakeFiles/SIMULATOR.dir/src/physics/IShape.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/SIMULATOR.dir/src/physics/IShape.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/kevin/Development/SIMULATOR/SIMULATOR/src/physics/IShape.cpp > CMakeFiles/SIMULATOR.dir/src/physics/IShape.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/kevin/Development/git/SIMULATOR/src/physics/IShape.cpp > CMakeFiles/SIMULATOR.dir/src/physics/IShape.cpp.i
 
 CMakeFiles/SIMULATOR.dir/src/physics/IShape.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/SIMULATOR.dir/src/physics/IShape.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/kevin/Development/SIMULATOR/SIMULATOR/src/physics/IShape.cpp -o CMakeFiles/SIMULATOR.dir/src/physics/IShape.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/kevin/Development/git/SIMULATOR/src/physics/IShape.cpp -o CMakeFiles/SIMULATOR.dir/src/physics/IShape.cpp.s
 
 CMakeFiles/SIMULATOR.dir/src/physics/IShape.cpp.o.requires:
 .PHONY : CMakeFiles/SIMULATOR.dir/src/physics/IShape.cpp.o.requires
@@ -606,17 +603,17 @@ CMakeFiles/SIMULATOR.dir/src/physics/IShape.cpp.o.provides.build: CMakeFiles/SIM
 
 CMakeFiles/SIMULATOR.dir/src/physics/ISimulationObject.cpp.o: CMakeFiles/SIMULATOR.dir/flags.make
 CMakeFiles/SIMULATOR.dir/src/physics/ISimulationObject.cpp.o: ../src/physics/ISimulationObject.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/kevin/Development/SIMULATOR/SIMULATOR/build/CMakeFiles $(CMAKE_PROGRESS_25)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/kevin/Development/git/SIMULATOR/build/CMakeFiles $(CMAKE_PROGRESS_25)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/SIMULATOR.dir/src/physics/ISimulationObject.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/SIMULATOR.dir/src/physics/ISimulationObject.cpp.o -c /home/kevin/Development/SIMULATOR/SIMULATOR/src/physics/ISimulationObject.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/SIMULATOR.dir/src/physics/ISimulationObject.cpp.o -c /home/kevin/Development/git/SIMULATOR/src/physics/ISimulationObject.cpp
 
 CMakeFiles/SIMULATOR.dir/src/physics/ISimulationObject.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/SIMULATOR.dir/src/physics/ISimulationObject.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/kevin/Development/SIMULATOR/SIMULATOR/src/physics/ISimulationObject.cpp > CMakeFiles/SIMULATOR.dir/src/physics/ISimulationObject.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/kevin/Development/git/SIMULATOR/src/physics/ISimulationObject.cpp > CMakeFiles/SIMULATOR.dir/src/physics/ISimulationObject.cpp.i
 
 CMakeFiles/SIMULATOR.dir/src/physics/ISimulationObject.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/SIMULATOR.dir/src/physics/ISimulationObject.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/kevin/Development/SIMULATOR/SIMULATOR/src/physics/ISimulationObject.cpp -o CMakeFiles/SIMULATOR.dir/src/physics/ISimulationObject.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/kevin/Development/git/SIMULATOR/src/physics/ISimulationObject.cpp -o CMakeFiles/SIMULATOR.dir/src/physics/ISimulationObject.cpp.s
 
 CMakeFiles/SIMULATOR.dir/src/physics/ISimulationObject.cpp.o.requires:
 .PHONY : CMakeFiles/SIMULATOR.dir/src/physics/ISimulationObject.cpp.o.requires
@@ -629,17 +626,17 @@ CMakeFiles/SIMULATOR.dir/src/physics/ISimulationObject.cpp.o.provides.build: CMa
 
 CMakeFiles/SIMULATOR.dir/src/physics/RigidBody.cpp.o: CMakeFiles/SIMULATOR.dir/flags.make
 CMakeFiles/SIMULATOR.dir/src/physics/RigidBody.cpp.o: ../src/physics/RigidBody.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/kevin/Development/SIMULATOR/SIMULATOR/build/CMakeFiles $(CMAKE_PROGRESS_26)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/kevin/Development/git/SIMULATOR/build/CMakeFiles $(CMAKE_PROGRESS_26)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/SIMULATOR.dir/src/physics/RigidBody.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/SIMULATOR.dir/src/physics/RigidBody.cpp.o -c /home/kevin/Development/SIMULATOR/SIMULATOR/src/physics/RigidBody.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/SIMULATOR.dir/src/physics/RigidBody.cpp.o -c /home/kevin/Development/git/SIMULATOR/src/physics/RigidBody.cpp
 
 CMakeFiles/SIMULATOR.dir/src/physics/RigidBody.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/SIMULATOR.dir/src/physics/RigidBody.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/kevin/Development/SIMULATOR/SIMULATOR/src/physics/RigidBody.cpp > CMakeFiles/SIMULATOR.dir/src/physics/RigidBody.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/kevin/Development/git/SIMULATOR/src/physics/RigidBody.cpp > CMakeFiles/SIMULATOR.dir/src/physics/RigidBody.cpp.i
 
 CMakeFiles/SIMULATOR.dir/src/physics/RigidBody.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/SIMULATOR.dir/src/physics/RigidBody.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/kevin/Development/SIMULATOR/SIMULATOR/src/physics/RigidBody.cpp -o CMakeFiles/SIMULATOR.dir/src/physics/RigidBody.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/kevin/Development/git/SIMULATOR/src/physics/RigidBody.cpp -o CMakeFiles/SIMULATOR.dir/src/physics/RigidBody.cpp.s
 
 CMakeFiles/SIMULATOR.dir/src/physics/RigidBody.cpp.o.requires:
 .PHONY : CMakeFiles/SIMULATOR.dir/src/physics/RigidBody.cpp.o.requires
@@ -652,17 +649,17 @@ CMakeFiles/SIMULATOR.dir/src/physics/RigidBody.cpp.o.provides.build: CMakeFiles/
 
 CMakeFiles/SIMULATOR.dir/src/physics/Simulation.cpp.o: CMakeFiles/SIMULATOR.dir/flags.make
 CMakeFiles/SIMULATOR.dir/src/physics/Simulation.cpp.o: ../src/physics/Simulation.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/kevin/Development/SIMULATOR/SIMULATOR/build/CMakeFiles $(CMAKE_PROGRESS_27)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/kevin/Development/git/SIMULATOR/build/CMakeFiles $(CMAKE_PROGRESS_27)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/SIMULATOR.dir/src/physics/Simulation.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/SIMULATOR.dir/src/physics/Simulation.cpp.o -c /home/kevin/Development/SIMULATOR/SIMULATOR/src/physics/Simulation.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/SIMULATOR.dir/src/physics/Simulation.cpp.o -c /home/kevin/Development/git/SIMULATOR/src/physics/Simulation.cpp
 
 CMakeFiles/SIMULATOR.dir/src/physics/Simulation.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/SIMULATOR.dir/src/physics/Simulation.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/kevin/Development/SIMULATOR/SIMULATOR/src/physics/Simulation.cpp > CMakeFiles/SIMULATOR.dir/src/physics/Simulation.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/kevin/Development/git/SIMULATOR/src/physics/Simulation.cpp > CMakeFiles/SIMULATOR.dir/src/physics/Simulation.cpp.i
 
 CMakeFiles/SIMULATOR.dir/src/physics/Simulation.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/SIMULATOR.dir/src/physics/Simulation.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/kevin/Development/SIMULATOR/SIMULATOR/src/physics/Simulation.cpp -o CMakeFiles/SIMULATOR.dir/src/physics/Simulation.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/kevin/Development/git/SIMULATOR/src/physics/Simulation.cpp -o CMakeFiles/SIMULATOR.dir/src/physics/Simulation.cpp.s
 
 CMakeFiles/SIMULATOR.dir/src/physics/Simulation.cpp.o.requires:
 .PHONY : CMakeFiles/SIMULATOR.dir/src/physics/Simulation.cpp.o.requires
@@ -675,17 +672,17 @@ CMakeFiles/SIMULATOR.dir/src/physics/Simulation.cpp.o.provides.build: CMakeFiles
 
 CMakeFiles/SIMULATOR.dir/src/physics/eval/IBroadPhaseStrategy.cpp.o: CMakeFiles/SIMULATOR.dir/flags.make
 CMakeFiles/SIMULATOR.dir/src/physics/eval/IBroadPhaseStrategy.cpp.o: ../src/physics/eval/IBroadPhaseStrategy.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/kevin/Development/SIMULATOR/SIMULATOR/build/CMakeFiles $(CMAKE_PROGRESS_28)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/kevin/Development/git/SIMULATOR/build/CMakeFiles $(CMAKE_PROGRESS_28)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/SIMULATOR.dir/src/physics/eval/IBroadPhaseStrategy.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/SIMULATOR.dir/src/physics/eval/IBroadPhaseStrategy.cpp.o -c /home/kevin/Development/SIMULATOR/SIMULATOR/src/physics/eval/IBroadPhaseStrategy.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/SIMULATOR.dir/src/physics/eval/IBroadPhaseStrategy.cpp.o -c /home/kevin/Development/git/SIMULATOR/src/physics/eval/IBroadPhaseStrategy.cpp
 
 CMakeFiles/SIMULATOR.dir/src/physics/eval/IBroadPhaseStrategy.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/SIMULATOR.dir/src/physics/eval/IBroadPhaseStrategy.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/kevin/Development/SIMULATOR/SIMULATOR/src/physics/eval/IBroadPhaseStrategy.cpp > CMakeFiles/SIMULATOR.dir/src/physics/eval/IBroadPhaseStrategy.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/kevin/Development/git/SIMULATOR/src/physics/eval/IBroadPhaseStrategy.cpp > CMakeFiles/SIMULATOR.dir/src/physics/eval/IBroadPhaseStrategy.cpp.i
 
 CMakeFiles/SIMULATOR.dir/src/physics/eval/IBroadPhaseStrategy.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/SIMULATOR.dir/src/physics/eval/IBroadPhaseStrategy.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/kevin/Development/SIMULATOR/SIMULATOR/src/physics/eval/IBroadPhaseStrategy.cpp -o CMakeFiles/SIMULATOR.dir/src/physics/eval/IBroadPhaseStrategy.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/kevin/Development/git/SIMULATOR/src/physics/eval/IBroadPhaseStrategy.cpp -o CMakeFiles/SIMULATOR.dir/src/physics/eval/IBroadPhaseStrategy.cpp.s
 
 CMakeFiles/SIMULATOR.dir/src/physics/eval/IBroadPhaseStrategy.cpp.o.requires:
 .PHONY : CMakeFiles/SIMULATOR.dir/src/physics/eval/IBroadPhaseStrategy.cpp.o.requires
@@ -698,17 +695,17 @@ CMakeFiles/SIMULATOR.dir/src/physics/eval/IBroadPhaseStrategy.cpp.o.provides.bui
 
 CMakeFiles/SIMULATOR.dir/src/physics/eval/CollisionDetector.cpp.o: CMakeFiles/SIMULATOR.dir/flags.make
 CMakeFiles/SIMULATOR.dir/src/physics/eval/CollisionDetector.cpp.o: ../src/physics/eval/CollisionDetector.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/kevin/Development/SIMULATOR/SIMULATOR/build/CMakeFiles $(CMAKE_PROGRESS_29)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/kevin/Development/git/SIMULATOR/build/CMakeFiles $(CMAKE_PROGRESS_29)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/SIMULATOR.dir/src/physics/eval/CollisionDetector.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/SIMULATOR.dir/src/physics/eval/CollisionDetector.cpp.o -c /home/kevin/Development/SIMULATOR/SIMULATOR/src/physics/eval/CollisionDetector.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/SIMULATOR.dir/src/physics/eval/CollisionDetector.cpp.o -c /home/kevin/Development/git/SIMULATOR/src/physics/eval/CollisionDetector.cpp
 
 CMakeFiles/SIMULATOR.dir/src/physics/eval/CollisionDetector.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/SIMULATOR.dir/src/physics/eval/CollisionDetector.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/kevin/Development/SIMULATOR/SIMULATOR/src/physics/eval/CollisionDetector.cpp > CMakeFiles/SIMULATOR.dir/src/physics/eval/CollisionDetector.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/kevin/Development/git/SIMULATOR/src/physics/eval/CollisionDetector.cpp > CMakeFiles/SIMULATOR.dir/src/physics/eval/CollisionDetector.cpp.i
 
 CMakeFiles/SIMULATOR.dir/src/physics/eval/CollisionDetector.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/SIMULATOR.dir/src/physics/eval/CollisionDetector.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/kevin/Development/SIMULATOR/SIMULATOR/src/physics/eval/CollisionDetector.cpp -o CMakeFiles/SIMULATOR.dir/src/physics/eval/CollisionDetector.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/kevin/Development/git/SIMULATOR/src/physics/eval/CollisionDetector.cpp -o CMakeFiles/SIMULATOR.dir/src/physics/eval/CollisionDetector.cpp.s
 
 CMakeFiles/SIMULATOR.dir/src/physics/eval/CollisionDetector.cpp.o.requires:
 .PHONY : CMakeFiles/SIMULATOR.dir/src/physics/eval/CollisionDetector.cpp.o.requires
@@ -721,17 +718,17 @@ CMakeFiles/SIMULATOR.dir/src/physics/eval/CollisionDetector.cpp.o.provides.build
 
 CMakeFiles/SIMULATOR.dir/src/physics/eval/IUpdater.cpp.o: CMakeFiles/SIMULATOR.dir/flags.make
 CMakeFiles/SIMULATOR.dir/src/physics/eval/IUpdater.cpp.o: ../src/physics/eval/IUpdater.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/kevin/Development/SIMULATOR/SIMULATOR/build/CMakeFiles $(CMAKE_PROGRESS_30)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/kevin/Development/git/SIMULATOR/build/CMakeFiles $(CMAKE_PROGRESS_30)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/SIMULATOR.dir/src/physics/eval/IUpdater.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/SIMULATOR.dir/src/physics/eval/IUpdater.cpp.o -c /home/kevin/Development/SIMULATOR/SIMULATOR/src/physics/eval/IUpdater.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/SIMULATOR.dir/src/physics/eval/IUpdater.cpp.o -c /home/kevin/Development/git/SIMULATOR/src/physics/eval/IUpdater.cpp
 
 CMakeFiles/SIMULATOR.dir/src/physics/eval/IUpdater.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/SIMULATOR.dir/src/physics/eval/IUpdater.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/kevin/Development/SIMULATOR/SIMULATOR/src/physics/eval/IUpdater.cpp > CMakeFiles/SIMULATOR.dir/src/physics/eval/IUpdater.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/kevin/Development/git/SIMULATOR/src/physics/eval/IUpdater.cpp > CMakeFiles/SIMULATOR.dir/src/physics/eval/IUpdater.cpp.i
 
 CMakeFiles/SIMULATOR.dir/src/physics/eval/IUpdater.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/SIMULATOR.dir/src/physics/eval/IUpdater.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/kevin/Development/SIMULATOR/SIMULATOR/src/physics/eval/IUpdater.cpp -o CMakeFiles/SIMULATOR.dir/src/physics/eval/IUpdater.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/kevin/Development/git/SIMULATOR/src/physics/eval/IUpdater.cpp -o CMakeFiles/SIMULATOR.dir/src/physics/eval/IUpdater.cpp.s
 
 CMakeFiles/SIMULATOR.dir/src/physics/eval/IUpdater.cpp.o.requires:
 .PHONY : CMakeFiles/SIMULATOR.dir/src/physics/eval/IUpdater.cpp.o.requires
@@ -744,17 +741,17 @@ CMakeFiles/SIMULATOR.dir/src/physics/eval/IUpdater.cpp.o.provides.build: CMakeFi
 
 CMakeFiles/SIMULATOR.dir/src/physics/eval/IMidNarrowPhaseStrategy.cpp.o: CMakeFiles/SIMULATOR.dir/flags.make
 CMakeFiles/SIMULATOR.dir/src/physics/eval/IMidNarrowPhaseStrategy.cpp.o: ../src/physics/eval/IMidNarrowPhaseStrategy.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/kevin/Development/SIMULATOR/SIMULATOR/build/CMakeFiles $(CMAKE_PROGRESS_31)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/kevin/Development/git/SIMULATOR/build/CMakeFiles $(CMAKE_PROGRESS_31)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/SIMULATOR.dir/src/physics/eval/IMidNarrowPhaseStrategy.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/SIMULATOR.dir/src/physics/eval/IMidNarrowPhaseStrategy.cpp.o -c /home/kevin/Development/SIMULATOR/SIMULATOR/src/physics/eval/IMidNarrowPhaseStrategy.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/SIMULATOR.dir/src/physics/eval/IMidNarrowPhaseStrategy.cpp.o -c /home/kevin/Development/git/SIMULATOR/src/physics/eval/IMidNarrowPhaseStrategy.cpp
 
 CMakeFiles/SIMULATOR.dir/src/physics/eval/IMidNarrowPhaseStrategy.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/SIMULATOR.dir/src/physics/eval/IMidNarrowPhaseStrategy.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/kevin/Development/SIMULATOR/SIMULATOR/src/physics/eval/IMidNarrowPhaseStrategy.cpp > CMakeFiles/SIMULATOR.dir/src/physics/eval/IMidNarrowPhaseStrategy.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/kevin/Development/git/SIMULATOR/src/physics/eval/IMidNarrowPhaseStrategy.cpp > CMakeFiles/SIMULATOR.dir/src/physics/eval/IMidNarrowPhaseStrategy.cpp.i
 
 CMakeFiles/SIMULATOR.dir/src/physics/eval/IMidNarrowPhaseStrategy.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/SIMULATOR.dir/src/physics/eval/IMidNarrowPhaseStrategy.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/kevin/Development/SIMULATOR/SIMULATOR/src/physics/eval/IMidNarrowPhaseStrategy.cpp -o CMakeFiles/SIMULATOR.dir/src/physics/eval/IMidNarrowPhaseStrategy.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/kevin/Development/git/SIMULATOR/src/physics/eval/IMidNarrowPhaseStrategy.cpp -o CMakeFiles/SIMULATOR.dir/src/physics/eval/IMidNarrowPhaseStrategy.cpp.s
 
 CMakeFiles/SIMULATOR.dir/src/physics/eval/IMidNarrowPhaseStrategy.cpp.o.requires:
 .PHONY : CMakeFiles/SIMULATOR.dir/src/physics/eval/IMidNarrowPhaseStrategy.cpp.o.requires
@@ -767,17 +764,17 @@ CMakeFiles/SIMULATOR.dir/src/physics/eval/IMidNarrowPhaseStrategy.cpp.o.provides
 
 CMakeFiles/SIMULATOR.dir/src/physics/eval/IIntegrator.cpp.o: CMakeFiles/SIMULATOR.dir/flags.make
 CMakeFiles/SIMULATOR.dir/src/physics/eval/IIntegrator.cpp.o: ../src/physics/eval/IIntegrator.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/kevin/Development/SIMULATOR/SIMULATOR/build/CMakeFiles $(CMAKE_PROGRESS_32)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/kevin/Development/git/SIMULATOR/build/CMakeFiles $(CMAKE_PROGRESS_32)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/SIMULATOR.dir/src/physics/eval/IIntegrator.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/SIMULATOR.dir/src/physics/eval/IIntegrator.cpp.o -c /home/kevin/Development/SIMULATOR/SIMULATOR/src/physics/eval/IIntegrator.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/SIMULATOR.dir/src/physics/eval/IIntegrator.cpp.o -c /home/kevin/Development/git/SIMULATOR/src/physics/eval/IIntegrator.cpp
 
 CMakeFiles/SIMULATOR.dir/src/physics/eval/IIntegrator.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/SIMULATOR.dir/src/physics/eval/IIntegrator.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/kevin/Development/SIMULATOR/SIMULATOR/src/physics/eval/IIntegrator.cpp > CMakeFiles/SIMULATOR.dir/src/physics/eval/IIntegrator.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/kevin/Development/git/SIMULATOR/src/physics/eval/IIntegrator.cpp > CMakeFiles/SIMULATOR.dir/src/physics/eval/IIntegrator.cpp.i
 
 CMakeFiles/SIMULATOR.dir/src/physics/eval/IIntegrator.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/SIMULATOR.dir/src/physics/eval/IIntegrator.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/kevin/Development/SIMULATOR/SIMULATOR/src/physics/eval/IIntegrator.cpp -o CMakeFiles/SIMULATOR.dir/src/physics/eval/IIntegrator.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/kevin/Development/git/SIMULATOR/src/physics/eval/IIntegrator.cpp -o CMakeFiles/SIMULATOR.dir/src/physics/eval/IIntegrator.cpp.s
 
 CMakeFiles/SIMULATOR.dir/src/physics/eval/IIntegrator.cpp.o.requires:
 .PHONY : CMakeFiles/SIMULATOR.dir/src/physics/eval/IIntegrator.cpp.o.requires
@@ -790,17 +787,17 @@ CMakeFiles/SIMULATOR.dir/src/physics/eval/IIntegrator.cpp.o.provides.build: CMak
 
 CMakeFiles/SIMULATOR.dir/src/physics/eval/IContactGenerator.cpp.o: CMakeFiles/SIMULATOR.dir/flags.make
 CMakeFiles/SIMULATOR.dir/src/physics/eval/IContactGenerator.cpp.o: ../src/physics/eval/IContactGenerator.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/kevin/Development/SIMULATOR/SIMULATOR/build/CMakeFiles $(CMAKE_PROGRESS_33)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/kevin/Development/git/SIMULATOR/build/CMakeFiles $(CMAKE_PROGRESS_33)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/SIMULATOR.dir/src/physics/eval/IContactGenerator.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/SIMULATOR.dir/src/physics/eval/IContactGenerator.cpp.o -c /home/kevin/Development/SIMULATOR/SIMULATOR/src/physics/eval/IContactGenerator.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/SIMULATOR.dir/src/physics/eval/IContactGenerator.cpp.o -c /home/kevin/Development/git/SIMULATOR/src/physics/eval/IContactGenerator.cpp
 
 CMakeFiles/SIMULATOR.dir/src/physics/eval/IContactGenerator.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/SIMULATOR.dir/src/physics/eval/IContactGenerator.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/kevin/Development/SIMULATOR/SIMULATOR/src/physics/eval/IContactGenerator.cpp > CMakeFiles/SIMULATOR.dir/src/physics/eval/IContactGenerator.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/kevin/Development/git/SIMULATOR/src/physics/eval/IContactGenerator.cpp > CMakeFiles/SIMULATOR.dir/src/physics/eval/IContactGenerator.cpp.i
 
 CMakeFiles/SIMULATOR.dir/src/physics/eval/IContactGenerator.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/SIMULATOR.dir/src/physics/eval/IContactGenerator.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/kevin/Development/SIMULATOR/SIMULATOR/src/physics/eval/IContactGenerator.cpp -o CMakeFiles/SIMULATOR.dir/src/physics/eval/IContactGenerator.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/kevin/Development/git/SIMULATOR/src/physics/eval/IContactGenerator.cpp -o CMakeFiles/SIMULATOR.dir/src/physics/eval/IContactGenerator.cpp.s
 
 CMakeFiles/SIMULATOR.dir/src/physics/eval/IContactGenerator.cpp.o.requires:
 .PHONY : CMakeFiles/SIMULATOR.dir/src/physics/eval/IContactGenerator.cpp.o.requires
@@ -813,17 +810,17 @@ CMakeFiles/SIMULATOR.dir/src/physics/eval/IContactGenerator.cpp.o.provides.build
 
 CMakeFiles/SIMULATOR.dir/src/physics/eval/IConstraintSolverStrategy.cpp.o: CMakeFiles/SIMULATOR.dir/flags.make
 CMakeFiles/SIMULATOR.dir/src/physics/eval/IConstraintSolverStrategy.cpp.o: ../src/physics/eval/IConstraintSolverStrategy.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/kevin/Development/SIMULATOR/SIMULATOR/build/CMakeFiles $(CMAKE_PROGRESS_34)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/kevin/Development/git/SIMULATOR/build/CMakeFiles $(CMAKE_PROGRESS_34)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/SIMULATOR.dir/src/physics/eval/IConstraintSolverStrategy.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/SIMULATOR.dir/src/physics/eval/IConstraintSolverStrategy.cpp.o -c /home/kevin/Development/SIMULATOR/SIMULATOR/src/physics/eval/IConstraintSolverStrategy.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/SIMULATOR.dir/src/physics/eval/IConstraintSolverStrategy.cpp.o -c /home/kevin/Development/git/SIMULATOR/src/physics/eval/IConstraintSolverStrategy.cpp
 
 CMakeFiles/SIMULATOR.dir/src/physics/eval/IConstraintSolverStrategy.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/SIMULATOR.dir/src/physics/eval/IConstraintSolverStrategy.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/kevin/Development/SIMULATOR/SIMULATOR/src/physics/eval/IConstraintSolverStrategy.cpp > CMakeFiles/SIMULATOR.dir/src/physics/eval/IConstraintSolverStrategy.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/kevin/Development/git/SIMULATOR/src/physics/eval/IConstraintSolverStrategy.cpp > CMakeFiles/SIMULATOR.dir/src/physics/eval/IConstraintSolverStrategy.cpp.i
 
 CMakeFiles/SIMULATOR.dir/src/physics/eval/IConstraintSolverStrategy.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/SIMULATOR.dir/src/physics/eval/IConstraintSolverStrategy.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/kevin/Development/SIMULATOR/SIMULATOR/src/physics/eval/IConstraintSolverStrategy.cpp -o CMakeFiles/SIMULATOR.dir/src/physics/eval/IConstraintSolverStrategy.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/kevin/Development/git/SIMULATOR/src/physics/eval/IConstraintSolverStrategy.cpp -o CMakeFiles/SIMULATOR.dir/src/physics/eval/IConstraintSolverStrategy.cpp.s
 
 CMakeFiles/SIMULATOR.dir/src/physics/eval/IConstraintSolverStrategy.cpp.o.requires:
 .PHONY : CMakeFiles/SIMULATOR.dir/src/physics/eval/IConstraintSolverStrategy.cpp.o.requires
@@ -836,17 +833,17 @@ CMakeFiles/SIMULATOR.dir/src/physics/eval/IConstraintSolverStrategy.cpp.o.provid
 
 CMakeFiles/SIMULATOR.dir/src/physics/eval/Contact.cpp.o: CMakeFiles/SIMULATOR.dir/flags.make
 CMakeFiles/SIMULATOR.dir/src/physics/eval/Contact.cpp.o: ../src/physics/eval/Contact.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/kevin/Development/SIMULATOR/SIMULATOR/build/CMakeFiles $(CMAKE_PROGRESS_35)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/kevin/Development/git/SIMULATOR/build/CMakeFiles $(CMAKE_PROGRESS_35)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/SIMULATOR.dir/src/physics/eval/Contact.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/SIMULATOR.dir/src/physics/eval/Contact.cpp.o -c /home/kevin/Development/SIMULATOR/SIMULATOR/src/physics/eval/Contact.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/SIMULATOR.dir/src/physics/eval/Contact.cpp.o -c /home/kevin/Development/git/SIMULATOR/src/physics/eval/Contact.cpp
 
 CMakeFiles/SIMULATOR.dir/src/physics/eval/Contact.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/SIMULATOR.dir/src/physics/eval/Contact.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/kevin/Development/SIMULATOR/SIMULATOR/src/physics/eval/Contact.cpp > CMakeFiles/SIMULATOR.dir/src/physics/eval/Contact.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/kevin/Development/git/SIMULATOR/src/physics/eval/Contact.cpp > CMakeFiles/SIMULATOR.dir/src/physics/eval/Contact.cpp.i
 
 CMakeFiles/SIMULATOR.dir/src/physics/eval/Contact.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/SIMULATOR.dir/src/physics/eval/Contact.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/kevin/Development/SIMULATOR/SIMULATOR/src/physics/eval/Contact.cpp -o CMakeFiles/SIMULATOR.dir/src/physics/eval/Contact.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/kevin/Development/git/SIMULATOR/src/physics/eval/Contact.cpp -o CMakeFiles/SIMULATOR.dir/src/physics/eval/Contact.cpp.s
 
 CMakeFiles/SIMULATOR.dir/src/physics/eval/Contact.cpp.o.requires:
 .PHONY : CMakeFiles/SIMULATOR.dir/src/physics/eval/Contact.cpp.o.requires
@@ -859,17 +856,17 @@ CMakeFiles/SIMULATOR.dir/src/physics/eval/Contact.cpp.o.provides.build: CMakeFil
 
 CMakeFiles/SIMULATOR.dir/src/physics/eval/HelperFunctions.cpp.o: CMakeFiles/SIMULATOR.dir/flags.make
 CMakeFiles/SIMULATOR.dir/src/physics/eval/HelperFunctions.cpp.o: ../src/physics/eval/HelperFunctions.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/kevin/Development/SIMULATOR/SIMULATOR/build/CMakeFiles $(CMAKE_PROGRESS_36)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/kevin/Development/git/SIMULATOR/build/CMakeFiles $(CMAKE_PROGRESS_36)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/SIMULATOR.dir/src/physics/eval/HelperFunctions.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/SIMULATOR.dir/src/physics/eval/HelperFunctions.cpp.o -c /home/kevin/Development/SIMULATOR/SIMULATOR/src/physics/eval/HelperFunctions.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/SIMULATOR.dir/src/physics/eval/HelperFunctions.cpp.o -c /home/kevin/Development/git/SIMULATOR/src/physics/eval/HelperFunctions.cpp
 
 CMakeFiles/SIMULATOR.dir/src/physics/eval/HelperFunctions.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/SIMULATOR.dir/src/physics/eval/HelperFunctions.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/kevin/Development/SIMULATOR/SIMULATOR/src/physics/eval/HelperFunctions.cpp > CMakeFiles/SIMULATOR.dir/src/physics/eval/HelperFunctions.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/kevin/Development/git/SIMULATOR/src/physics/eval/HelperFunctions.cpp > CMakeFiles/SIMULATOR.dir/src/physics/eval/HelperFunctions.cpp.i
 
 CMakeFiles/SIMULATOR.dir/src/physics/eval/HelperFunctions.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/SIMULATOR.dir/src/physics/eval/HelperFunctions.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/kevin/Development/SIMULATOR/SIMULATOR/src/physics/eval/HelperFunctions.cpp -o CMakeFiles/SIMULATOR.dir/src/physics/eval/HelperFunctions.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/kevin/Development/git/SIMULATOR/src/physics/eval/HelperFunctions.cpp -o CMakeFiles/SIMULATOR.dir/src/physics/eval/HelperFunctions.cpp.s
 
 CMakeFiles/SIMULATOR.dir/src/physics/eval/HelperFunctions.cpp.o.requires:
 .PHONY : CMakeFiles/SIMULATOR.dir/src/physics/eval/HelperFunctions.cpp.o.requires
@@ -882,17 +879,17 @@ CMakeFiles/SIMULATOR.dir/src/physics/eval/HelperFunctions.cpp.o.provides.build: 
 
 CMakeFiles/SIMULATOR.dir/src/utils/LCPSolver/LCPSolver.cpp.o: CMakeFiles/SIMULATOR.dir/flags.make
 CMakeFiles/SIMULATOR.dir/src/utils/LCPSolver/LCPSolver.cpp.o: ../src/utils/LCPSolver/LCPSolver.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/kevin/Development/SIMULATOR/SIMULATOR/build/CMakeFiles $(CMAKE_PROGRESS_37)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/kevin/Development/git/SIMULATOR/build/CMakeFiles $(CMAKE_PROGRESS_37)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/SIMULATOR.dir/src/utils/LCPSolver/LCPSolver.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/SIMULATOR.dir/src/utils/LCPSolver/LCPSolver.cpp.o -c /home/kevin/Development/SIMULATOR/SIMULATOR/src/utils/LCPSolver/LCPSolver.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/SIMULATOR.dir/src/utils/LCPSolver/LCPSolver.cpp.o -c /home/kevin/Development/git/SIMULATOR/src/utils/LCPSolver/LCPSolver.cpp
 
 CMakeFiles/SIMULATOR.dir/src/utils/LCPSolver/LCPSolver.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/SIMULATOR.dir/src/utils/LCPSolver/LCPSolver.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/kevin/Development/SIMULATOR/SIMULATOR/src/utils/LCPSolver/LCPSolver.cpp > CMakeFiles/SIMULATOR.dir/src/utils/LCPSolver/LCPSolver.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/kevin/Development/git/SIMULATOR/src/utils/LCPSolver/LCPSolver.cpp > CMakeFiles/SIMULATOR.dir/src/utils/LCPSolver/LCPSolver.cpp.i
 
 CMakeFiles/SIMULATOR.dir/src/utils/LCPSolver/LCPSolver.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/SIMULATOR.dir/src/utils/LCPSolver/LCPSolver.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/kevin/Development/SIMULATOR/SIMULATOR/src/utils/LCPSolver/LCPSolver.cpp -o CMakeFiles/SIMULATOR.dir/src/utils/LCPSolver/LCPSolver.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/kevin/Development/git/SIMULATOR/src/utils/LCPSolver/LCPSolver.cpp -o CMakeFiles/SIMULATOR.dir/src/utils/LCPSolver/LCPSolver.cpp.s
 
 CMakeFiles/SIMULATOR.dir/src/utils/LCPSolver/LCPSolver.cpp.o.requires:
 .PHONY : CMakeFiles/SIMULATOR.dir/src/utils/LCPSolver/LCPSolver.cpp.o.requires
@@ -905,17 +902,17 @@ CMakeFiles/SIMULATOR.dir/src/utils/LCPSolver/LCPSolver.cpp.o.provides.build: CMa
 
 CMakeFiles/SIMULATOR.dir/src/physics/Robot.cpp.o: CMakeFiles/SIMULATOR.dir/flags.make
 CMakeFiles/SIMULATOR.dir/src/physics/Robot.cpp.o: ../src/physics/Robot.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/kevin/Development/SIMULATOR/SIMULATOR/build/CMakeFiles $(CMAKE_PROGRESS_38)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/kevin/Development/git/SIMULATOR/build/CMakeFiles $(CMAKE_PROGRESS_38)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/SIMULATOR.dir/src/physics/Robot.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/SIMULATOR.dir/src/physics/Robot.cpp.o -c /home/kevin/Development/SIMULATOR/SIMULATOR/src/physics/Robot.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/SIMULATOR.dir/src/physics/Robot.cpp.o -c /home/kevin/Development/git/SIMULATOR/src/physics/Robot.cpp
 
 CMakeFiles/SIMULATOR.dir/src/physics/Robot.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/SIMULATOR.dir/src/physics/Robot.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/kevin/Development/SIMULATOR/SIMULATOR/src/physics/Robot.cpp > CMakeFiles/SIMULATOR.dir/src/physics/Robot.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/kevin/Development/git/SIMULATOR/src/physics/Robot.cpp > CMakeFiles/SIMULATOR.dir/src/physics/Robot.cpp.i
 
 CMakeFiles/SIMULATOR.dir/src/physics/Robot.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/SIMULATOR.dir/src/physics/Robot.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/kevin/Development/SIMULATOR/SIMULATOR/src/physics/Robot.cpp -o CMakeFiles/SIMULATOR.dir/src/physics/Robot.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/kevin/Development/git/SIMULATOR/src/physics/Robot.cpp -o CMakeFiles/SIMULATOR.dir/src/physics/Robot.cpp.s
 
 CMakeFiles/SIMULATOR.dir/src/physics/Robot.cpp.o.requires:
 .PHONY : CMakeFiles/SIMULATOR.dir/src/physics/Robot.cpp.o.requires
@@ -928,17 +925,17 @@ CMakeFiles/SIMULATOR.dir/src/physics/Robot.cpp.o.provides.build: CMakeFiles/SIMU
 
 CMakeFiles/SIMULATOR.dir/src/ElementRobot.cpp.o: CMakeFiles/SIMULATOR.dir/flags.make
 CMakeFiles/SIMULATOR.dir/src/ElementRobot.cpp.o: ../src/ElementRobot.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/kevin/Development/SIMULATOR/SIMULATOR/build/CMakeFiles $(CMAKE_PROGRESS_39)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/kevin/Development/git/SIMULATOR/build/CMakeFiles $(CMAKE_PROGRESS_39)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/SIMULATOR.dir/src/ElementRobot.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/SIMULATOR.dir/src/ElementRobot.cpp.o -c /home/kevin/Development/SIMULATOR/SIMULATOR/src/ElementRobot.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/SIMULATOR.dir/src/ElementRobot.cpp.o -c /home/kevin/Development/git/SIMULATOR/src/ElementRobot.cpp
 
 CMakeFiles/SIMULATOR.dir/src/ElementRobot.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/SIMULATOR.dir/src/ElementRobot.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/kevin/Development/SIMULATOR/SIMULATOR/src/ElementRobot.cpp > CMakeFiles/SIMULATOR.dir/src/ElementRobot.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/kevin/Development/git/SIMULATOR/src/ElementRobot.cpp > CMakeFiles/SIMULATOR.dir/src/ElementRobot.cpp.i
 
 CMakeFiles/SIMULATOR.dir/src/ElementRobot.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/SIMULATOR.dir/src/ElementRobot.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/kevin/Development/SIMULATOR/SIMULATOR/src/ElementRobot.cpp -o CMakeFiles/SIMULATOR.dir/src/ElementRobot.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/kevin/Development/git/SIMULATOR/src/ElementRobot.cpp -o CMakeFiles/SIMULATOR.dir/src/ElementRobot.cpp.s
 
 CMakeFiles/SIMULATOR.dir/src/ElementRobot.cpp.o.requires:
 .PHONY : CMakeFiles/SIMULATOR.dir/src/ElementRobot.cpp.o.requires
@@ -951,17 +948,17 @@ CMakeFiles/SIMULATOR.dir/src/ElementRobot.cpp.o.provides.build: CMakeFiles/SIMUL
 
 CMakeFiles/SIMULATOR.dir/src/physics/ROBOTSIM/IRobotHandler.cpp.o: CMakeFiles/SIMULATOR.dir/flags.make
 CMakeFiles/SIMULATOR.dir/src/physics/ROBOTSIM/IRobotHandler.cpp.o: ../src/physics/ROBOTSIM/IRobotHandler.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/kevin/Development/SIMULATOR/SIMULATOR/build/CMakeFiles $(CMAKE_PROGRESS_40)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/kevin/Development/git/SIMULATOR/build/CMakeFiles $(CMAKE_PROGRESS_40)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/SIMULATOR.dir/src/physics/ROBOTSIM/IRobotHandler.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/SIMULATOR.dir/src/physics/ROBOTSIM/IRobotHandler.cpp.o -c /home/kevin/Development/SIMULATOR/SIMULATOR/src/physics/ROBOTSIM/IRobotHandler.cpp
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/SIMULATOR.dir/src/physics/ROBOTSIM/IRobotHandler.cpp.o -c /home/kevin/Development/git/SIMULATOR/src/physics/ROBOTSIM/IRobotHandler.cpp
 
 CMakeFiles/SIMULATOR.dir/src/physics/ROBOTSIM/IRobotHandler.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/SIMULATOR.dir/src/physics/ROBOTSIM/IRobotHandler.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/kevin/Development/SIMULATOR/SIMULATOR/src/physics/ROBOTSIM/IRobotHandler.cpp > CMakeFiles/SIMULATOR.dir/src/physics/ROBOTSIM/IRobotHandler.cpp.i
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/kevin/Development/git/SIMULATOR/src/physics/ROBOTSIM/IRobotHandler.cpp > CMakeFiles/SIMULATOR.dir/src/physics/ROBOTSIM/IRobotHandler.cpp.i
 
 CMakeFiles/SIMULATOR.dir/src/physics/ROBOTSIM/IRobotHandler.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/SIMULATOR.dir/src/physics/ROBOTSIM/IRobotHandler.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/kevin/Development/SIMULATOR/SIMULATOR/src/physics/ROBOTSIM/IRobotHandler.cpp -o CMakeFiles/SIMULATOR.dir/src/physics/ROBOTSIM/IRobotHandler.cpp.s
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/kevin/Development/git/SIMULATOR/src/physics/ROBOTSIM/IRobotHandler.cpp -o CMakeFiles/SIMULATOR.dir/src/physics/ROBOTSIM/IRobotHandler.cpp.s
 
 CMakeFiles/SIMULATOR.dir/src/physics/ROBOTSIM/IRobotHandler.cpp.o.requires:
 .PHONY : CMakeFiles/SIMULATOR.dir/src/physics/ROBOTSIM/IRobotHandler.cpp.o.requires
@@ -1122,6 +1119,6 @@ CMakeFiles/SIMULATOR.dir/clean:
 .PHONY : CMakeFiles/SIMULATOR.dir/clean
 
 CMakeFiles/SIMULATOR.dir/depend:
-	cd /home/kevin/Development/SIMULATOR/SIMULATOR/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/kevin/Development/SIMULATOR/SIMULATOR /home/kevin/Development/SIMULATOR/SIMULATOR /home/kevin/Development/SIMULATOR/SIMULATOR/build /home/kevin/Development/SIMULATOR/SIMULATOR/build /home/kevin/Development/SIMULATOR/SIMULATOR/build/CMakeFiles/SIMULATOR.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/kevin/Development/git/SIMULATOR/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/kevin/Development/git/SIMULATOR /home/kevin/Development/git/SIMULATOR /home/kevin/Development/git/SIMULATOR/build /home/kevin/Development/git/SIMULATOR/build /home/kevin/Development/git/SIMULATOR/build/CMakeFiles/SIMULATOR.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/SIMULATOR.dir/depend
 

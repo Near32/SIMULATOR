@@ -155,11 +155,27 @@ void RigidBody::addForceAtWorldPoint(const Mat<float>& force, const Mat<float>& 
 
 void RigidBody::addForceAtBodyPoint(const Mat<float>& force, const Mat<float>& pointL)
 {
+	/*
 	addForce(force);
-	addTorque( crossproductV( pointL, force) );	
+	addTorque( crossproductV( pointW-, force) );
+	*/
+	Mat<float> pointW( this->getPointInWorld(pointL) );
+	Mat<float> forceW( this->getVectorInWorld(force) );
+	this->addForceAtWorldPoint(forceW, pointW);
 }
 
+void RigidBody::addForceLocalAtBodyPoint(const Mat<float>& forceL, const Mat<float>& pointL)
+{
+	Mat<float> pointW( this->getPointInWorld(pointL) );
+	Mat<float> forceW( this->getVectorInWorld(forceL) );
+	this->addForceAtWorldPoint(forceW, pointW);
+}
 
+void RigidBody::addForceWorldAtBodyPoint(const Mat<float>& forceW, const Mat<float>& pointL)
+{
+	Mat<float> pointW( this->getPointInWorld(pointL) );
+	this->addForceAtWorldPoint(forceW, pointW);
+}
 void RigidBody::addTorque(const Mat<float>& torque)
 {
 	userTorque += torque;
@@ -187,6 +203,11 @@ Pose->exp().afficher();
 #endif
 	//return transpose( extract(Pose->exp(), 1,1, 3,3)) * (pointL+extract(Pose->exp(), 1,4, 3,4) );	
 	return transpose( extract(Pose->exp(), 1,1, 3,3)) * (pointL)+extract(Pose->exp(), 1,4, 3,4);	
+}
+
+Mat<float> RigidBody::getVectorInWorld( const Mat<float>& vectorL)
+{
+	return transpose( extract(Pose->exp(), 1,1, 3,3)) * (vectorL);	
 }
 
 Mat<float> RigidBody::getPointInLocal( const Mat<float>& pointW)

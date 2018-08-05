@@ -9,7 +9,7 @@
 
 #define debug
 //#define debuglvl1
-//#define debuglvl2
+#define debuglvl2
 //#define debuglvl3
 #define debuglvl4
 
@@ -86,7 +86,7 @@ Simulation::Simulation(Environnement* env_) : Simulation()
 				if( !( element->getName() == std::string("ground") ) )
 				{
 					simulatedObjects.insert( simulatedObjects.end(), std::unique_ptr<ISimulationObject>(new RigidBody( element->getPoseReference(), element->getName(),id, BOX) ) );
-					((RigidBody*)simulatedObjects[simulatedObjects.size()-1].get())->setMass(1e3f);
+					((RigidBody*)simulatedObjects[simulatedObjects.size()-1].get())->setMass(1e2f);
 					//((RigidBody&)(*simulatedObjects[id])).setPose( (*element)->getPoseReference());
 					//((RigidBody&)(*simulatedObjects[id])).setPtrShape( (IShape*)(new BoxShape( (RigidBody*)simulatedObjects[id].get(), ((IElementFixe&)(*(*element))).hwd)) );		
 					((BoxShape&)((RigidBody*)(simulatedObjects[id].get()))->getShapeReference()).setHWD( ((IElementFixe*)(element.get()))->hwd );
@@ -184,9 +184,6 @@ std::cout << "SIMULATION : environnement initialization : ElementMobile : id = "
 		Name2ID[ element->getName() ] = id;
 		//std::cout << id << " : " << element->getName() << " == " << Name2ID[element->getName()] << std::endl;
 		id++;
-#ifdef debug
-	std::cout << "SIMULATION : post-increment : id = " << id << " : ...." << std::endl;
-#endif
 		
 	}
 	
@@ -691,115 +688,114 @@ void Simulation::runStride( float timeStep)
 	
 	std::cout << "SIMULATION TIME = " << time << " seconds." << std::endl;
 	//apply forces to the RigidBodies:
-#ifdef debug
-std::cout << "SIMULATION : runStride : apply Forces : ..." << std::endl;
-#endif		
+	#ifdef debug
+	std::cout << "SIMULATION : runStride : apply Forces : ..." << std::endl;
+	#endif		
 	applyForces(timeStep);
-#ifdef debug
-std::cout << "SIMULATION : runStride : apply Forces : DONE" << std::endl;
-#endif			
+	#ifdef debug
+	std::cout << "SIMULATION : runStride : apply Forces : DONE" << std::endl;
+	#endif			
 
 
-//update the robot control law :
-#ifdef debug
-std::cout << "SIMULATION : runStride : robot control law update : ..." << std::endl;
-#endif	
+	//update the robot control law :
+	#ifdef debug
+	std::cout << "SIMULATION : runStride : robot control law update : ..." << std::endl;
+	#endif	
 	robotHandler->update(timeStep);
-#ifdef debug
-std::cout << "SIMULATION : runStride : robot control law update : DONE." << std::endl;
-#endif	
-
-
+	#ifdef debug
+	std::cout << "SIMULATION : runStride : robot control law update : DONE." << std::endl;
+	#endif	
+	
 
 	//update the velocities of any rigid body :
-#ifdef debug
-std::cout << "SIMULATION : runStride : rigidbodies velocities' update : ..." << std::endl;
-#endif	
+	#ifdef debug
+	std::cout << "SIMULATION : runStride : rigidbodies velocities' update : ..." << std::endl;
+	#endif	
 	updater->updateVelocities(timeStep);
-#ifdef debug
-std::cout << "SIMULATION : runStride : rigidbodies velocities' update : DONE." << std::endl;
-#endif	
+	#ifdef debug
+	std::cout << "SIMULATION : runStride : rigidbodies velocities' update : DONE." << std::endl;
+	#endif	
 
 
 
 	//check Collisions and create the corresponding entities to deal with those :
-#ifdef debug
-std::cout << "SIMULATION : runStride : collision check : ..." << std::endl;
-#endif	
+	#ifdef debug
+	std::cout << "SIMULATION : runStride : collision check : ..." << std::endl;
+	#endif	
 	collisionDetector->checkForCollision(timeStep);
-#ifdef debug
-std::cout << "SIMULATION : runStride : collision check : DONE." << std::endl;
-#endif		
-
-
+	#ifdef debug
+	std::cout << "SIMULATION : runStride : collision check : DONE." << std::endl;
+	#endif		
+	
 
 	//construct the system to be solved...
 	if(initializedQQdotInvMFext)
 	{
 		//TODO : update QQdotInvMFext, for now on, we do not care at all about reallocation and optimization, so the matrixes are being reconstructed every time...
-#ifdef debug
-std::cout << "SIMULATION : runStride : updating matrices : ..." << std::endl;
-#endif					
+		#ifdef debug
+		std::cout << "SIMULATION : runStride : updating matrices : ..." << std::endl;
+		#endif					
 		updateInvMSFext();
 	}
 	else
 	{
-#ifdef debug
-std::cout << "SIMULATION : runStride : initializing matrices : ..." << std::endl;
-#endif			
+		#ifdef debug
+		std::cout << "SIMULATION : runStride : initializing matrices : ..." << std::endl;
+		#endif			
 		constructQQdotInvMSFext();
-#ifdef debug
-std::cout << "SIMULATION : runStride : initializing matrices : DONE." << std::endl;
-#endif					
+		#ifdef debug
+		std::cout << "SIMULATION : runStride : initializing matrices : DONE." << std::endl;
+		#endif					
 	}
 	
 	
-#ifdef debuglvl3
-std::cout << " SIMULATION : runStride : Q QDOT invM S Fext : " << std::endl;
-transpose(q).afficher();
-transpose(qdot).afficher();
-invM.print();
-S.print();
-Fext.afficher();
-#endif
+	#ifdef debuglvl3
+	std::cout << " SIMULATION : runStride : Q QDOT invM S Fext : " << std::endl;
+	transpose(q).afficher();
+	transpose(qdot).afficher();
+	invM.print();
+	S.print();
+	Fext.afficher();
+	#endif
 
-	((RigidBody*)(simulatedObjects[1].get()))->getMatOrientation().afficher();
+	//((RigidBody*)(simulatedObjects[1].get()))->getMatOrientation().afficher();
 	
 	//solve the system and update it :
-#ifdef debug
-std::cout << "SIMULATION : runStride : solving system : ..." << std::endl;
-#endif			
-	constraintsSolver->nbrIterationSolver = 2;	
+	#ifdef debug
+	std::cout << "SIMULATION : runStride : solving system : ..." << std::endl;
+	#endif			
+	constraintsSolver->nbrIterationSolver = 10;	
 	constraintsSolver->Solve(timeStep, collectionC, q, qdot, invM,S, Fext);
 	//the second part is done during the solving of the system :
 	//from qdot to sim dot;
 	updateQdot();
 	
-	
-//update the robot control law :
-#ifdef debug
-std::cout << "SIMULATION : runStride : robot control law update : ..." << std::endl;
-#endif	
+	//update the robot control law :
+	#ifdef debug
+	std::cout << "SIMULATION : runStride : robot control law update : ..." << std::endl;
+	#endif	
 	robotHandler->update(timeStep);
-#ifdef debug
-std::cout << "SIMULATION : runStride : robot control law update : DONE." << std::endl;
-#endif	
-
+	#ifdef debug
+	std::cout << "SIMULATION : runStride : robot control law update : DONE." << std::endl;
+	#endif	
+	
 
 	//from sim dot to sim pos :
 	updater->updatePositions(timeStep);
-#ifdef debug
-std::cout << "SIMULATION : runStride : solving system : DONE." << std::endl;
-#endif					
+	
+	#ifdef debug
+	std::cout << "SIMULATION : runStride : solving system : DONE." << std::endl;
+	#endif					
+
 	//apply changes in the state of the environment : from simulation to EtatEngine only
 	updateStates();
 	
 
-#ifdef debug
-std::cout << " SIMULATION : runStride : Q QDOT  : END : " << std::endl;
-transpose(q).afficher();
-transpose(qdot).afficher();
-#endif
+	#ifdef debug
+	std::cout << " SIMULATION : runStride : Q QDOT  : END : " << std::endl;
+	transpose(q).afficher();
+	transpose(qdot).afficher();
+	#endif
 
 	std::cout << " RUNSTRIDE took : " << (float)(clock()-timeclock)/CLOCKS_PER_SEC << " seconds." << std::endl;
 
@@ -1728,18 +1724,37 @@ void Simulation::applyForces(float timeStep)
 		}
 	}
 
-	/*
-	Mat<float> forceLATERAL( (float)0,3,1);
-	forceLATERAL.set( 1.0f, 1,1);
-	Mat<float> bodyPoint( (float)0,3,1);
-	bodyPoint.set( 5.0f,1,1);
-	bodyPoint.set( 10.0f,3,1);
-	((RigidBody*)simulatedObjects[2].get())->addForceAtBodyPoint( forceLATERAL, bodyPoint); 
-	*/
+	
+	if(this->time < timeStep)
+	{
+		Mat<float> forceW( (float)0,3,1);
+		forceW.set( 0.5f, 3,1);
+		Mat<float> bodyPoint( (float)0,3,1);
+		//bodyPoint.set( 5.0f,1,1);
+		//bodyPoint.set( 5.0f,2,1);
+		bodyPoint.set( 10.0f,3,1);
+
+		//((RigidBody*)simulatedObjects[1].get())->addForceLocalAtBodyPoint( forceL, bodyPoint); 
+		((RigidBody*)simulatedObjects[1].get())->addForceWorldAtBodyPoint( forceW, bodyPoint); 
+
+		Mat<float> forceW1( (float)0,3,1);
+		forceW1.set( 200.0f, 3,1);
+		Mat<float> bodyPoint1( (float)0,3,1);
+		//bodyPoint1.set( 5.0f,1,1);
+		//bodyPoint1.set( 5.0f,2,1);
+		//bodyPoint1.set( 10.0f,3,1);
+
+		((RigidBody*)simulatedObjects[1].get())->addForceWorldAtBodyPoint( forceW1, bodyPoint1); 
+	}
+	
+
 #ifdef debuglvl2	
 	for( auto& it : simulatedObjects)
 	{
+		std::cout << "RigidBody :: " << it->getName() <<  " with mass :: " << ((RigidBody*)(it.get()))->getMass() << " kg." << std::endl;
+		std::cout << " Force :: " << std::endl;
 		((RigidBody*)(it.get()))->getForceAccumulator().afficher();
+		std::cout << " Torque :: " << std::endl;
 		((RigidBody*)(it.get()))->getTorqueAccumulator().afficher();
 	}
 #endif

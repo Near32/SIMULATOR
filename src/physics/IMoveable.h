@@ -4,6 +4,9 @@
 #include "../utils/math.h"
 #include <exception>
 
+#define default_linearDampingCoefficient 0.999
+#define default_angularDampingCoefficient 0.999
+
 class IMoveable
 {
 	protected :
@@ -12,6 +15,12 @@ class IMoveable
 	
 	Mat<float>* LinearVelocity;
 	Mat<float>* AngularVelocity;
+	/**
+	 * Amount of damping applied to angular velocity
+	 * in order to remove numerical instabality-based energy
+	 */
+	float linearDampingCoefficient;
+	float angularDampingCoefficient;
 	
 //-----------------------------------------------------
 //-----------------------------------------------------
@@ -47,6 +56,16 @@ class IMoveable
 	Mat<float>& getLinearVelocity();
 	
 	Mat<float>& getAngularVelocity();
+
+	const float& getLinearDampingCoefficient() const
+	{	
+		return this->linearDampingCoefficient;
+	}
+
+	const float& getAngularDampingCoefficient() const
+	{	
+		return this->angularDampingCoefficient;
+	}
 
 	
 	//---------------------------------------------------------

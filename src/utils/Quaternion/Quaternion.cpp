@@ -2,15 +2,88 @@
 
 //#define normalize
 
+void Quat::updateOrientation(const float& dt, const Mat<float>& av) 
+{
+	Quat omega;
+	omega.x = av.get(1,1);
+	omega.y = av.get(2,1);
+	omega.z = av.get(3,1);
+	omega.w = 0.0;
+
+	Quat mult = Qt_Mul(omega,*this);
+
+	this->x += dt/2.0 * mult.x;
+	this->y += dt/2.0 * mult.y;
+	this->z += dt/2.0 * mult.z;
+	this->w += dt/2.0 * mult.w;
+
+}
+
+void Quat::mult(const float& v) 
+{
+	x = v*x;
+	y = v*y;
+	z = v*z;
+	w = v*w;
+}
+
+void Quat::normalize()
+{
+	float n2 = pow(x,2) + pow(y,2) + pow(z,2) + pow(w,2);
+
+	if(n2 == 0.0f)
+	{
+		w = 1.0;
+	}
+
+	float invn = 1.0f/sqrt(n2);
+	x *= invn;
+	y *= invn;
+	z *= invn;
+	w *= invn;
+
+}
+
+Mat<float> Quat::mat() const
+{
+	Mat<float> r(3,3);
+
+	float wx = w*x,
+	wy = w*y,
+	wz = w*z;
+	float xx = x*x,
+	xy = x*y,
+	xz = x*z;
+	float yy = y*y,
+	yz = y*z,
+	zz = z*z;
+	
+	r.set( (1.0f - 2*(yy + zz)), 1,1); 
+	r.set( 2*(xy - wz), 2,1);
+	r.set( 2*(xz + wy), 3,1);
+	
+	r.set( 2*(xy + wz), 1,2); 
+	r.set( (1.0f - 2*(xx + zz)), 2,2); 
+	r.set( 2*(yz - wx), 3,2);
+	
+	r.set( 2*(xz - wy), 1,3);
+	r.set( 2*(yz + wx), 2,3); 
+	r.set( (1.0 - 2*(xx + yy)), 3,3);
+
+	return r;
+}
+
 
 /* Returns quaternion product qL * qR. */
 Quat Qt_Mul(Quat qL, Quat qR)
 {
 	Quat qq;
 	qq.w = qL.w*qR.w - qL.x*qR.x - qL.y*qR.y - qL.z*qR.z;
-	qq.x = qL.w*qR.x + qL.x*qR.w + qL.y*qR.z - qL.z*qR.y;
-	qq.y = qL.w*qR.y + qL.y*qR.w + qL.z*qR.x - qL.x*qR.z;
-	qq.z = qL.w*qR.z + qL.z*qR.w + qL.x*qR.y - qL.y*qR.x;
+	//qq.x = qL.w*qR.x + qL.x*qR.w + qL.y*qR.z - qL.z*qR.y;
+	qq.x = qL.w*qR.x + qL.x*qR.w - qL.y*qR.z - qL.z*qR.y;
+	//qq.y = qL.w*qR.y - qL.x*qR.z + qL.y*qR.w + qL.z*qR.x;
+	qq.y = qL.w*qR.y - qL.x*qR.z + qL.y*qR.w - qL.z*qR.x;
+	qq.z = qL.w*qR.z + qL.x*qR.y - qL.y*qR.x + qL.z*qR.w;
 	return (qq);
 }
 

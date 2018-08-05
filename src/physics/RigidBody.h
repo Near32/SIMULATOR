@@ -57,6 +57,8 @@ class RigidBody : public ISimulationObject, public IMoveable
 	void addForce(const Mat<float>& force);
 	void addForceAtWorldPoint(const Mat<float>& force, const Mat<float>& pointW);
 	void addForceAtBodyPoint(const Mat<float>& force, const Mat<float>& pointL);
+	void addForceLocalAtBodyPoint(const Mat<float>& forceL, const Mat<float>& pointL);
+	void addForceWorldAtBodyPoint(const Mat<float>& forceW, const Mat<float>& pointL);
 	
 	void addTorque(const Mat<float>& torque);
 	
@@ -136,6 +138,7 @@ class RigidBody : public ISimulationObject, public IMoveable
 		
 	
 	Mat<float> getPointInWorld( const Mat<float>& pointL);
+	Mat<float> getVectorInWorld( const Mat<float>& vectorL);
 	Mat<float> getPointInLocal( const Mat<float>& pointW);
 	Mat<float> getAxisInWorld( const Mat<float>& aL);
 	Mat<float> getAxisInLocal( const Mat<float>& aW);
