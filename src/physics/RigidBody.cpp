@@ -218,9 +218,7 @@ Mat<float> RigidBody::getPointInLocal( const Mat<float>& pointW)
 
 Mat<float> RigidBody::getVelocityPointWInWorld( const Mat<float>& pointW)
 {
-	//Mat<float> pointL( this->getPointInLocal( pointW) );
-	Mat<float> pointL( this->getAxisInWorld( this->getPointInLocal( pointW) ) );
-	return this->getLinearVelocity()+crossproductV(this->getAngularVelocity(),pointL);
+	return this->getLinearVelocity()+crossproductV(this->getAngularVelocity(),this->getPosition()-pointW);	
 }
 
 Mat<float> RigidBody::getAxisInWorld( const Mat<float>& aL)
