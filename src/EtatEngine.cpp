@@ -57,7 +57,7 @@ std::cout << "SIMULATION : run " << sim->getTime() << " : successfully !!" << st
 				case TCSimulation:
 				{
 				float timestep = 5e-2f;
-				float duration = 2.0f;
+				float duration = 0.25f;
 				float time = sim->getTime();
 #ifdef debug
 std::cout << "SIMULATION : run : ..." << std::endl;
@@ -477,10 +477,23 @@ void EtatEngine::init2()
 	//std::cout << " Quat2Euler results : " << roll << " : " << pitch << " : " << yaw << std::endl;
 	
 	//set tiny rotation :
-	obs_se3.setOrientation( q );
+	//obs_se3.setOrientation( q );
 	
 	env->addElement( new ElementMobile(std::string("OBS"), new se3(obs_se3), hwd) );
 	
+
+	/*-----------------------------------------------------------------------*/
+
+	/*
+	t.set( hwd.get(2,1)/2+40.0f, 3,1);
+	t.set( hwd.get(1,1),1,1);
+	se3 obs1_se3(t);
+	//t.set( 0.0f,1,1);
+	//t.set( hwd.get(3,1)/2, 3,1);
+	
+	env->addElement( new ElementMobile(std::string("OBS1"), new se3(obs1_se3), hwd) );
+	*/	
+
 	/*
 	t.set( t.get(3,1)+2.0f+offset, 3,1);	
 	env->addElement( new ElementMobile(std::string("picBAS"), new se3(t), hwd) );

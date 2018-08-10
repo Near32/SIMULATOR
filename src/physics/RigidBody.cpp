@@ -2,6 +2,7 @@
 
 
 //#define debuglvl1
+Mat<float> one(1.0f,1,1);
 
 
 RigidBody::RigidBody() : ISimulationObject(), IMoveable(), userForce( Mat<float>((float)0,3,1) ), userTorque(Mat<float>((float)0,3,1)), isFixed(false), canCollide(true), mass(1.0f), imass(1.0f), Inertia(Identity3), iInertia(Identity3), ptrShape(new SphereShape(this)),isRobot(false)
@@ -197,12 +198,10 @@ void RigidBody::calculateDerivedData()
 
 Mat<float> RigidBody::getPointInWorld( const Mat<float>& pointL)
 {
-#ifdef debuglvl1
-std::cout << "RGB : get point in world : pose :" << std::endl;	
-Pose->exp().afficher();
-#endif
+	Mat<float> transM_L2W(Pose->getTransformationL2W());
 	//return transpose( extract(Pose->exp(), 1,1, 3,3)) * (pointL+extract(Pose->exp(), 1,4, 3,4) );	
-	return transpose( extract(Pose->exp(), 1,1, 3,3)) * (pointL)+extract(Pose->exp(), 1,4, 3,4);	
+	//return transpose( extract(pose, 1,1, 3,3)) * (pointL)+Pose->getT();	
+	return extract( transM_L2W*operatorC(pointL,one), 1,1, 3,1);
 }
 
 Mat<float> RigidBody::getVectorInWorld( const Mat<float>& vectorL)
@@ -212,24 +211,30 @@ Mat<float> RigidBody::getVectorInWorld( const Mat<float>& vectorL)
 
 Mat<float> RigidBody::getPointInLocal( const Mat<float>& pointW)
 {
-	return extract(Pose->exp(), 1,1, 3,3) *pointW - extract(Pose->exp(), 1,4, 3,4) ;	
+	Mat<float> transM_W2L(Pose->getTransformationW2L());
+	return extract( transM_W2L*operatorC(pointW,one), 1,1, 3,1);
 }
 
 
 Mat<float> RigidBody::getVelocityPointWInWorld( const Mat<float>& pointW)
 {
-	Mat<float> pointL( this->getPointInLocal( pointW) );
+	//Mat<float> pointL( this->getPointInLocal( pointW) );
+	Mat<float> pointL( this->getAxisInWorld( this->getPointInLocal( pointW) ) );
 	return this->getLinearVelocity()+crossproductV(this->getAngularVelocity(),pointL);
 }
 
 Mat<float> RigidBody::getAxisInWorld( const Mat<float>& aL)
 {
-	return transpose( extract(Pose->exp(), 1,1, 3,3)) * aL;	
+	//return transpose( extract(Pose->exp(), 1,1, 3,3)) * aL;
+	Mat<float> R_L2W( extract( Pose->getTransformationL2W(), 1,1, 3,3) );
+	return R_L2W * aL;	
 }
 
 Mat<float> RigidBody::getAxisInLocal( const Mat<float>& aW)
 {
-	return extract(Pose->exp(), 1,1, 3,3) * aW;	
+	//return extract(Pose->exp(), 1,1, 3,3) * aW;
+	Mat<float> R_W2L( extract( Pose->getTransformationW2L(), 1,1, 3,3) );
+	return R_W2L * aW;	
 }
 
 

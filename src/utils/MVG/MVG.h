@@ -64,17 +64,34 @@ Mat<T> expW( const Mat<T>& w)
 
 }
 
-
+/*
 template<typename T>
 inline Mat<T> expM(const Mat<T>& khi)
 {
-	return operatorL( operatorC( expW( extract(khi,1,1,3,1) ), Mat<T>((T)0,1,3) ), operatorC( extract(khi, 4,1, 6,1), Mat<T>((T)1,1,1) ) );
+	return operatorL( operatorC( expW( extract(khi,1,1,3,1) ), Mat<T>((T)0,1,3) ), 
+		operatorC( extract(khi, 4,1, 6,1), Mat<T>((T)1,1,1) ) );
 }
+*/
+
+/**/
+template<typename T>
+inline Mat<T> expM(const Mat<T>& khi)
+{
+	Mat<T> R( expW( extract(khi,1,1,3,1) ));
+	Mat<T> r( R*extract(khi, 4,1, 6,1) );
+
+	return operatorL( 
+					operatorC( R, Mat<T>((T)0,1,3) ), 
+					operatorC( ((T)-1.0)*r , Mat<T>((T)1,1,1) ) 
+					);
+	
+}
+/**/
 
 template<typename T>
 inline Mat<T> expM(Mat<T>* khi)
 {
-	return operatorL( operatorC( expW( extract(khi,1,1,3,1) ), Mat<T>((T)0,1,3) ), operatorC( extract(khi, 4,1, 6,1), Mat<T>((T)1,1,1) ) );
+	return expM( *khi);
 }
 
 template<typename T>

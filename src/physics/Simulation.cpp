@@ -9,9 +9,9 @@
 
 #define debug
 //#define debuglvl1
-#define debuglvl2
+//#define debuglvl2
 //#define debuglvl3
-#define debuglvl4
+//#define debuglvl4
 
 #define benchmark
 
@@ -85,8 +85,9 @@ Simulation::Simulation(Environnement* env_) : Simulation()
 				//The element is an obstacle :
 				if( !( element->getName() == std::string("ground") ) )
 				{
+					float mass = 1e2f;
 					simulatedObjects.insert( simulatedObjects.end(), std::unique_ptr<ISimulationObject>(new RigidBody( element->getPoseReference(), element->getName(),id, BOX) ) );
-					((RigidBody*)simulatedObjects[simulatedObjects.size()-1].get())->setMass(1e2f);
+					((RigidBody*)simulatedObjects[simulatedObjects.size()-1].get())->setMass(mass);
 					//((RigidBody&)(*simulatedObjects[id])).setPose( (*element)->getPoseReference());
 					//((RigidBody&)(*simulatedObjects[id])).setPtrShape( (IShape*)(new BoxShape( (RigidBody*)simulatedObjects[id].get(), ((IElementFixe&)(*(*element))).hwd)) );		
 					((BoxShape&)((RigidBody*)(simulatedObjects[id].get()))->getShapeReference()).setHWD( ((IElementFixe*)(element.get()))->hwd );
@@ -96,6 +97,7 @@ std::cout << "SIMULATION : environnement initialization : ElementFixe : Obstacle
 				}
 				else
 				{
+					float ground_mass = 1e20f;
 					//then it is the ground :
 					simulatedObjects.insert( simulatedObjects.end(), std::unique_ptr<ISimulationObject>(new RigidBody( element->getPoseReference(), element->getName(),id,true) ) );
 					//((RigidBody&)(*simulatedObjects[id])).setPose( (*element)->getPoseReference());
@@ -103,7 +105,7 @@ std::cout << "SIMULATION : environnement initialization : ElementFixe : Obstacle
 					
 					//IT IS THE UNMOVEABLE GROUND :
 					((RigidBody*)(simulatedObjects[id].get()))->isFixed = true;
-					((RigidBody*)(simulatedObjects[id].get()))->setMass( 1e20f );//numeric_limit<float>::epsilon() );
+					((RigidBody*)(simulatedObjects[id].get()))->setMass( ground_mass );//numeric_limit<float>::epsilon() );
 					
 					
 #ifdef debug
@@ -764,7 +766,7 @@ void Simulation::runStride( float timeStep)
 	#ifdef debug
 	std::cout << "SIMULATION : runStride : solving system : ..." << std::endl;
 	#endif			
-	constraintsSolver->nbrIterationSolver = 10;	
+	constraintsSolver->nbrIterationSolver = 100;	
 	constraintsSolver->Solve(timeStep, collectionC, q, qdot, invM,S, Fext);
 	//the second part is done during the solving of the system :
 	//from qdot to sim dot;
@@ -1725,7 +1727,7 @@ void Simulation::applyForces(float timeStep)
 	}
 
 	
-	if(this->time < timeStep)
+	if(false ) //this->time < timeStep)
 	{
 		Mat<float> forceW( (float)0,3,1);
 		forceW.set( 0.5f, 3,1);
@@ -1738,14 +1740,28 @@ void Simulation::applyForces(float timeStep)
 		((RigidBody*)simulatedObjects[1].get())->addForceWorldAtBodyPoint( forceW, bodyPoint); 
 
 		Mat<float> forceW1( (float)0,3,1);
-		forceW1.set( 200.0f, 3,1);
+		forceW1.set( 800.0f, 3,1);
+		forceW1.set( 400.0f, 1,1);
 		Mat<float> bodyPoint1( (float)0,3,1);
 		//bodyPoint1.set( 5.0f,1,1);
 		//bodyPoint1.set( 5.0f,2,1);
 		//bodyPoint1.set( 10.0f,3,1);
 
 		((RigidBody*)simulatedObjects[1].get())->addForceWorldAtBodyPoint( forceW1, bodyPoint1); 
+
+		if( false )//simulatedObjects.size() > 2)
+		{
+			RigidBody& rbA = *((RigidBody*)simulatedObjects[1].get());
+			RigidBody& rbB = *((RigidBody*)simulatedObjects[2].get());
+			Mat<float> p1in1(0.0f, 3,1), p2in2(0.0f,3,1);
+			//p1in1.set( 10.0f, 3,1);
+			p2in2.set( 10.0f, 3,1);
+			float restLength = 25.0f;
+			float springConstant = 1.0f;
+			collectionF.insert( collectionF.begin(), std::unique_ptr<IForceEffect>(new SpringForceEffect(p1in1,p2in2,rbA,rbB, restLength, springConstant))  );	
+		}
 	}
+	
 	
 
 #ifdef debuglvl2	

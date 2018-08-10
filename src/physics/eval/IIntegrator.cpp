@@ -2,8 +2,6 @@
 #include "../Simulation.h"
 
 #define NORMALIZE_QUAT
-#define damping 
-#define dampingAfter
 
 IIntegrator::IIntegrator(Simulation* sim) : sim(sim)
 {
@@ -115,9 +113,11 @@ void ExplicitEulerIntegrator::integrateVelocities(float dt)
 			Mat<float> resultingLinearAcceleration(  ((RigidBody*)(it.get()))->getIMass() * ((RigidBody*)(it.get()))->getForceAccumulator());
 			Mat<float> resultingLinearVelocity(  ((RigidBody*)(it.get()))->getLinearVelocity() + dt*resultingLinearAcceleration);
 			
+			#ifdef debuglvl2
 			std::cout << "RigidBody : " << it->getName() << std::endl;
 			std::cout << " Linear Velocity :: before update " << std::endl;
 			((RigidBody*)(it.get()))->getLinearVelocity().afficher();
+			#endif
 			/*
 			std::cout << " Resulting Linear Velocity :: before damping " << std::endl;
 			resultingLinearVelocity.afficher();
@@ -147,14 +147,14 @@ void ExplicitEulerIntegrator::integrateVelocities(float dt)
 			((RigidBody*)(it.get()))->setAngularVelocity( resultingAngularVelocity );
 			#endif
 			
-			//#ifdef debuglvl2
+			#ifdef debuglvl2
 			std::cout << " Linear Velocity :: after update :" << std::endl;
 			((RigidBody*)(it.get()))->getLinearVelocity().afficher();
 			std::cout << " Resulting Linear Velocity :: " << std::endl;
 			resultingLinearVelocity.afficher();
 			std::cout << " Angular Velocity :: " << std::endl;
 			((RigidBody*)(it.get()))->getAngularVelocity().afficher();
-			//#endif
+			#endif
 
 		}
 	}
@@ -173,17 +173,28 @@ void ExplicitEulerIntegrator::integratePositions(float dt)
 	{
 		if( it->getType() == TSORigidBody)
 		{
+			if( ((RigidBody*)(it.get()))->getFixedStatus() )
+			{
+				((RigidBody*)(it.get()))->setLinearVelocity( 0.0f* ((RigidBody*)(it.get()))->getLinearVelocity() );
+				((RigidBody*)(it.get()))->setAngularVelocity( 0.0f* ((RigidBody*)(it.get()))->getAngularVelocity() );
+			}
 			//------------------------------------------------
 			//Linear :
+			#ifdef debuglvl2
 			std::cout << "RigidBody : " << it->getName() << std::endl;
 			std::cout << " Position :: before update " << std::endl;
 			((RigidBody*)(it.get()))->getPosition().afficher();
+			#endif
+
 			((RigidBody*)(it.get()))->setPosition( ((RigidBody*)(it.get()))->getPosition() + dt * ((RigidBody*)(it.get()))->getLinearVelocity());
+			
+			#ifdef debuglvl2
 			std::cout << " Linear Velocity :: before update " << std::endl;
 			((RigidBody*)(it.get()))->getLinearVelocity().afficher();
 			std::cout << " Position :: after update " << std::endl;
 			((RigidBody*)(it.get()))->getPosition().afficher();
-			
+			#endif 
+
 			#ifdef dampingAfter
 			// Linear Damping :
 			((RigidBody*)(it.get()))->setLinearVelocity( (float) pow( ((RigidBody*)(it.get()))->getLinearDampingCoefficient(), dt) * ((RigidBody*)(it.get()))->getLinearVelocity() );
@@ -250,11 +261,13 @@ void ExplicitEulerIntegrator::integratePositions(float dt)
 			
 #ifdef method2			
 			//METHOD 2 : BARAFF rigid Body 1 
+			#ifdef debuglvl2
 			std::cout << " Orientation :: before update " << std::endl;
 			((RigidBody*)(it.get()))->getMatOrientation().afficher();
 			std::cout << " Angular Velocity :: before update " << std::endl;
 			((RigidBody*)(it.get()))->getAngularVelocity().afficher();
-			
+			#endif 
+
 			Quat qav;
 			Mat<float> vav( ((RigidBody*)(it.get()))->getAngularVelocity() );
 			qav.x = vav.get(1,1);
@@ -265,8 +278,6 @@ void ExplicitEulerIntegrator::integratePositions(float dt)
 			
 
 			Quat res( q+dt*0.5f * Qt_Mul( qav, q) );
-			std::cout << " Orientation :: before norm " << std::endl;
-			Qt2Mat<float>(res).afficher();
 			
 			//let us normalize res :
 			#ifdef NORMALIZE_QUAT
@@ -286,8 +297,10 @@ void ExplicitEulerIntegrator::integratePositions(float dt)
 			
 			((RigidBody*)(it.get()))->setOrientation( res );
 			
+			#ifdef debuglvl2
 			std::cout << " Orientation :: after update " << std::endl;
 			((RigidBody*)(it.get()))->getMatOrientation().afficher();
+			#endif
 			//----------------------------------------------
 			
 #endif			
@@ -300,16 +313,19 @@ void ExplicitEulerIntegrator::integratePositions(float dt)
 			omega.set( omega.get(2,1) + dt*avv.get(2,1), 2,1);
 			omega.set( omega.get(3,1) + dt*avv.get(3,1), 3,1);
 			
+			#ifdef debuglvl2
 			std::cout << " Orientation :: before update " << std::endl;
 			((RigidBody*)(it.get()))->getMatOrientation().afficher();
 			std::cout << " Angular Velocity :: before update " << std::endl;
 			((RigidBody*)(it.get()))->getAngularVelocity().afficher();
-			
+			#endif 
+
 			((RigidBody*)(it.get()))->setW(omega); 
 			
+			#ifdef debuglvl2
 			std::cout << " Orientation :: after update " << std::endl;
 			((RigidBody*)(it.get()))->getMatOrientation().afficher();
-			
+			#endif 
 			
 #endif			
 			

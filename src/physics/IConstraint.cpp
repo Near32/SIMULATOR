@@ -141,13 +141,17 @@ void ContactConstraint::computeJacobians()
 	
 	//JacobianA = operatorL( Identity, (1.0f)*crossProduct(AnchorAL) );
 	Mat<float> normalG(rbA.getAxisInWorld(normalAL));
-	JacobianA = operatorL( (-1.0f)*transpose(normalG), transpose((-1.0f)*crossproductV( rbA.getPointInWorld(AnchorAL)-rbA.getPosition(), normalG)) );
+	JacobianA = operatorL( (-1.0f)*transpose(normalG), 
+							transpose((-1.0f)*crossproductV( rbA.getPointInWorld(AnchorAL)-rbA.getPosition(), normalG)) 
+							);
 	
 	//---------------------
 	
 	//B : 
 	//JacobianB = operatorL( (-1.0f)*Identity, (-1.0f)*crossProduct(AnchorBL) );
-	JacobianB = operatorL( (1.0f)*transpose(normalG), transpose((1.0f)*crossproductV( rbA.getPointInWorld(AnchorAL) - rbB.getPosition(), normalG)) );
+	JacobianB = operatorL( (1.0f)*transpose(normalG), 
+							transpose((1.0f)*crossproductV( rbA.getPointInWorld(AnchorAL) - rbB.getPosition(), normalG)) 
+							);
 	
 	
 	//--------------------------

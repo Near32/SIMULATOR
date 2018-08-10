@@ -42,7 +42,7 @@ std::cout << "COLLISION DETECTOR : CONTACT GENERATOR : initialization : OKAY." <
 #endif	
 
 #ifdef debug
-std::cout << "COLLISION DETECTOR : CONTACT GENERATOR : contact forces creations : ..." << std::endl;
+std::cout << "COLLISION DETECTOR : CONTACT GENERATOR : contact forces creations : " << c.size() << " contact(s)." << std::endl;
 #endif	
 	//--------------------------------------
 	
@@ -69,17 +69,27 @@ std::cout << "COLLISION DETECTOR : CONTACT GENERATOR : contact forces creations 
 			//innerVoronoiProjectionANDNormal( *(contact.rbA), anchorALProjected, normalAB);
 			innerVoronoiProjectionANDNormal( *(contact.rbA), anchorALProjected, normalAB);
 			//Mat<float> normalAB( contact.normal[0]);
+			
+			//----------------------------------------------------------------------------------
+			// Beware, penetration depths should be positive, 
+			// but they can be negative when the contact is (about to be resting) positively.
+			//----------------------------------------------------------------------------------
 			float penetrationDepth = ( transpose(normalAB)*(anchorALProjected-anchorAL) ).get(1,1);
+			//----------------------------------------------------------------------------------
+			//penetrationDepth = fabs(penetrationDepth);
+			//----------------------------------------------------------------------------------
+			
+			//----------------------------------------------------------------------------------
+			//----------------------------------------------------------------------------------
+			#ifdef debug 
 			std::cout << "CONTACT GENERATOR :: Contact  : " << i << " : penetration depth = " << penetrationDepth << std::endl;
+			std::cout << "CONTACT GENERATOR :: Contact  : " << i << " : normal :" << std::endl;
 			transpose(normalAB).afficher();
+			#endif
 			//----------------------------------------------------------------------------------
 			//----------------------------------------------------------------------------------
 			
-			//----------------------------------------------------------------------------------
-			penetrationDepth = fabs(penetrationDepth);
-			//----------------------------------------------------------------------------------
-			//----------------------------------------------------------------------------------
-			
+
 			//----------------------------------------------------------------------------------
 			//Creation of the ContactConstraint :
 			//----------------------------------------------------------------------------------

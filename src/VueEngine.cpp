@@ -196,7 +196,7 @@ ressourcesMutex.unlock();
 	for(int i=0;i<env->ListeElements.size();i++)
 	{
 		ressourcesMutex.lock();
-		Mat<float> poseElement = env->ListeElements[i]->pose->exp();
+		Mat<float> poseElement = env->ListeElements[i]->pose->getT();
 		ressourcesMutex.unlock();
 		
 		Mat<float> EulerAngles(3,1);
@@ -233,7 +233,7 @@ ressourcesMutex.unlock();
 		#endif
 		
 		//let us go in the correct configuration to draw the Element :
-		glTranslated( poseElement.get(1,4), poseElement.get(2,4), poseElement.get(3,4));
+		glTranslated( poseElement.get(1,1), poseElement.get(2,1), poseElement.get(3,1));
 		glRotated( EulerAngles.get(1,1), 1,0,0);
 		glRotated( EulerAngles.get(2,1), 0,1,0);
 		glRotated( EulerAngles.get(3,1), 0,0,1);
@@ -317,7 +317,7 @@ ressourcesMutex.unlock();
 		glRotated( -EulerAngles.get(3,1), 0,0,1);
 		glRotated( -EulerAngles.get(2,1), 0,1,0);
 		glRotated( -EulerAngles.get(1,1), 1,0,0);
-		glTranslated( -poseElement.get(1,4), -poseElement.get(2,4), -poseElement.get(3,4));
+		glTranslated( -poseElement.get(1,1), -poseElement.get(2,1), -poseElement.get(3,1));
 		//-----------------------------------
 		
 		

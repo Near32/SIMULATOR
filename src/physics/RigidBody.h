@@ -6,6 +6,9 @@
 #include "IShape.h"
 
 
+#define defRestFactor 1e0f // 0<= defRestFactor <= 1.0 ==> 1.0:no kinetic energy loss.
+
+
 class RigidBody : public ISimulationObject, public IMoveable
 {
 	public :

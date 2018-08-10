@@ -55,7 +55,7 @@ class Mat
 
         inline T get(int line, int column) const;
         inline void set(T value, int line, int column);
-        void afficher();
+        void afficher() const;
 
         void swap(int i1, int j1, int i2, int j2);
         void swapL(int i1, int i2);
@@ -662,7 +662,7 @@ inline void Mat<T>::set(T value, int line, int column)
 
 
 template<typename T>	/*pas de point virgule en fin de ligne...*/
-void Mat<T>::afficher()
+void Mat<T>::afficher() const
 {
     cout << "Matrice :" << endl;
 

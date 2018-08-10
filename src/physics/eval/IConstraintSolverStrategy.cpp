@@ -1146,7 +1146,7 @@ void IterativeImpulseBasedConstraintSolverStrategy::computeConstraintsANDJacobia
 	size_t size = c.size();
 	int n = sim->simulatedObjects.size();
 	float baumgarteBAS = 0.0f;//1e-1f;
-	float baumgarteC = 1.0f;//1e-1f;
+	float baumgarteC = -1e1f;
 	float baumgarteH = 0.0f;//1e-1f;
 	
 	//---------------
@@ -1197,9 +1197,9 @@ void IterativeImpulseBasedConstraintSolverStrategy::computeConstraintsANDJacobia
 			{
 				//Baumgarte stabilization :
 				//SLOP METHOD :
-				float slop = 1e-4f;
+				float slop = 1e0f;
 				float pdepth = ((ContactConstraint*)(c[k].get()))->penetrationDepth;
-				tC *= baumgarteC/this->dt * fabs_(pdepth-slop);			
+				tC *= baumgarteC/this->dt * fabs_(fabs_(pdepth)-slop);			
 				
 				//METHOD 1:
 				//tC *= baumgarteC/this->dt;
@@ -1212,7 +1212,15 @@ void IterativeImpulseBasedConstraintSolverStrategy::computeConstraintsANDJacobia
 				
 				std::cout << " ITERATIVE SOLVER :: CONTACT : restitFactor = " << restitFactor << std::endl;
 				std::cout << " ITERATIVE SOLVER :: CONTACT : pDepth = " << pdepth << std::endl;
-				
+				std::cout << " ITERATIVE SOLVER :: CONTACT : Contact Constraint : " << std::endl;
+				transpose(tC).afficher();
+				std::cout << " ITERATIVE SOLVER :: CONTACT : Normal vector : " << std::endl;
+				transpose(normal).afficher();
+				std::cout << " ITERATIVE SOLVER :: CONTACT : Relative Velocity vector : " << std::endl;
+				transpose(Vrel).afficher();
+				//std::cout << " ITERATIVE SOLVER :: CONTACT : First derivative of Contact Constraint : " << std::endl;
+				//(transpose(tJA)*).afficher();
+					
 			}
 			//BAS JOINT :
 			if( c[k]->getType() == CTBallAndSocketJoint)

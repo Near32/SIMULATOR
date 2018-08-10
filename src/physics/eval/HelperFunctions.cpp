@@ -15,7 +15,13 @@ Mat<float> closestPointLOfBOXGivenPointL(RigidBody& rb, const Mat<float>& pointL
 	max.set( -min.get(1,1), 1,1);
 	max.set( -min.get(2,1), 2,1);
 	max.set( -min.get(3,1), 3,1);
-	
+
+#ifdef debug
+std::cout << "COLLISION DETECTOR : CLPLL : pointL : " << std::endl;
+pointL.afficher();
+std::cout << "COLLISION DETECTOR : CLPLL : BOX : " << std::endl;
+operatorL(min,max).afficher();
+#endif	
 	
 	Mat<float> clpL(3,1);
 	//compute the closest point by projecting the point to the closest face using Voronoi regions approach.
@@ -85,7 +91,7 @@ bool testOBBPlane( RigidBody& box, RigidBody& plane)
 */
 Mat<float> testOBBOBB( RigidBody& b1, RigidBody& b2, bool& intersect)
 {
-	float precision = 1e-3f;
+	float precision = 1e0f;
 	Mat<float> ret((float)0,3,1);
 	bool initialized = false;
 	BoxShape& box1 = (BoxShape&)(b1.getShapeReference());
@@ -117,21 +123,23 @@ Mat<float> testOBBOBB( RigidBody& b1, RigidBody& b2, bool& intersect)
 				tempL.set( pm1*( min1.get(1,1) ) + (1-pm1)*( max1.get(1,1) ), 1,1);
 				tempL.set( pm2*( min1.get(2,1) ) + (1-pm2)*( max1.get(2,1) ), 2,1);
 				tempL.set( pm3*( min1.get(3,1) ) + (1-pm3)*( max1.get(3,1) ), 3,1);
-				
-				
-				//--------------------
 				//let us compute its coordinate in the world frame :
 				temp = b1.getPointInWorld( tempL);
-#ifdef debug				
-				b1.getPose().exp().afficher();
-				b2.getPose().exp().afficher();
-				tempL.afficher();
-				temp.afficher();
-#endif
+#ifdef debug
+std::cout << "COLLISION DETECTOR : test : temp1inW : " << std::endl;
+temp.afficher();
+std::cout << "COLLISION DETECTOR : test : b2 : pose " << std::endl;
+b2.getPose().exp().afficher();
+#endif	
+				//--------------------
+			
 				//----------------------
 				//let us find its associated projected point :
 				voronoiTemp = closestPointWOfBOXGivenPointW( b2, temp);
-				
+//#ifdef debug
+std::cout << "COLLISION DETECTOR :: temp1inW voronoiTemp : " << std::endl;
+operatorL(temp,voronoiTemp).afficher();
+//#endif
 				//----------------------
 				//let us find out if there was an intersection
 				// <==> voronoiTemp = temp, because it would means that the projected point is already the closest to b2 for it is within it.

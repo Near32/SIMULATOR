@@ -14,8 +14,6 @@ enum ConstraintType{
 };
 */
 
-#define defRestFactor 0.5f
-
 class IConstraint
 {
 	public :

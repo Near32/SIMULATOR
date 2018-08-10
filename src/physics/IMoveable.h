@@ -4,8 +4,11 @@
 #include "../utils/math.h"
 #include <exception>
 
-#define default_linearDampingCoefficient 0.999
-#define default_angularDampingCoefficient 0.999
+#define damping 
+#define dampingAfter
+
+#define default_linearDampingCoefficient 0.5 // 0.1
+#define default_angularDampingCoefficient 0.2 //0.5
 
 class IMoveable
 {

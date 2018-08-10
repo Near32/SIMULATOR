@@ -18,7 +18,12 @@ class se3
 	
 	Mat<float>* w;		//rotational tangent values.
 	Mat<float>* t;		//translational values.
-	Mat<float>* SE3;		// (R | t) matrix.
+	Mat<float>* SE3;		// (so3(w) | t_se3) matrix. | t_se3 = - so3(w)*t
+	//Mat<float>* invSE3;		// ( so3(w)^t | t) matrix.
+
+	Mat<float>* transM_W2L;
+	Mat<float>* transM_L2W;
+
 	bool hasChanged;
 	
 	public :
@@ -31,13 +36,21 @@ class se3
 	
 	~se3();
 	
+	void computeExp();
+	void computeTransformations();
+
 	Mat<float> exp();					//compute the (R | t) matrix.
 	Mat<float> getT()	const;
 	Mat<float> getW()	const;
 	Mat<float> getSE3()	const;
+	
+	Mat<float> getTransformationW2L() const;
+	Mat<float> getTransformationL2W() const;
+
 	void setT(const Mat<float>& t_);
 	void setW(const Mat<float>& w_);
 	void setOrientation( const Quat& q);	
+
 	
 	se3& operator=(const se3& x);
 	
