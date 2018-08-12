@@ -1146,7 +1146,7 @@ void IterativeImpulseBasedConstraintSolverStrategy::computeConstraintsANDJacobia
 	size_t size = c.size();
 	int n = sim->simulatedObjects.size();
 	float baumgarteBAS = 0.0f;//1e-1f;
-	float baumgarteC = -1e1f;
+	float baumgarteC = -2e0f;
 	float baumgarteH = 0.0f;//1e-1f;
 	
 	//---------------
@@ -1195,29 +1195,38 @@ void IterativeImpulseBasedConstraintSolverStrategy::computeConstraintsANDJacobia
 			//Contact offset :
 			if( c[k]->getType() == CTContactConstraint)
 			{
-				//Baumgarte stabilization :
+				//----------------------------------------
 				//SLOP METHOD :
+				/*
 				float slop = 1e0f;
 				float pdepth = ((ContactConstraint*)(c[k].get()))->penetrationDepth;
+				std::cout << " ITERATIVE SOLVER :: CONTACT : pDepth = " << pdepth << std::endl;
 				tC *= baumgarteC/this->dt * fabs_(fabs_(pdepth)-slop);			
+				*/
+				//----------------------------------------
 				
-				//METHOD 1:
-				//tC *= baumgarteC/this->dt;
+				//----------------------------------------
+				//DEFAULT METHOD :
+				tC *= baumgarteC/this->dt;
+				//----------------------------------------
 				
+				//----------------------------------------
 				//METHOD 2 :
+				/*
 				float restitFactor = ( (ContactConstraint*) (c[k].get()) )->getRestitutionFactor();
+				std::cout << " ITERATIVE SOLVER :: CONTACT : restitFactor = " << restitFactor << std::endl;
 				Mat<float> Vrel( ( (ContactConstraint*) (c[k].get()) )->getRelativeVelocity() );
 				Mat<float> normal( ( (ContactConstraint*) (c[k].get()) )->getNormalVector() );
-				tC +=  restitFactor * transpose(Vrel)*normal; 
-				
-				std::cout << " ITERATIVE SOLVER :: CONTACT : restitFactor = " << restitFactor << std::endl;
-				std::cout << " ITERATIVE SOLVER :: CONTACT : pDepth = " << pdepth << std::endl;
-				std::cout << " ITERATIVE SOLVER :: CONTACT : Contact Constraint : " << std::endl;
-				transpose(tC).afficher();
 				std::cout << " ITERATIVE SOLVER :: CONTACT : Normal vector : " << std::endl;
 				transpose(normal).afficher();
+				tC +=  restitFactor * transpose(Vrel)*normal; 
+				*/
+				//----------------------------------------
+				
+				std::cout << " ITERATIVE SOLVER :: CONTACT : Contact Constraint : " << std::endl;
+				transpose(tC).afficher();
 				std::cout << " ITERATIVE SOLVER :: CONTACT : Relative Velocity vector : " << std::endl;
-				transpose(Vrel).afficher();
+				transpose(( (ContactConstraint*) (c[k].get()) )->getRelativeVelocity()).afficher();
 				//std::cout << " ITERATIVE SOLVER :: CONTACT : First derivative of Contact Constraint : " << std::endl;
 				//(transpose(tJA)*).afficher();
 					
@@ -1302,6 +1311,9 @@ void IterativeImpulseBasedConstraintSolverStrategy::wrappingUp(std::vector<std::
 
 void IterativeImpulseBasedConstraintSolverStrategy::Solve(float dt, std::vector<std::unique_ptr<IConstraint> >& c, Mat<float>& q, Mat<float>& qdot, SparseMat<float>& invM, SparseMat<float>& S, const Mat<float>& Fext )
 {
+	float clampingVal = 1e20f;
+	float clampingValQ = 1e20f;
+
 	Mat<float> qdotminus(qdot);
 	this->dt = dt;
 	Mat<float> tempInvMFext( dt*(invM * Fext) ) ;
@@ -1357,7 +1369,7 @@ void IterativeImpulseBasedConstraintSolverStrategy::Solve(float dt, std::vector<
 				}
 	
 	
-				float clampingVal = 1e4f;
+				/*
 				for(int i=1;i<=udot.getLine();i++)
 				{
 					if(udot.get(i,1) > clampingVal)
@@ -1365,6 +1377,7 @@ void IterativeImpulseBasedConstraintSolverStrategy::Solve(float dt, std::vector<
 						udot.set( clampingVal,i,1);
 					}
 				}
+				*/
 			
 				//---------------------------------			
 				// UPDATE OF THE VELOCITY :
@@ -1386,7 +1399,7 @@ void IterativeImpulseBasedConstraintSolverStrategy::Solve(float dt, std::vector<
 			
 				//---------------------------------	
 	
-				float clampingValQ = 1e3f;
+				/*
 				for(int i=1;i<=qdot.getLine();i++)
 				{
 					if( fabs_(qdot.get(i,1)) > clampingValQ)
@@ -1394,6 +1407,7 @@ void IterativeImpulseBasedConstraintSolverStrategy::Solve(float dt, std::vector<
 						qdot.set( clampingValQ * fabs_(qdot.get(i,1))/qdot.get(i,1),i,1);
 					}
 				}
+				*/
 					
 			}
 			else

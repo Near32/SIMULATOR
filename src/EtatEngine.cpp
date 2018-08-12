@@ -57,7 +57,7 @@ std::cout << "SIMULATION : run " << sim->getTime() << " : successfully !!" << st
 				case TCSimulation:
 				{
 				float timestep = 5e-2f;
-				float duration = 0.25f;
+				float duration = 1.0f;
 				float time = sim->getTime();
 #ifdef debug
 std::cout << "SIMULATION : run : ..." << std::endl;

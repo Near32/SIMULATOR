@@ -766,7 +766,7 @@ void Simulation::runStride( float timeStep)
 	#ifdef debug
 	std::cout << "SIMULATION : runStride : solving system : ..." << std::endl;
 	#endif			
-	constraintsSolver->nbrIterationSolver = 100;	
+	constraintsSolver->nbrIterationSolver = 10;	
 	constraintsSolver->Solve(timeStep, collectionC, q, qdot, invM,S, Fext);
 	//the second part is done during the solving of the system :
 	//from qdot to sim dot;
